@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.1.4",
+    "aos": "^2.3.4",
     "axios": "^1.7.7",
     "formik": "^2.4.6",
     "html2pdf.js": "^0.10.2",
