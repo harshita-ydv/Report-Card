@@ -109,7 +109,7 @@ function LandingPage() {
         </div>
 
         {/* Call-to-Action Section */}
-        <div className="bg-blue-800 container mx-auto mt-16 text-center p-8 text-white rounded-lg shadow-lg">
+        <div className="bg-blue-500 container mx-auto mt-16 text-center p-8 text-white rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold mb-4">Get Started with ReportCardGen</h2>
           <p className="text-lg mb-6">
             Join thousands of educators using ReportCardGen to simplify report card management.

@@ -361,7 +361,7 @@ function Login() {
                   <Field
                     className={`peer w-full p-3 border ${
                       errors.email && touched.email ? 'border-red-500' : 'border-gray-300'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-50`}
+                    } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 bg-gray-50`}
                     type="email"
                     name="email"
                     placeholder=" "
@@ -379,7 +379,7 @@ function Login() {
                   <Field
                     className={`peer w-full p-3 border ${
                       errors.password && touched.password ? 'border-red-500' : 'border-gray-300'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-50`}
+                    } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 bg-gray-50`}
                     type="password"
                     name="password"
                     placeholder=" "
@@ -397,7 +397,7 @@ function Login() {
                   type="submit"
                   disabled={isSubmitting}
                   className={`w-full p-2 text-white rounded-md ${
-                    isSubmitting ? 'bg-purple-300' : 'bg-purple-500 hover:bg-purple-600'
+                    isSubmitting ? 'bg-purple-300' : 'bg-blue-900 hover:bg-blue-900'
                   } transition duration-300`}
                 >
                   {isSubmitting ? 'Logging in...' : 'Sign in'}
@@ -405,7 +405,7 @@ function Login() {
 
                 <div className="mt-4 text-center">
                   <span className="text-sm text-gray-600">Don’t have an account? </span>
-                  <Link to="/register" className="text-sm text-purple-500 hover:underline">
+                  <Link to="/register" className="text-sm text-blue-900 hover:underline">
                     Sign up
                   </Link>
                 </div>

@@ -94,8 +94,128 @@
 
 
 // 
+// import React, { useState } from 'react';
+// import { Link, Outlet } from 'react-router-dom';
+
+// const TeacherDashboard = () => {
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+//   const toggleSidebar = () => {
+//     setIsSidebarOpen(!isSidebarOpen);
+//   };
+
+//   return (
+//     <div className="min-h-screen flex flex-col bg-gray-100">
+//       {/* Navbar */}
+//       <header className="bg-white shadow-md p-4 flex items-center justify-between">
+//         {/* <h1 className="text-blue-500 font-semibold text-lg">Teacher Dashboard</h1> */}
+//         <button
+//           onClick={toggleSidebar}
+//           className="text-blue-500 lg:hidden focus:outline-none"
+//         >
+//           <svg
+//             xmlns="http://www.w3.org/2000/svg"
+//             className="h-6 w-6"
+//             fill="none"
+//             viewBox="0 0 24 24"
+//             stroke="currentColor"
+//           >
+//             <path
+//               strokeLinecap="round"
+//               strokeLinejoin="round"
+//               strokeWidth={2}
+//               d="M4 6h16M4 12h16m-7 6h7"
+//             />
+//           </svg>
+//         </button>
+//       </header>
+
+//       <div className="flex flex-1">
+//         {/* Sidebar */}
+//         <aside
+//           className={`fixed inset-y-0 left-0 transform ${
+//             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+//           } lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out bg-white shadow-lg w-64 z-50`}
+//         >
+//           <nav className="p-4">
+//             <ul className="space-y-4">
+//               <li>
+//                 <Link
+//                   to="/teacher-dashboard"
+//                   className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+//                 >
+//                   Home
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link
+//                   to="/teacher-dashboard/add-student"
+//                   className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+//                 >
+//                   Add Student
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link
+//                   to="/teacher-dashboard/manage-students"
+//                   className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+//                 >
+//                   Manage Students
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link
+//                   to="/teacher-dashboard/view-students"
+//                   className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+//                 >
+//                   View Report Card
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link
+//                   to="/teacher-dashboard/upload"
+//                   className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+//                 >
+//                   Upload Excel File
+//                 </Link>
+//               </li>
+//             </ul>
+//           </nav>
+//         </aside>
+
+//         {/* Main Content */}
+//         <main className="flex-1 p-6 lg:ml-30 flex items-center justify-center">
+//           <div className="w-full max-w-4xl">
+//             <Outlet />
+//           </div>
+//         </main>
+//       </div>
+
+//       {/* Footer */}
+//       <footer className="bg-blue-900 text-white py-6">
+//         <div className="container mx-auto text-center text-sm">
+//           © 2024 ReportCardGen. All rights reserved.
+//         </div>
+//       </footer>
+
+//       {/* Overlay for Sidebar on Mobile */}
+//       {isSidebarOpen && (
+//         <div
+//           className="fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"
+//           onClick={toggleSidebar}
+//         ></div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default TeacherDashboard;
+
+
+
 import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { FaHome, FaUserPlus, FaUsers, FaFileExcel, FaEye } from 'react-icons/fa'; // Import icons
 
 const TeacherDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -105,13 +225,14 @@ const TeacherDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       {/* Navbar */}
-      <header className="bg-white shadow-md p-4 flex items-center justify-between">
-        {/* <h1 className="text-blue-500 font-semibold text-lg">Teacher Dashboard</h1> */}
+      <header className="bg-white-900 text-black shadow-md flex items-center justify-between">
+       
+         
         <button
           onClick={toggleSidebar}
-          className="text-blue-500 lg:hidden focus:outline-none"
+          className="text-white lg:hidden focus:outline-none"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -135,48 +256,53 @@ const TeacherDashboard = () => {
         <aside
           className={`fixed inset-y-0 left-0 transform ${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          } lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out bg-white shadow-lg w-64 z-50`}
+          } lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out bg-blue-100 shadow-lg w-64 z-50`}
         >
-          <nav className="p-4">
-            <ul className="space-y-4">
+          <nav className="p-4 text-b">
+            <ul className="space-y-6">
               <li>
                 <Link
                   to="/teacher-dashboard"
-                  className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
                 >
-                  Home
+                  <FaHome />
+                  <span>Home</span>
                 </Link>
               </li>
               <li>
                 <Link
                   to="/teacher-dashboard/add-student"
-                  className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
                 >
-                  Add Student
+                  <FaUserPlus />
+                  <span>Add Student</span>
                 </Link>
               </li>
               <li>
                 <Link
                   to="/teacher-dashboard/manage-students"
-                  className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
                 >
-                  Manage Students
+                  <FaUsers />
+                  <span>Manage Students</span>
                 </Link>
               </li>
               <li>
                 <Link
                   to="/teacher-dashboard/view-students"
-                  className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
                 >
-                  View Report Card
+                  <FaEye />
+                  <span>Download PDF</span>
                 </Link>
               </li>
               <li>
                 <Link
                   to="/teacher-dashboard/upload"
-                  className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
                 >
-                  Upload Excel File
+                  <FaFileExcel />
+                  <span>Upload Excel File</span>
                 </Link>
               </li>
             </ul>
@@ -184,15 +310,15 @@ const TeacherDashboard = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-6 lg:ml-30 flex items-center justify-center">
-          <div className="w-full max-w-4xl">
+        <main className="flex-1  lg:ml-50 flex items-center justify-center bg-white">
+          <div className="w-full max-w-4xl bg-gray-100 p-6 rounded-lg shadow-md">
             <Outlet />
           </div>
         </main>
       </div>
 
       {/* Footer */}
-      <footer className="bg-blue-900 text-white py-6">
+      <footer className="bg-blue-900 text-white py-4">
         <div className="container mx-auto text-center text-sm">
           © 2024 ReportCardGen. All rights reserved.
         </div>
