@@ -237,6 +237,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     padding: 20,
     fontSize: 12,
+    border: '5px solid black', // Added border for the page
+    width: 500,
+    height: 500,
   },
   logo: {
     width: 80,
@@ -248,14 +251,34 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     marginBottom: 15,
-    color: 'orange',
+    color: 'darkblue',
+  },
+  section: {
+    border: '2px solid gray', // Section border
+    padding: 10,
+    marginBottom: 20,
+    borderRadius: 5, // Optional: rounded corners
   },
   text: {
     fontSize: 12,
     marginBottom: 4,
   },
+  signatureSection: {
+    // display:"flex",
+    marginTop: 20,
+    marginBottom: 10,
+    // alignItems: 'center',
+  },
+  signatureSectionright: {
+    marginTop: "113%",
+     marginBottom: "10",
+  width: '45%', 
+  position: 'absolute', 
+  right: 0, 
+  textAlign: 'right', 
+  alignItems: 'flex-end'
+  }
 });
-
 const GenReportCard = () => {
   const [students, setStudents] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -296,66 +319,84 @@ const GenReportCard = () => {
 
   const createPDFBlob = async (student) =>
     pdf(
+      
       <Document>
-               <Page style={styles.page} size={{ width: 500, height: 500 }}>
-                 {/* Logo */}
-                 <Image style={styles.logo} src={logo} />
-                
-                 {/* Title */}
-                 <Text style={styles.title}>Student Report</Text>
-                
-                 {/* Student Details Section */}
-                 <View style={{ marginBottom: 20 }}>
-               <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>Student Details:</Text>
-                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-           {/* <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>ID:</Text> {student.id}</Text> */}
-                    <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Name:</Text> {student.name}</Text>
-                     <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Father Email:</Text> {student.email}</Text>
-      
-                   </View>
-                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-                     <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Father's Name:</Text> {student.fatherName}</Text>
-                     <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Mother's Name:</Text> {student.motherName}</Text>
-                   </View>
-                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-                     <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Email:</Text> {student.fatheremail}</Text>
-                    <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Contact No:</Text> {student.phone}</Text>
-                 </View>
-                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-                    <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {student.address}</Text>
-      
-                     <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Roll Number:</Text> {student.rollno}</Text>
-                   </View>
-                 </View>
-        
-                 {/* Attendance Section */}
-               <View style={{ marginBottom: 20 }}>
-                   <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>Attendance Details:</Text>
-                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-                     <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Total Present:</Text> {student.totalpresent}</Text>
-                     <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Total Absent:</Text> {student.totalabsent}</Text>
-                   </View>
-                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-                     <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Attendance %:</Text> {student.attenpercentage}</Text>
-                     <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Total Days</Text> {student.totalday}</Text>
-      
-                 </View>
-             </View>
-        
-               {/* Academic Performance Section */}
-               <View>
-                  <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>Academic Performance:</Text>
-                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-                   <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>1A Level:</Text> {student.oneA}</Text>
-                   <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>1B Level:</Text> {student.oneB}</Text>
-               </View>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-                   <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>2A Level:</Text> {student.twoA}</Text>
-                 <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>2B Level:</Text> {student.twoB}</Text>
-               </View>
-                 </View>
-             </Page>
-            </Document>
+  <Page style={styles.page} size={{ width: 500, height: 700 }}>
+    {/* Logo */}
+    <Image style={styles.logo} src={logo} />
+    
+    {/* Title */}
+    <Text style={styles.title}>Student ReportCard</Text>
+    
+    {/* Student Details Section */}
+    <View style={styles.section}>
+      <View>
+        <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>Student Details:</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Name:</Text> {student.name}</Text>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Father Email:</Text> {student.email}</Text>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Father's Name:</Text> {student.fatherName}</Text>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Mother's Name:</Text> {student.motherName}</Text>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Email:</Text> {student.fatheremail}</Text>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Contact No:</Text> {student.phone}</Text>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {student.address}</Text>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Roll Number:</Text> {student.rollno}</Text>
+        </View>
+      </View>
+    </View>
+
+    {/* Attendance Section */}
+    <View style={styles.section}>
+      <View>
+        <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>Attendance Details:</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Total Present:</Text> {student.totalpresent}</Text>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Total Absent:</Text> {student.totalabsent}</Text>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Attendance %:</Text> {student.attenpercentage}</Text>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Total Days:</Text> {student.totalday}</Text>
+        </View>
+      </View>
+    </View>
+
+    {/* Academic Performance Section */}
+    <View style={styles.section}>
+      <View>
+        <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>Academic Performance:</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>1A Level:</Text> {student.oneA}</Text>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>1B Level:</Text> {student.oneB}</Text>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>1C Level:</Text> {student.oneC}</Text>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>2A Level:</Text> {student.twoA}</Text>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>2B Level:</Text> {student.twoB}</Text>
+          <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>2C Level:</Text> {student.twoC}</Text>
+        </View>
+      </View>
+    </View>
+
+    {/* Signature Section */}
+    <View style={styles.signatureSection}>
+      <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>Signature:</Text>
+      <Text style={styles.text}>________________</Text>
+      <Text style={styles.text}>CEO Signatory</Text>
+    </View>
+    <View style={[styles.signatureSectionright,{  paddingRight: 20 }]}>
+      <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>Signature:</Text>
+      <Text style={styles.text}>________________</Text>
+      <Text style={styles.text}>HOD Signatory</Text>
+    </View>
+
+  </Page>
+</Document>
     ).toBlob();
 
   const handleSearch = (e) => {
@@ -372,11 +413,11 @@ const GenReportCard = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto p-4 sm:p-6 bg-white rounded-lg">
-      <h1 className="text-2xl sm:text-3xl font-bold text-orange-600 text-center mb-6">
+    <div>
+      <h1 className="text-2xl sm:text-3xl font-bold text-black-600 text-center mb-6">
         Student Report Management
       </h1>
-
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 bg-white rounded-lg">
       <div className="mb-4 flex justify-end">
         <input
           type="text"
@@ -397,7 +438,7 @@ const GenReportCard = () => {
               {student.name}
             </h3>
             <p><strong>Father's Name:</strong> {student.fatherName}</p>
-            <p><strong>Father's Email:</strong> {student.fatheremail}</p>
+            <p><strong>Father's Email:</strong> {student.email}</p>
             <p><strong>Roll No:</strong> {student.rollno}</p>
             <p><strong>Contact:</strong> {student.phone}</p>
 
@@ -418,6 +459,7 @@ const GenReportCard = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };
