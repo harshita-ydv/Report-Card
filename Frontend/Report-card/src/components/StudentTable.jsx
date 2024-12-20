@@ -145,18 +145,21 @@
 
 // export default StudentTable;
 
+// 
+
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa"; // Import icons
+import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 
 const StudentTable = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStudent, setSelectedStudent] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1); // Track current page
-  const [itemsPerPage, setItemsPerPage] = useState(10); // Items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -185,7 +188,6 @@ const StudentTable = () => {
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
-
     const filtered = data.filter((student) =>
       student.name.toLowerCase().includes(query)
     );
@@ -217,70 +219,66 @@ const StudentTable = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow">
-      <h1 className="text-2xl sm:text-3xl font-bold text-black-600 text-center mb-6">
-        Student Management
-      </h1>
+    <div className="bg-white text-blue-900">
+      <h1 className="text-2xl font-bold text-center mb-6">Student Management</h1>
 
       {/* Search Input */}
-      <div className="mb-4 flex justify-end">
+      <div className="mb-4 flex justify-end pr-4">
         <input
           type="text"
-          placeholder="Search by Name"
           value={searchQuery}
           onChange={handleSearch}
-          className="p-2 border border-gray-300 rounded w-full max-w-xs focus:outline-none focus:ring focus:border-orange-500"
+          placeholder="Search by name"
+          className="w-48 p-2 border border-blue-900 rounded"
         />
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-200 text-gray-700">
-              <th className="border border-gray-300 px-4 py-2">Name</th>
-              <th className="border border-gray-300 px-4 py-2">Roll No</th>
-              <th className="border border-gray-300 px-4 py-2">Email</th>
-              <th className="border border-gray-300 px-4 py-2">Course</th>
-              <th className="border border-gray-300 px-4 py-2">Actions</th>
+      <table className="table-auto w-full border-collapse border border-gray-300">
+        <thead>
+          <tr className="bg-gray-200 text-gray-700">
+            <th className="border border-gray-300 px-4 py-2">Name</th>
+            <th className="border border-gray-300 px-4 py-2">Roll No</th>
+            <th className="border border-gray-300 px-4 py-2">Email</th>
+            <th className="border border-gray-300 px-4 py-2">Course</th>
+            <th className="border border-gray-300 px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {paginateData().map((student) => (
+            <tr key={student.id} className="text-gray-700">
+              <td className="border border-gray-300 px-4 py-2">{student.name}</td>
+              <td className="border border-gray-300 px-4 py-2">{student.rollno}</td>
+              <td className="border border-gray-300 px-4 py-2">{student.email}</td>
+              <td className="border border-gray-300 px-4 py-2">{student.course}</td>
+              <td className="border border-gray-200 px-4 py-3 flex justify-center space-x-3">
+                <FaEye
+                  className="text-blue-500 cursor-pointer hover:text-blue-600"
+                  size={18}
+                  onClick={() => handleViewDetails(student)}
+                />
+                <FaEdit
+                  className="text-blue-500 cursor-pointer hover:text-blue-600"
+                  size={18}
+                  onClick={() => editData(student)}
+                />
+                <FaTrash
+                  className="text-blue-500 cursor-pointer hover:text-blue-600"
+                  size={18}
+                  onClick={() => deleteData(student.id)}
+                />
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {paginateData().map((student) => (
-              <tr key={student.id} className="text-gray-700">
-                <td className="border border-gray-300 px-4 py-2">{student.name}</td>
-                <td className="border border-gray-300 px-4 py-2">{student.rollno}</td>
-                <td className="border border-gray-300 px-4 py-2">{student.email}</td>
-                <td className="border border-gray-300 px-4 py-2">{student.course}</td>
-                <td className="border border-gray-300 px-4 py-2 flex justify-center space-x-3">
-                  <FaEye
-                    className="text-blue-500 cursor-pointer hover:text-blue-600"
-                    size={18}
-                    onClick={() => handleViewDetails(student)}
-                  />
-                  <FaEdit
-                    className="text-yellow-500 cursor-pointer hover:text-yellow-600"
-                    size={18}
-                    onClick={() => editData(student)}
-                  />
-                  <FaTrash
-                    className="text-red-500 cursor-pointer hover:text-red-600"
-                    size={18}
-                    onClick={() => deleteData(student.id)}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
 
       {/* Pagination Controls */}
       <div className="flex justify-center mt-4">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-4 py-2 mx-2 text-white bg-gray-500 rounded disabled:bg-gray-300"
+          className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
         >
           Prev
         </button>
@@ -288,7 +286,7 @@ const StudentTable = () => {
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 mx-2 text-white bg-gray-500 rounded disabled:bg-gray-300"
+          className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
         >
           Next
         </button>
@@ -324,5 +322,3 @@ const StudentTable = () => {
 };
 
 export default StudentTable;
-
-

@@ -201,7 +201,7 @@ function Register() {
                 {/* Name field */}
                 <div className="relative mb-6">
                   <Field
-                    className={`peer w-full p-3 border ${touched.name && errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-50`}
+                    className={`peer w-full p-3 border ${touched.name && errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 bg-gray-50`}
                     type="text"
                     name="name"
                     placeholder=" "
@@ -215,7 +215,7 @@ function Register() {
                 {/* Email field */}
                 <div className="relative mb-6">
                   <Field
-                    className={`peer w-full p-3 border ${touched.email && errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-50`}
+                    className={`peer w-full p-3 border ${touched.email && errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 bg-gray-50`}
                     type="email"
                     name="email"
                     placeholder=" "
@@ -229,7 +229,7 @@ function Register() {
                 {/* Password field */}
                 <div className="relative mb-6">
                   <Field
-                    className={`peer w-full p-3 border ${touched.password && errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-50`}
+                    className={`peer w-full p-3 border ${touched.password && errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 bg-gray-50`}
                     type="password"
                     name="password"
                     placeholder=" "
@@ -247,7 +247,7 @@ function Register() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full p-2 text-white rounded-md ${isSubmitting ? 'bg-purple-300' : 'bg-purple-500 hover:bg-purple-600'} transition duration-300`}
+                  className={`w-full p-2 text-white rounded-md ${isSubmitting ? 'bg-purple-300' : 'bg-blue-900 hover:bg-blue-900'} transition duration-300`}
                 >
                   {isSubmitting ? 'Registering...' : 'Register'}
                 </button>
@@ -256,7 +256,7 @@ function Register() {
           </Formik>
 <p className="text-sm text-center mt-4">
 Already registered?{' '}
-<Link to="/login" className="text-blue-500 hover:underline">
+<Link to="/login" className="text-blue-900 hover:underline">
   Login here
 </Link>
 </p>

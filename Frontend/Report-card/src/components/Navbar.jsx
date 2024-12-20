@@ -29,7 +29,7 @@ const Navbar = () => {
   }, [role, location.pathname, navigate]);
 
   return (
-    <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg">
+    <nav className="bg-blue-900 text-white shadow-lg">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <img
