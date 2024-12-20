@@ -7,7 +7,7 @@ const TeacherHome = () => {
 
   return (
     <div className="container mx-auto my-8 p-6 mt-0">
-      <h2 className="text-3xl font-bold text-center mb-6">Welcome to Teacher's Home Page</h2>
+      <h2 className="text-3xl font-bold text-center mb-6">Welcome to Teacher's Dashboard</h2>
       <p className="text-lg text-center mb-10">Here you can manage your classes, view schedules, and more.</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
