@@ -1,12 +1,14 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+// tailwind.config.js
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}", // Adjust paths based on your project structure
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        skyblue: '#00BFFF', // Define a name for the color
+      },
+    },
   },
   plugins: [],
-}
-
+};

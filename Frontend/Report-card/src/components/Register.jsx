@@ -149,6 +149,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import logo from '../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png';
 import { useNavigate, Link } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+import Navbar from './Navbar';
 
 function Register() {
   // Define the validation schema using Yup
@@ -179,13 +181,15 @@ function Register() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Left Section: Form */}
         <div className="w-full md:w-1/2 p-8">
           {/* <h2 className="text-3xl font-bold text-gray-800 mb-6">Register</h2> */}
           <img
-  src={logo} // Use the imported logo
+       src={logo} // Use the imported logo
   alt="Report Card Generator Logo"
   className="w-32 h-auto mx-auto mb-4" // Adjust the width (w-32) and margin (mb-4)
 />
@@ -201,7 +205,7 @@ function Register() {
                 {/* Name field */}
                 <div className="relative mb-6">
                   <Field
-                    className={`peer w-full p-3 border ${touched.name && errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 bg-gray-50`}
+                    className={`peer w-full p-3 border ${touched.name && errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
                     type="text"
                     name="name"
                     placeholder=" "
@@ -215,7 +219,7 @@ function Register() {
                 {/* Email field */}
                 <div className="relative mb-6">
                   <Field
-                    className={`peer w-full p-3 border ${touched.email && errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 bg-gray-50`}
+                    className={`peer w-full p-3 border ${touched.email && errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
                     type="email"
                     name="email"
                     placeholder=" "
@@ -229,7 +233,7 @@ function Register() {
                 {/* Password field */}
                 <div className="relative mb-6">
                   <Field
-                    className={`peer w-full p-3 border ${touched.password && errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 bg-gray-50`}
+                    className={`peer w-full p-3 border ${touched.password && errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
                     type="password"
                     name="password"
                     placeholder=" "
@@ -247,7 +251,7 @@ function Register() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full p-2 text-white rounded-md ${isSubmitting ? 'bg-purple-300' : 'bg-blue-900 hover:bg-blue-900'} transition duration-300`}
+                  className={`w-full p-2 text-white rounded-md ${isSubmitting ? 'bg-purple-300' : 'bg-skyblue hover:bg-blue-800'} transition duration-300`}
                 >
                   {isSubmitting ? 'Registering...' : 'Register'}
                 </button>
@@ -263,14 +267,15 @@ Already registered?{' '}
       </div>
 
       {/* Right Section: Illustration */}
-      <div className="hidden md:flex w-1/2 bg-purple-100 items-center justify-center h-auto">        <img
-            src="https://img.freepik.com/free-vector/button-style-concept-illustration_114360-4428.jpg?ga=GA1.1.852954389.1699076296"
+      <div className="hidden md:flex w-1/2 bg-purple-100 items-center justify-center h-max"><img
+            src="https://img.freepik.com/free-vector/progress-indicator-concept-illustration_114360-4978.jpg?ga=GA1.1.852954389.1699076296&semt=ais_hybrid"
             alt="Illustration"
-            className="max-w-full h-auto"
+            className="max-w-full h-max"
           />
         </div>
       </div>
     </div>
+    </>
   );
 }
 

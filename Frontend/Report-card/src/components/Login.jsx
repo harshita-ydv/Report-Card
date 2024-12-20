@@ -293,6 +293,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import logo from '../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png';
+import Navbar from './Navbar';
 
 const predefinedSuperAdmin = { email: 'admin@example.com', password: 'admin123' };
 
@@ -310,17 +311,21 @@ function Login() {
 
   const handleLogin = async (values) => {
     const { email, password } = values;
-
+  
     if (email === predefinedSuperAdmin.email && password === predefinedSuperAdmin.password) {
       localStorage.setItem('role', 'SuperAdmin');
+      localStorage.setItem('name', 'Super Admin');  // Store name in localStorage
+      localStorage.setItem('email', predefinedSuperAdmin.email); // Store email
       navigate('/superadmin-dashboard');
     } else {
       try {
         const response = await axios.post('http://localhost:5000/api/auth/login/jwt', { email, password });
-        const { role } = response.data;
-
+        const { role, name } = response.data;  // Assuming the response has name and email
+  
         localStorage.setItem('role', role);
-
+        localStorage.setItem('name', name);  // Store name in localStorage
+        localStorage.setItem('email', email);  // Store email in localStorage
+  
         if (role === 'Teacher') {
           navigate('/teacher-dashboard');
         } else if (role === 'Student') {
@@ -335,8 +340,11 @@ function Login() {
       }
     }
   };
+  
 
   return (
+    <>
+    <Navbar/>
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Left Side - Login Form */}
@@ -361,7 +369,7 @@ function Login() {
                   <Field
                     className={`peer w-full p-3 border ${
                       errors.email && touched.email ? 'border-red-500' : 'border-gray-300'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 bg-gray-50`}
+                    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
                     type="email"
                     name="email"
                     placeholder=" "
@@ -379,7 +387,7 @@ function Login() {
                   <Field
                     className={`peer w-full p-3 border ${
                       errors.password && touched.password ? 'border-red-500' : 'border-gray-300'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 bg-gray-50`}
+                    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
                     type="password"
                     name="password"
                     placeholder=" "
@@ -397,7 +405,7 @@ function Login() {
                   type="submit"
                   disabled={isSubmitting}
                   className={`w-full p-2 text-white rounded-md ${
-                    isSubmitting ? 'bg-purple-300' : 'bg-blue-900 hover:bg-blue-900'
+                    isSubmitting ? 'bg-blue-800' : 'bg-skyblue hover:bg-blue-800'
                   } transition duration-300`}
                 >
                   {isSubmitting ? 'Logging in...' : 'Sign in'}
@@ -424,6 +432,7 @@ function Login() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

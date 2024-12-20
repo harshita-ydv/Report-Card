@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="bg-blue-900 text-white py-8">
+    <footer className=" bg-blue-900 text-white py-8">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
         {/* Project Information */}
         <div>
@@ -14,8 +14,8 @@ function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-          <ul className="text-sm space-y-2">
+          <h3 className="text-lg font-semibold mb-4 text-center">Quick Links</h3>
+          <ul className="text-sm space-y-2 text-center">
             <li>
               <a href="#home" className="hover:underline hover:text-gray-300 transition duration-200">
                 Home

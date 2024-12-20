@@ -2,15 +2,21 @@ import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Footer from './Footer';
+import {useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+// const navigate = useNavigate();
 
 
 function LandingPage() {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
+  const navigate = useNavigate();
 
   return (
+
     <>
+    <Navbar/>
       <div className="bg-gray-100 text-gray-900 min-h-screen p-8 transition-colors duration-300">
         <div className="bg-white container mx-auto rounded-lg shadow-lg p-8 transition-all duration-300">
           {/* Centered Heading */}
@@ -114,8 +120,9 @@ function LandingPage() {
           <p className="text-lg mb-6">
             Join thousands of educators using ReportCardGen to simplify report card management.
           </p>
-          <button className="bg-yellow-500 text-blue-900 font-semibold py-2 px-6 rounded-full hover:bg-yellow-400 transition-all">
-            Sign Up Now
+          <button             onClick={() => navigate('/login')}
+ className="bg-yellow-500 text-blue-900 font-semibold py-2 px-6 rounded-full hover:bg-yellow-400 transition-all">
+            Sign In Now
           </button>
         </div>
       </div>

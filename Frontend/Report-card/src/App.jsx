@@ -25,8 +25,9 @@ import RejectRequest from './components/RejectRequest';
 
 function App() {
   return (
+    <>
     <Router>
-      <Navbar />
+      {/* <Navbar  /> */}
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
@@ -35,8 +36,6 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword/>} />
         <Route path="/reset-password/:token" component={<ResetPassword/>} />
         <Route path="/password-recovery" element={<PasswordRecovery/>} />
-
-
         {/* Protected Route for Super Admin */}
         <Route
           path="/superadmin-dashboard/*"
@@ -89,6 +88,7 @@ function App() {
       </Routes>
       <Footer />
     </Router>
+    </>
   );
 }
 

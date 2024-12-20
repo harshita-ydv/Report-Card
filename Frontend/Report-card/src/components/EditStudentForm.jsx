@@ -224,6 +224,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from './Navbar';
 
 const EditStudentForm = () => {
   const location = useLocation();
@@ -252,6 +253,8 @@ const EditStudentForm = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
       <h1 className="text-2xl font-bold text-center text-orange-600 mb-6">Edit Student</h1>
       <form onSubmit={handleSubmit}>
@@ -308,6 +311,7 @@ const EditStudentForm = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 
