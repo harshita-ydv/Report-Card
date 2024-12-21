@@ -221,6 +221,123 @@
 // };
 
 // export default EditStudentForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // mainnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+
+
+// import React, { useState } from 'react';
+// import { useLocation, useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// import Navbar from './Navbar';
+
+// const EditStudentForm = () => {
+//   const location = useLocation();
+//   const navigate = useNavigate();
+//   const { student } = location.state;
+
+//   const [formData, setFormData] = useState(student);
+
+//   const handleChange = (e) => {
+//     setFormData({
+//       ...formData,
+//       [e.target.name]: e.target.value,
+//     });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       await axios.put(`http://localhost:5000/api/data/${formData.id}`, formData);
+//       alert('Student updated successfully!');
+//       navigate('/teacher-dashboard/manage-students');
+//     } catch (error) {
+//       console.error('Error updating student:', error);
+//       alert('This email is already in use');
+//     }
+//   };
+
+//   return (
+//     <>
+//     <Navbar/>
+//     <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+//       <h1 className="text-2xl font-bold text-center text-orange-600 mb-6">Edit Student</h1>
+//       <form onSubmit={handleSubmit}>
+//         <div className="grid grid-cols-2 gap-4">
+//           {Object.keys(formData).map((key) => {
+//             if (key !== 'id') {  // Exclude the ID field from rendering
+//               return (
+//                 <div key={key}>
+//                   <label className="block font-semibold mb-2">{key.charAt(0).toUpperCase() + key.slice(1)}</label>
+//                   {key === 'gender' ? (
+//                     <select
+//                       name={key}
+//                       value={formData[key]}
+//                       onChange={handleChange}
+//                       className="w-full border px-3 py-2 rounded-md"
+//                       required
+//                     >
+//                       <option value="Male">Male</option>
+//                       <option value="Female">Female</option>
+//                       <option value="Other">Other</option>
+//                     </select>
+//                   ) : (
+//                     <input
+//                       type={key === 'dob' ? 'date' : 'text'}
+//                       name={key}
+//                       value={formData[key]}
+//                       onChange={handleChange}
+//                       className="w-full border px-3 py-2 rounded-md"
+//                       required
+//                     />
+//                   )}
+//                 </div>
+//               );
+//             }
+//             return null;
+//           })}
+//         </div>
+
+//         {/* Form Buttons */}
+//         <div className="mt-6 text-center">
+//           <button
+//             type="submit"
+//             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
+//           >
+//             Save Changes
+//           </button>
+//           <button
+//             type="button"
+//             onClick={() => navigate('/teacher-dashboard/manage-students')}
+//             className="ml-4 bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition duration-200"
+//           >
+//             Cancel
+//           </button>
+//         </div>
+//       </form>
+//     </div>
+//     </>
+//   );
+// };
+
+// export default EditStudentForm;
+
+
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -254,68 +371,117 @@ const EditStudentForm = () => {
 
   return (
     <>
-    <Navbar/>
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold text-center text-orange-600 mb-6">Edit Student</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-2 gap-4">
-          {Object.keys(formData).map((key) => {
-            if (key !== 'id') {  // Exclude the ID field from rendering
-              return (
-                <div key={key}>
-                  <label className="block font-semibold mb-2">{key.charAt(0).toUpperCase() + key.slice(1)}</label>
-                  {key === 'gender' ? (
-                    <select
-                      name={key}
-                      value={formData[key]}
-                      onChange={handleChange}
-                      className="w-full border px-3 py-2 rounded-md"
-                      required
-                    >
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  ) : (
-                    <input
-                      type={key === 'dob' ? 'date' : 'text'}
-                      name={key}
-                      value={formData[key]}
-                      onChange={handleChange}
-                      className="w-full border px-3 py-2 rounded-md"
-                      required
-                    />
-                  )}
-                </div>
-              );
-            }
-            return null;
-          })}
-        </div>
+      <Navbar />
+      <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <h1 className="text-2xl font-bold text-center text-orange-600 mb-6">Edit Student</h1>
+        <form onSubmit={handleSubmit}>
+          {/* Name */}
+          <div className="mb-4">
+            <label className="block font-semibold mb-2">Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name || ''}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded-md"
+              required
+            />
+          </div>
 
-        {/* Form Buttons */}
-        <div className="mt-6 text-center">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
-          >
-            Save Changes
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate('/teacher-dashboard/manage-students')}
-            className="ml-4 bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition duration-200"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
-    </div>
+          {/* Email */}
+          <div className="mb-4">
+            <label className="block font-semibold mb-2">Father Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email || ''}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded-md"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block font-semibold mb-2">Email</label>
+            <input
+              type="fatheremail"
+              name="fatheremail"
+              value={formData.fatheremail || ''}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded-md"
+              required
+            />
+          </div>
+
+          {/* Phone */}
+          <div className="mb-4">
+            <label className="block font-semibold mb-2">Phone</label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone || ''}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded-md"
+              required
+            />
+          </div>
+
+  
+          {/* Gender */}
+          <div className="mb-4">
+            <label className="block font-semibold mb-2">Gender</label>
+            <select
+              name="gender"
+              value={formData.gender || ''}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded-md"
+              required
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          {/* Address */}
+          <div className="mb-4">
+            <label className="block font-semibold mb-2">Address</label>
+            <input
+              type="text"
+              name="address"
+              value={formData.address || ''}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded-md"
+            />
+          </div>
+
+  
+
+          {/* Form Buttons */}
+          <div className="mt-6 text-center">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
+            >
+              Save Changes
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/teacher-dashboard/manage-students')}
+              className="ml-4 bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition duration-200"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };
 
 export default EditStudentForm;
+
+
+
 
 
 // import React, { useState } from 'react';

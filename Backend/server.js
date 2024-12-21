@@ -7,7 +7,7 @@ const session = require('express-session');
 const passport = require('./config/passport');
 const XLSX = require('xlsx');
 const multer = require('multer');
-
+const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const nodemailer = require('nodemailer');
@@ -294,6 +294,44 @@ app.post('/api/upload-excel', upload.single('file'), (req, res) => {
 
 
 
+// ////////////////////////////////////////////////////////////////
+
+cloudinary.config({
+  cloud_name: ' dayuzreb2',
+  api_key: '779315564742525',
+  api_secret: 'IFliGRYmEPoR3R5y8RQjDOxO8jg',
+});
+
+// const app = express();
+// app.use(cors());
+
+// Set up multer for handling file uploads
+// const storage = multer.memoryStorage();
+const uploadd = multer({ storage: multer.memoryStorage() });
+
+app.post('/upload-profile-photo', uploadd.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+  // Upload the image to Cloudinary
+  cloudinary.uploader
+    .upload(
+      req.file,
+      {
+        resource_type: 'auto', // Automatically determine file type (image, video, etc.)
+      },
+      (error, result) => {
+        if (error) {
+          return res.status(500).json({ error: 'Image upload failed' });
+        }
+
+        // Send the Cloudinary image URL as the response
+        res.json({ imageUrl: result.secure_url });
+      }
+    )
+    .end(req.file.buffer); // Send the image buffer to Cloudinary
+});
 
 
 
@@ -308,9 +346,7 @@ app.post('/api/upload-excel', upload.single('file'), (req, res) => {
 
 
 
-
-
-
+///////////////////////////////////////////////////////////////////////////
 
 app.get('/api/data', (req, res) => {
   try {

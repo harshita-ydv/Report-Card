@@ -32,6 +32,8 @@ function AcceptRequest() {
               className="py-4 flex justify-between items-center"
             >
               <div>
+              <p className="text-lg font-medium">{teacher.email}</p>
+
                 <p className="text-lg font-medium">{teacher.status}</p>
                 <p className="text-gray-500">{teacher.role}</p>
               </div>

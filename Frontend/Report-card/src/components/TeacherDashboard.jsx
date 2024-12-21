@@ -216,7 +216,7 @@
 import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { FaHome, FaUserPlus, FaUsers, FaFileExcel, FaEye } from 'react-icons/fa'; // Import icons
-
+import Navbar from './Navbar'
 const TeacherDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -253,7 +253,7 @@ const TeacherDashboard = () => {
 
       <Navbar toggleSidebar={toggleSidebar} />
       <div className="flex flex-1">
-        {/* Sidebar */}
+
         <aside
           className={`fixed inset-y-0 left-0 transform ${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -264,8 +264,7 @@ const TeacherDashboard = () => {
               <li>
                 <Link
                   to="/teacher-dashboard"
-                  onClick={toggleSidebar}
-                  className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
                 >
                   <FaHome />
                   <span>Home</span>
@@ -274,8 +273,7 @@ const TeacherDashboard = () => {
               <li>
                 <Link
                   to="/teacher-dashboard/add-student"
-                  onClick={toggleSidebar}
-                  className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
                 >
                   <FaUserPlus />
                   <span>Add Student</span>
@@ -284,8 +282,7 @@ const TeacherDashboard = () => {
               <li>
                 <Link
                   to="/teacher-dashboard/manage-students"
-                  onClick={toggleSidebar}
-                  className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
                 >
                   <FaUsers />
                   <span>Manage Students</span>
@@ -294,8 +291,7 @@ const TeacherDashboard = () => {
               <li>
                 <Link
                   to="/teacher-dashboard/view-students"
-                  onClick={toggleSidebar}
-                  className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
                 >
                   <FaEye />
                   <span>Download PDF</span>
@@ -304,8 +300,7 @@ const TeacherDashboard = () => {
               <li>
                 <Link
                   to="/teacher-dashboard/upload"
-                  onClick={toggleSidebar}
-                  className="block text-blue-500 font-semibold hover:text-blue-700 transition"
+                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
                 >
                   <FaFileExcel />
                   <span>Upload Excel File</span>
@@ -315,20 +310,15 @@ const TeacherDashboard = () => {
           </nav>
         </aside>
 
-        {/* Main Content */}
+   
         <main className="flex-1  lg:ml-50 flex items-center justify-center bg-white">
-          <div className="w-full max-w-4xl bg-gray-100 p-6 rounded-lg shadow-md">
+          <div className="w-full max-w-4xl  p-6 rounded-lg ">
             <Outlet />
           </div>
         </main>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-blue-900 text-white py-4">
-        <div className="container mx-auto text-center text-sm">
-          © 2024 ReportCardGen. All rights reserved.
-        </div>
-      </footer>
+ 
 
       {/* Overlay for Sidebar on Mobile */}
       {isSidebarOpen && (

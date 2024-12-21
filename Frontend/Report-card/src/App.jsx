@@ -1,83 +1,117 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Login from './components/Login';
-import Register from './components/Register';
-import TeacherDashboard from './components/TeacherDashboard';
-import StudentDashboard from './components/StudentDashboard';
-import ProtectedRoute from './components/ProtectedRoute';
-import SuperadminDas from './components/SuperadminDas';
-import AddStudent from './components/AddStudent';
-import TeacherHome from './components/TeacherHome';
-import StudentTable from './components/StudentTable';
-import EditStudentForm from './components/EditStudentForm';
-import LandingPage from './LandingPage/LandingPage';
-import Footer from './LandingPage/Footer';
-import GenReportCard from './components/GenrateReportCard';
-import ViewReportCard from './components/ViewReportCard';
-import ForgotPassword from './components/ForgotPassword';
-import ResetPassword from './components/ResetPassword';
-import TeacherStatus from './components/TeacherStatus';
-import UploadExcelForm from './components/UploadExcelForm';
-import PasswordRecovery from './components/PasswordRecovery';
-import AcceptRequest from './components/AcceptRequest';
-import RejectRequest from './components/RejectRequest';
+import React, { Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+const Navbar = React.lazy(() => import("./components/Navbar"));
+const Login = React.lazy(() => import("./components/Login"));
+const Register = React.lazy(() => import("./components/Register"));
+const TeacherDashboard = React.lazy(() =>
+  import("./components/TeacherDashboard")
+);
+const StudentDashboard = React.lazy(() =>
+  import("./components/StudentDashboard")
+);
+("");
+const ProtectedRoute = React.lazy(() => import("./components/ProtectedRoute"));
+("");
+const SuperadminDas = React.lazy(() => import("./components/SuperadminDas"));
+const AddStudent = React.lazy(() => import("./components/AddStudent"));
+const TeacherHome = React.lazy(() => import("./components/TeacherHome"));
+const StudentTable = React.lazy(() => import("./components/StudentTable"));
+const EditStudentForm = React.lazy(() =>
+  import("./components/EditStudentForm")
+);
+const LandingPage = React.lazy(() => import("./LandingPage/LandingPage"));
+const Footer = React.lazy(() => import("./LandingPage/Footer"));
+const GenReportCard = React.lazy(() =>
+  import("./components/GenrateReportCard")
+);
+const ViewReportCard = React.lazy(() => import("./components/ViewReportCard"));
+const ForgotPassword = React.lazy(() => import("./components/ForgotPassword"));
+const ResetPassword = React.lazy(() => import("./components/ResetPassword"));
+const TeacherStatus = React.lazy(() => import("./components/TeacherStatus"));
+const UploadExcelForm = React.lazy(() =>
+  import("./components/UploadExcelForm")
+);
+const PasswordRecovery = React.lazy(() =>
+  import("./components/PasswordRecovery")
+);
+const AcceptRequest = React.lazy(() => import("./components/AcceptRequest"));
+const RejectRequest = React.lazy(() => import("./components/RejectRequest"));
+const Profile = React.lazy(() => import("./components/ProfileModel"));
+const Superhome = React.lazy(() => import("./components/Superhome"));
+const PendingRequest = React.lazy(() => import("./components/PendingRequest"));
+import HashLoader from 'react-spinners/HashLoader'
 
 function App() {
   return (
     <>
-    <Router>
-      {/* <Navbar  /> */}
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword/>} />
-        <Route path="/reset-password/:token" component={<ResetPassword/>} />
-        <Route path="/password-recovery" element={<PasswordRecovery/>} />
-        {/* Protected Route for Super Admin */}
-        <Route
-          path="/superadmin-dashboard/*"
-          element={
-            <ProtectedRoute role="SuperAdmin">
-              <SuperadminDas />
-  
-              {/* <Route path="/teacher-status" element={<TeacherStatus/>} /> */}
-            </ProtectedRoute>
-          }
-        />
-          <Route path="pending-requests" element={<AcceptRequest/>} />
-                <Route path="users" element={<RejectRequest/>} />
-              {/* <Route path="/teacher-status" element={<TeacherStatus/>} /> */}
-
-        {/* Protected Route for Teacher */}
-        <Route
-          path="/teacher-dashboard/*"
-          element={
-            <ProtectedRoute role="Teacher">
-              <TeacherDashboard />
-            </ProtectedRoute>
+      <Router>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center h-screen">
+              <HashLoader
+                color="#1e3a8a"
+                loading
+                size={70}
+                speedMultiplier={1}
+              />
+            </div>
           }
         >
-          <Route index element={<TeacherHome />} />
-          <Route path="add-student" element={<AddStudent />} />
-          <Route path="manage-students" element={<StudentTable />} />
-          
-          <Route path="view-students" element={<GenReportCard/>} />
-          <Route path="upload" element={<UploadExcelForm/>} />
+          {/* <Navbar  /> */}
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route
+              path="/reset-password/:token"
+              component={<ResetPassword />}
+            />
+            <Route path="/password-recovery" element={<PasswordRecovery />} />
+            {/* Protected Route for Super Admin */}
+            <Route
+              path="/superadmin-dashboard/*"
+              element={
+                <ProtectedRoute role="SuperAdmin">
+                  <SuperadminDas />
 
+                  {/* <Route path="/teacher-status" element={<TeacherStatus/>} /> */}
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Superhome />} />
+              <Route path="pending-requests" element={<PendingRequest />} />
 
+              <Route path="accept-requests" element={<AcceptRequest />} />
+              <Route path="users" element={<RejectRequest />} />
+              {/* <Route path="/teacher-status" element={<TeacherStatus/>} /> */}
+            </Route>
+            {/* Protected Route for Teacher */}
+            <Route
+              path="/teacher-dashboard/*"
+              element={
+                <ProtectedRoute role="Teacher">
+                  <TeacherDashboard />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<TeacherHome />} />
+              <Route path="add-student" element={<AddStudent />} />
+              <Route path="manage-students" element={<StudentTable />} />
 
+              <Route path="view-students" element={<GenReportCard />} />
+              <Route path="upload" element={<UploadExcelForm />} />
+            </Route>
+            {/* <Route path="/upload" element={<UploadExcelForm/>} /> */}
+            {/* Route for Editing Student */}
+            <Route path="/edit-students" element={<EditStudentForm />} />
+            {/* <Route path="/profile" element={<Profile/>} /> */}
 
-        </Route>
-    {/* <Route path="/upload" element={<UploadExcelForm/>} /> */}
-        {/* Route for Editing Student */}
-        <Route path="/edit-students" element={<EditStudentForm />} />
-        {/* <Route path="/view-report/:id" element={<ViewReportCard/>} /> */}
+            {/* <Route path="/view-report/:id" element={<ViewReportCard/>} /> */}
 
-        {/* Protected Route for Student */}
-        {/* <Route
+            {/* Protected Route for Student */}
+            {/* <Route
           path="/student-dashboard"
           element={
             <ProtectedRoute role="Student">
@@ -85,16 +119,12 @@ function App() {
             </ProtectedRoute>
           }
         /> */}
-      </Routes>
-      <Footer />
-    </Router>
+          </Routes>
+          <Footer />
+        </Suspense>
+      </Router>
     </>
   );
 }
 
 export default App;
-
-
-
-
-

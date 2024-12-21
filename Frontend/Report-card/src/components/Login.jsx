@@ -286,6 +286,161 @@
 
 
 
+// mainnnnnnnnnnnnnnnnnnnnnnnnnn
+// import React from 'react';
+// import axios from 'axios';
+// import { useNavigate, Link } from 'react-router-dom';
+// import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import * as Yup from 'yup';
+// import logo from '../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png';
+// import Navbar from './Navbar';
+
+// const predefinedSuperAdmin = { email: 'admin@example.com', password: 'admin123' };
+
+// function Login() {
+//   const navigate = useNavigate();
+
+//   // Yup validation schema
+//   const validationSchema = Yup.object().shape({
+//     email: Yup.string()
+//       .email('Invalid email format')
+//       .required('Email is required'),
+//     password: Yup.string()
+//       .required('Password is required'),
+//   });
+
+//   const handleLogin = async (values) => {
+//     const { email, password } = values;
+  
+//     if (email === predefinedSuperAdmin.email && password === predefinedSuperAdmin.password) {
+//       localStorage.setItem('role', 'SuperAdmin');
+//       localStorage.setItem('name', 'Super Admin');  // Store name in localStorage
+//       localStorage.setItem('email', predefinedSuperAdmin.email); // Store email
+//       navigate('/superadmin-dashboard');
+//     } else {
+//       try {
+//         const response = await axios.post('http://localhost:5000/api/auth/login/jwt', { email, password });
+//         const { role, name } = response.data;  // Assuming the response has name and email
+  
+//         localStorage.setItem('role', role);
+//         localStorage.setItem('name', name);  // Store name in localStorage
+//         localStorage.setItem('email', email);  // Store email in localStorage
+  
+//         if (role === 'Teacher') {
+//           navigate('/teacher-dashboard');
+//         } else if (role === 'Student') {
+//           navigate('/student-dashboard');
+//         }
+//       } catch (error) {
+//         if (error.response) {
+//           alert(`Login failed: ${error.response.data.message}`);
+//         } else {
+//           alert('An error occurred. Please try again.');
+//         }
+//       }
+//     }
+//   };
+  
+
+//   return (
+//     <>
+//     <Navbar/>
+//     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+//       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
+//         {/* Left Side - Login Form */}
+//         <div className="w-full md:w-1/2 p-8">
+//           {/* <h2 className="text-3xl font-bold text-gray-800 mb-6">Welcome back</h2> */}
+//           <img
+//   src={logo} // Use the imported logo
+//   alt="Report Card Generator Logo"
+//   className="w-32 h-auto mx-auto mb-4" // Adjust the width (w-32) and margin (mb-4)
+// />
+//           <p className="text-gray-600 mb-4">Please enter your details</p>
+
+//           <Formik
+//             initialValues={{ email: '', password: '' }}
+//             validationSchema={validationSchema}
+//             onSubmit={handleLogin}
+//           >
+//             {({ isSubmitting, errors, touched }) => (
+//               <Form>
+//                 {/* Email Field */}
+//                 <div className="relative mb-6">
+//                   <Field
+//                     className={`peer w-full p-3 border ${
+//                       errors.email && touched.email ? 'border-red-500' : 'border-gray-300'
+//                     } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+//                     type="email"
+//                     name="email"
+//                     placeholder=" "
+//                   />
+//                   <label
+//                     className="absolute left-3 top-2 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+//                   >
+//                     Email address
+//                   </label>
+//                   <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+//                 </div>
+
+//                 {/* Password Field */}
+//                 <div className="relative mb-6">
+//                   <Field
+//                     className={`peer w-full p-3 border ${
+//                       errors.password && touched.password ? 'border-red-500' : 'border-gray-300'
+//                     } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+//                     type="password"
+//                     name="password"
+//                     placeholder=" "
+//                   />
+//                   <label
+//                     className="absolute left-3 top-2 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+//                   >
+//                     Password
+//                   </label>
+//                   <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
+//                 </div>
+
+//                 {/* Submit Button */}
+//                 <button
+//                   type="submit"
+//                   disabled={isSubmitting}
+//                   className={`w-full p-2 text-white rounded-md ${
+//                     isSubmitting ? 'bg-blue-800' : 'bg-skyblue hover:bg-blue-800'
+//                   } transition duration-300`}
+//                 >
+//                   {isSubmitting ? 'Logging in...' : 'Sign in'}
+//                 </button>
+
+//                 <div className="mt-4 text-center">
+//                   <span className="text-sm text-gray-600">Don’t have an account? </span>
+//                   <Link to="/register" className="text-sm text-blue-900 hover:underline">
+//                     Sign up
+//                   </Link>
+//                 </div>
+//               </Form>
+//             )}
+//           </Formik>
+//         </div>
+
+        // {/* Right Side - Illustration */}
+        // <div className="hidden md:flex w-1/2 bg-purple-100 items-center justify-center">
+        //   <img
+        //     src="https://img.freepik.com/free-vector/progress-indicator-concept-illustration_114360-4978.jpg?ga=GA1.1.852954389.1699076296&semt=ais_hybrid"
+        //     alt="Illustration"
+        //     className="max-w-full h-250"
+        //   />
+        // </div>
+//       </div>
+//     </div>
+//     </>
+//   );
+// }
+
+// export default Login;
+
+
+
+
 
 import React from 'react';
 import axios from 'axios';
@@ -300,32 +455,30 @@ const predefinedSuperAdmin = { email: 'admin@example.com', password: 'admin123' 
 function Login() {
   const navigate = useNavigate();
 
-  // Yup validation schema
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email format')
       .required('Email is required'),
-    password: Yup.string()
-      .required('Password is required'),
+    password: Yup.string().required('Password is required'),
   });
 
   const handleLogin = async (values) => {
     const { email, password } = values;
-  
+
     if (email === predefinedSuperAdmin.email && password === predefinedSuperAdmin.password) {
       localStorage.setItem('role', 'SuperAdmin');
-      localStorage.setItem('name', 'Super Admin');  // Store name in localStorage
-      localStorage.setItem('email', predefinedSuperAdmin.email); // Store email
+      localStorage.setItem('name', 'Super Admin');
+      localStorage.setItem('email', predefinedSuperAdmin.email);
       navigate('/superadmin-dashboard');
     } else {
       try {
         const response = await axios.post('http://localhost:5000/api/auth/login/jwt', { email, password });
-        const { role, name } = response.data;  // Assuming the response has name and email
-  
+        const { role, name } = response.data;
+
         localStorage.setItem('role', role);
-        localStorage.setItem('name', name);  // Store name in localStorage
-        localStorage.setItem('email', email);  // Store email in localStorage
-  
+        localStorage.setItem('name', name);
+        localStorage.setItem('email', email);
+
         if (role === 'Teacher') {
           navigate('/teacher-dashboard');
         } else if (role === 'Student') {
@@ -340,98 +493,102 @@ function Login() {
       }
     }
   };
-  
 
   return (
     <>
-    <Navbar/>
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
-        {/* Left Side - Login Form */}
-        <div className="w-full md:w-1/2 p-8">
-          {/* <h2 className="text-3xl font-bold text-gray-800 mb-6">Welcome back</h2> */}
-          <img
-  src={logo} // Use the imported logo
-  alt="Report Card Generator Logo"
-  className="w-32 h-auto mx-auto mb-4" // Adjust the width (w-32) and margin (mb-4)
-/>
-          <p className="text-gray-600 mb-4">Please enter your details</p>
+      <Navbar />
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="w-full md:w-1/2 p-8">
+            <img
+              src={logo}
+              alt="Report Card Generator Logo"
+              className="w-32 h-auto mx-auto mb-4"
+            />
+            <p className="text-gray-600 mb-4">Please enter your details</p>
 
-          <Formik
-            initialValues={{ email: '', password: '' }}
-            validationSchema={validationSchema}
-            onSubmit={handleLogin}
-          >
-            {({ isSubmitting, errors, touched }) => (
-              <Form>
-                {/* Email Field */}
-                <div className="relative mb-6">
-                  <Field
-                    className={`peer w-full p-3 border ${
-                      errors.email && touched.email ? 'border-red-500' : 'border-gray-300'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
-                    type="email"
-                    name="email"
-                    placeholder=" "
-                  />
-                  <label
-                    className="absolute left-3 top-2 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+            <Formik
+              initialValues={{ email: '', password: '' }}
+              validationSchema={validationSchema}
+              onSubmit={handleLogin}
+            >
+              {({ isSubmitting, errors, touched }) => (
+                <Form>
+                  {/* Email Field */}
+                  <div className="relative mb-6">
+                    <Field
+                      className={`peer w-full p-3 border ${
+                        errors.email && touched.email ? 'border-red-500' : 'border-gray-300'
+                      } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+                      type="email"
+                      name="email"
+                      placeholder=" "
+                    />
+                    <label
+                      className="absolute left-3 top-2 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+                    >
+                      Email address
+                    </label>
+                    <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
+
+                  {/* Password Field */}
+                  <div className="relative mb-6">
+                    <Field
+                      className={`peer w-full p-3 border ${
+                        errors.password && touched.password ? 'border-red-500' : 'border-gray-300'
+                      } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+                      type="password"
+                      name="password"
+                      placeholder=" "
+                    />
+                    <label
+                      className="absolute left-3 top-2 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+                    >
+                      Password
+                    </label>
+                    <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
+
+                  {/* Forgot Password Link */}
+                  <div className="text-right mb-4">
+                    <Link to="/forgot-password" className="text-sm text-blue-900 hover:underline">
+                      Forgot Password?
+                    </Link>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`w-full p-2 text-white rounded-md ${
+                      isSubmitting ? 'bg-blue-800' : 'bg-skyblue hover:bg-blue-800'
+                    } transition duration-300`}
                   >
-                    Email address
-                  </label>
-                  <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
-                </div>
+                    {isSubmitting ? 'Logging in...' : 'Sign in'}
+                  </button>
 
-                {/* Password Field */}
-                <div className="relative mb-6">
-                  <Field
-                    className={`peer w-full p-3 border ${
-                      errors.password && touched.password ? 'border-red-500' : 'border-gray-300'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
-                    type="password"
-                    name="password"
-                    placeholder=" "
-                  />
-                  <label
-                    className="absolute left-3 top-2 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
-                  >
-                    Password
-                  </label>
-                  <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
-                </div>
+                  <div className="mt-4 text-center">
+                    <span className="text-sm text-gray-600">Don’t have an account? </span>
+                    <Link to="/register" className="text-sm text-blue-900 hover:underline">
+                      Sign up
+                    </Link>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full p-2 text-white rounded-md ${
-                    isSubmitting ? 'bg-blue-800' : 'bg-skyblue hover:bg-blue-800'
-                  } transition duration-300`}
-                >
-                  {isSubmitting ? 'Logging in...' : 'Sign in'}
-                </button>
-
-                <div className="mt-4 text-center">
-                  <span className="text-sm text-gray-600">Don’t have an account? </span>
-                  <Link to="/register" className="text-sm text-blue-900 hover:underline">
-                    Sign up
-                  </Link>
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </div>
-
-        {/* Right Side - Illustration */}
+            {/* Right Side - Illustration */}
         <div className="hidden md:flex w-1/2 bg-purple-100 items-center justify-center">
           <img
             src="https://img.freepik.com/free-vector/progress-indicator-concept-illustration_114360-4978.jpg?ga=GA1.1.852954389.1699076296&semt=ais_hybrid"
             alt="Illustration"
-            className="max-w-full h-250"
+            className="max-w-full h-[100%]"
           />
         </div>
+        </div>
       </div>
-    </div>
     </>
   );
 }

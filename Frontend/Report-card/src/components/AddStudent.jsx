@@ -378,95 +378,102 @@ const AddStudent = () => {
 </div>
 {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> */}
   {/* Total Present */}
-  <div className="mb-4">
-    <label className="block text-gray-700 text-sm font-bold mb-2">Total Present
-    <span className="text-red-500">*</span>
-    </label>
-    <input
-      type="number"
-      name="totalpresent"
-      onChange={(e) => {
-        const value = e.target.value;
-        formik.setFieldValue("totalpresent", value);
-        if (formik.values.totalday) {
-          const percentage = ((value / formik.values.totalday) * 100).toFixed(2);
-          formik.setFieldValue("attenpercentage", percentage);
-        }
-      }}
-      onBlur={formik.handleBlur}
-      value={formik.values.totalpresent}
-      className={`p-1 w-full rounded-md border ${
-        formik.touched.totalpresent && formik.errors.totalpresent ? "border-red-500" : "border-gray-300"
-      }`}
-    />
-    {formik.touched.totalpresent && formik.errors.totalpresent && (
-      <div className="text-red-500 text-sm">{formik.errors.totalpresent}</div>
-    )}
-  </div>
+{/* Total Present */}
+<div className="mb-4">
+  <label className="block text-gray-700 text-sm font-bold mb-2">
+    Total Present <span className="text-red-500">*</span>
+  </label>
+  <input
+    type="number"
+    name="totalpresent"
+    onChange={(e) => {
+      const value = Number(e.target.value);
+      formik.setFieldValue("totalpresent", value);
 
-  {/* Total Absent */}
-  <div className="mb-4">
-    <label className="block text-gray-700 text-sm font-bold mb-2">Total Absent
-    <span className="text-red-500">*</span>
-    </label>
-    <input
-      type="number"
-      name="totalabsent"
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-      value={formik.values.totalabsent}
-      className={`p-1 w-full rounded-md border ${
-        formik.touched.totalabsent && formik.errors.totalabsent ? "border-red-500" : "border-gray-300"
-      }`}
-    />
-    {formik.touched.totalabsent && formik.errors.totalabsent && (
-      <div className="text-red-500 text-sm">{formik.errors.totalabsent}</div>
-    )}
-  </div>
+      // Automatically calculate Total Absent and Attendance Percentage
+      if (formik.values.totalday) {
+        const totalAbsent = formik.values.totalday - value;
+        const percentage = ((value / formik.values.totalday) * 100).toFixed(2);
+        formik.setFieldValue("totalabsent", totalAbsent >= 0 ? totalAbsent : 0);
+        formik.setFieldValue("attenpercentage", percentage);
+      }
+    }}
+    onBlur={formik.handleBlur}
+    value={formik.values.totalpresent}
+    className={`p-1 w-full rounded-md border ${
+      formik.touched.totalpresent && formik.errors.totalpresent ? "border-red-500" : "border-gray-300"
+    }`}
+  />
+  {formik.touched.totalpresent && formik.errors.totalpresent && (
+    <div className="text-red-500 text-sm">{formik.errors.totalpresent}</div>
+  )}
+</div>
 
-  {/* Total Days */}
-  <div className="mb-4">
-    <label className="block text-gray-700 text-sm font-bold mb-2">Total Days
-    <span className="text-red-500">*</span>
-    </label>
-    <input
-      type="number"
-      name="totalday"
-      onChange={(e) => {
-        const value = e.target.value;
-        formik.setFieldValue("totalday", value);
-        if (formik.values.totalpresent) {
-          const percentage = ((formik.values.totalpresent / value) * 100).toFixed(2);
-          formik.setFieldValue("attenpercentage", percentage);
-        }
-      }}
-      onBlur={formik.handleBlur}
-      value={formik.values.totalday}
-      className={`p-1 w-full rounded-md border ${
-        formik.touched.totalday && formik.errors.totalday ? "border-red-500" : "border-gray-300"
-      }`}
-    />
-    {formik.touched.totalday && formik.errors.totalday && (
-      <div className="text-red-500 text-sm">{formik.errors.totalday}</div>
-    )}
-  </div>
+{/* Total Days */}
+<div className="mb-4">
+  <label className="block text-gray-700 text-sm font-bold mb-2">
+    Total Days <span className="text-red-500">*</span>
+  </label>
+  <input
+    type="number"
+    name="totalday"
+    onChange={(e) => {
+      const value = Number(e.target.value);
+      formik.setFieldValue("totalday", value);
 
-  {/* Attendance Percentage */}
-  <div className="mb-4">
-    <label className="block text-gray-700 text-sm font-bold mb-2">Attendance Percentage
-    <span className="text-red-500">*</span>
-    </label>
-    <input
-      type="number"
-      name="attenpercentage"
-      readOnly
-      value={formik.values.attenpercentage}
-      className="p-1 w-full rounded-md border border-gray-300 bg-gray-100"
-    />
-    {formik.touched.attenpercentage && formik.errors.attenpercentage && (
-      <div className="text-red-500 text-sm">{formik.errors.attenpercentage}</div>
-    )}
-  </div>
+      // Automatically calculate Total Absent and Attendance Percentage
+      if (formik.values.totalpresent) {
+        const totalAbsent = value - formik.values.totalpresent;
+        const percentage = ((formik.values.totalpresent / value) * 100).toFixed(2);
+        formik.setFieldValue("totalabsent", totalAbsent >= 0 ? totalAbsent : 0);
+        formik.setFieldValue("attenpercentage", percentage);
+      }
+    }}
+    onBlur={formik.handleBlur}
+    value={formik.values.totalday}
+    className={`p-1 w-full rounded-md border ${
+      formik.touched.totalday && formik.errors.totalday ? "border-red-500" : "border-gray-300"
+    }`}
+  />
+  {formik.touched.totalday && formik.errors.totalday && (
+    <div className="text-red-500 text-sm">{formik.errors.totalday}</div>
+  )}
+</div>
+
+{/* Total Absent */}
+<div className="mb-4">
+  <label className="block text-gray-700 text-sm font-bold mb-2">
+    Total Absent <span className="text-red-500">*</span>
+  </label>
+  <input
+    type="number"
+    name="totalabsent"
+    readOnly
+    value={formik.values.totalabsent}
+    className="p-1 w-full rounded-md border border-gray-300 bg-gray-100"
+  />
+  {formik.touched.totalabsent && formik.errors.totalabsent && (
+    <div className="text-red-500 text-sm">{formik.errors.totalabsent}</div>
+  )}
+</div>
+
+{/* Attendance Percentage */}
+<div className="mb-4">
+  <label className="block text-gray-700 text-sm font-bold mb-2">
+    Attendance Percentage <span className="text-red-500">*</span>
+  </label>
+  <input
+    type="number"
+    name="attenpercentage"
+    readOnly
+    value={formik.values.attenpercentage}
+    className="p-1 w-full rounded-md border border-gray-300 bg-gray-100"
+  />
+  {formik.touched.attenpercentage && formik.errors.attenpercentage && (
+    <div className="text-red-500 text-sm">{formik.errors.attenpercentage}</div>
+  )}
+</div>
+
 
         {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> */}
           {/* 1A Level Field */}
