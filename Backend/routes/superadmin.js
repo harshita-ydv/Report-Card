@@ -58,8 +58,8 @@ router.get('/pending-teacher-requests', async (req, res) => {
 const transporter = nodemailer.createTransport({
   service: 'Gmail', // Or your email provider
   auth: {
-    user: 'ayushmalviya990@gmail.com', // Replace with your email
-    pass: 'ixsw wfwp xspl tdtp', // Replace with your email password or app password
+    user: 'vishwakarmadivya133@gmail.com', // Replace with your email
+    pass: 'jlxi fdms ajoo qyuf', // Replace with your email password or app password
   },
 });
 
@@ -76,7 +76,7 @@ router.put('/approve/:id', async (req, res) => {
 
     // Send approval email
     await transporter.sendMail({
-      from: 'ayushmalviya990@gmail.com',
+      from: 'vishwakarmadivya133@gmail.com',
       to: teacher.email,
       subject: 'Request Approved',
       text: `Hello ${teacher.name},\n\nYour request has been approved. You can now log in using the following link:\n\nhttp://localhost:3000/login\n\nThank you!`,
