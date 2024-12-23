@@ -8,7 +8,7 @@ const Superhome = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container mx-auto my-8 p-4">
+    <div className="container mx-auto my-4 p-4">
       <h2 className="text-3xl font-extrabold text-center text-blue-900 mb-6">
         Dashboard Overview
       </h2>
@@ -26,7 +26,7 @@ const Superhome = () => {
           Pending Requests   
           </h5>
           <p className="text-gray-600 text-sm mb-4">
-            Access detailed reports and analyze data effectively.
+            Access detailed reports and analyze effectively.
           </p>
           <button
             onClick={() => navigate("/superadmin-dashboard/pending-requests")}
