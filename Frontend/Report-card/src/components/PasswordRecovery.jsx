@@ -1,12 +1,13 @@
-// PasswordRecovery.js
 import React, { useState } from 'react';
 import ForgotPassword from './ForgotPassword';
 import VerifyCode from './VerifyCode';
 import ResetPassword from './ResetPassword';
+import { useNavigate } from 'react-router-dom';
 
 const PasswordRecovery = () => {
   const [step, setStep] = useState(1);
   const [userEmail, setUserEmail] = useState('');
+  const navigate = useNavigate();
 
   const handleCodeSent = (email) => {
     setUserEmail(email);
@@ -15,6 +16,10 @@ const PasswordRecovery = () => {
 
   const handleCodeVerified = () => {
     setStep(3);
+  };
+
+  const handlePasswordResetSuccess = () => {
+    navigate('/login'); // Redirect to the login page
   };
 
   return (
@@ -33,7 +38,10 @@ const PasswordRecovery = () => {
       )}
 
       {step === 3 && (
-        <ResetPassword email={userEmail} />
+        <ResetPassword 
+          email={userEmail} 
+          onSuccess={handlePasswordResetSuccess} 
+        />
       )}
     </div>
   );

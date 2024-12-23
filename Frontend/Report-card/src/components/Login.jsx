@@ -473,10 +473,10 @@ function Login() {
     } else {
       try {
         const response = await axios.post('http://localhost:5000/api/auth/login/jwt', { email, password });
-        const { role, name } = response.data;
+        const { role  } = response.data;
 
         localStorage.setItem('role', role);
-        localStorage.setItem('name', name);
+        // localStorage.setItem('name', name);
         localStorage.setItem('email', email);
 
         if (role === 'Teacher') {
@@ -552,7 +552,7 @@ function Login() {
 
                   {/* Forgot Password Link */}
                   <div className="text-right mb-4">
-                    <Link to="/forgot-password" className="text-sm text-blue-900 hover:underline">
+                    <Link to="/password-recovery" className="text-sm text-blue-900 hover:underline">
                       Forgot Password?
                     </Link>
                   </div>
