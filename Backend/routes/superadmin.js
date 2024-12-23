@@ -102,7 +102,7 @@ router.put('/reject/:id', async (req, res) => {
 
     // Send rejection email
     await transporter.sendMail({
-      from: 'ayushmalviya990@gmail.com',
+      from: 'vishwakarmadivya133@gmail.com',
       to: teacher.email,
       subject: 'Request Rejected',
       text: `Hello ${teacher.name},\n\nUnfortunately, your request has been rejected. For further details, please contact the admin.\n\nThank you!`,
