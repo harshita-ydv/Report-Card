@@ -480,33 +480,90 @@ const StudentTable = () => {
         </button>
       </div>
 
-      {/* Modal for Viewing Details */}
-      {selectedStudent && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-2xl">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              {selectedStudent.name}'s Details
-            </h2>
-            <div className="space-y-2">
-              <p><strong>Roll No:</strong> {selectedStudent.rollno}</p>
-              <p><strong>Email:</strong> {selectedStudent.email}</p>
-              <p><strong>Course:</strong> {selectedStudent.course}</p>
-              <p><strong>Contact No:</strong> {selectedStudent.phone}</p>
-              <p><strong>Address:</strong> {selectedStudent.address}</p>
-            </div>
-            <div className="flex justify-end mt-4">
-              <button
-                onClick={handleCloseDetails}
-                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 text-sm"
-              >
-                Close
-              </button>
-            </div>
-          </div>
+{selectedStudent && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-blue-900 p-5 rounded-lg shadow-lg w-10/11 max-w-2xl">
+      <div className="bg-white shadow-md rounded-lg p-5 space-y-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-1">
+          {selectedStudent.name}'s Details
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 p-6">
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Father's Name:</strong> {selectedStudent.fatherName}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Father's Email:</strong> {selectedStudent.email}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Mother's Name:</strong> {selectedStudent.motherName}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Student Email:</strong> {selectedStudent.fatheremail}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Contact No:</strong> {selectedStudent.phone}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Other Contact No:</strong> {selectedStudent.otherPhone}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Gender:</strong> {selectedStudent.gender}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Address:</strong> {selectedStudent.address}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Roll No:</strong> {selectedStudent.rollno}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Course:</strong> {selectedStudent.course}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Year:</strong> {selectedStudent.year}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Total Present:</strong> {selectedStudent.totalpresent}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Total Absent:</strong> {selectedStudent.totalabsent}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">Total Days:</strong> {selectedStudent.totalday}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">1A:</strong> {selectedStudent.oneA}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">1B:</strong> {selectedStudent.oneB}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">1C:</strong> {selectedStudent.oneC}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">2A:</strong> {selectedStudent.twoA}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">2B:</strong> {selectedStudent.twoB}
+          </p>
+          <p className="bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 transition-colors duration-200">
+            <strong className="text-gray-800">2C:</strong> {selectedStudent.twoC}
+          </p>
         </div>
-      )}
+      </div>
+
+      <div className="flex justify-end mt-4">
+        <button
+          onClick={handleCloseDetails}
+          className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 text-sm"
+        >
+          Close
+        </button>
+      </div>
     </div>
-  );
-};
+  </div>
+)}
+</div>
+</div>
+  )}
 
 export default StudentTable;
