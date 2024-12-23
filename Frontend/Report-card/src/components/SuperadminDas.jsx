@@ -335,7 +335,7 @@ const SuperAdminDas= () => {
 
         {/* Main Content */}
         <main className="flex-1 lg:ml-50 flex items-center justify-center bg-[#fcfcfc]">
-          <div className="w-full max-w-4xl p-6 rounded-lg">
+          <div className="w-full max-w-6xl p-6 rounded-lg">
             <Outlet />
           </div>
         </main>
