@@ -479,8 +479,7 @@ const StudentTable = () => {
         >
           Next
         </button>
-      </div>
-      {selectedStudent && (
+      </div>{selectedStudent && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div className="bg-blue-100 p-4 rounded-lg shadow-lg w-11/12 max-w-3xl">
       <div className="bg-white shadow-md rounded-lg p-4 space-y-4">
