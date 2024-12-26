@@ -153,6 +153,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './Navbar';
 
 function Register() {
+  const navigate = useNavigate();
   // Define the validation schema using Yup
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -171,7 +172,8 @@ function Register() {
     try {
       await axios.post('http://localhost:5000/api/auth/register', values);
       alert('Registered successfully');
-      resetForm(); // Reset the form on successful registration
+      resetForm();
+      navigate('/login') // Reset the form on successful registration
     } catch (error) {
       console.error('Registration failed', error);
       alert('Email already in use');
@@ -183,7 +185,7 @@ function Register() {
   return (
     <>
     <Navbar/>
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Left Section: Form */}
         <div className="w-full md:w-1/2 p-8">
@@ -193,7 +195,7 @@ function Register() {
   alt="Report Card Generator Logo"
   className="w-32 h-auto mx-auto mb-4" // Adjust the width (w-32) and margin (mb-4)
 />
-          <p className="text-gray-600 mb-4">Please enter your details</p>
+          {/* <p className="text-gray-600 mb-4">Please enter your details</p> */}
 
           <Formik
             initialValues={{ name: '', email: '', password: '', role: 'Teacher' }}
@@ -210,7 +212,7 @@ function Register() {
                     name="name"
                     placeholder=" "
                   />
-                  <label className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2.5 left-3 z-10 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75">
+                  <label className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-0 left-3 z-10 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75">
                     Name
                   </label>
                   <ErrorMessage name="name" component="div" className="text-red-500 text-sm mt-1" />
@@ -224,7 +226,7 @@ function Register() {
                     name="email"
                     placeholder=" "
                   />
-                  <label className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2.5 left-3 z-10 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75">
+                  <label className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-0 left-3 z-10 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75">
                     Email address
                   </label>
                   <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
@@ -238,7 +240,7 @@ function Register() {
                     name="password"
                     placeholder=" "
                   />
-                  <label className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2.5 left-3 z-10 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75">
+                  <label className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-0 left-3 z-10 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75">
                     Password
                   </label>
                   <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
@@ -251,7 +253,7 @@ function Register() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full p-2 text-white rounded-md ${isSubmitting ? 'bg-purple-300' : 'bg-skyblue hover:bg-blue-800'} transition duration-300`}
+                  className={`w-full p-2 text-white rounded-md ${isSubmitting ? 'bg-blue-500' : 'bg-blue-500 hover:bg-blue-600'} transition duration-300`}
                 >
                   {isSubmitting ? 'Registering...' : 'Register'}
                 </button>
@@ -260,14 +262,14 @@ function Register() {
           </Formik>
 <p className="text-sm text-center mt-4">
 Already registered?{' '}
-<Link to="/login" className="text-blue-900 hover:underline">
+<Link to="/login" className="text-blue-600 hover:underline">
   Login here
 </Link>
 </p>
       </div>
 
       {/* Right Section: Illustration */}
-      <div className="hidden md:flex w-1/2 bg-purple-100 items-center justify-center h-max"><img
+      <div className="hidden md:flex  bg-purple-100 items-center justify-center h-auto w-auto"><img
             src="https://img.freepik.com/free-vector/progress-indicator-concept-illustration_114360-4978.jpg?ga=GA1.1.852954389.1699076296&semt=ais_hybrid"
             alt="Illustration"
             className="max-w-full h-max"

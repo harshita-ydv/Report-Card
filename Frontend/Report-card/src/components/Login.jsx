@@ -679,7 +679,7 @@ function Login() {
                       placeholder=" "
                     />
                     <label
-                      className="absolute left-3 top-2 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+                      className="absolute left-3 top-0 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
                     >
                       Email address
                     </label>
@@ -697,7 +697,7 @@ function Login() {
                       placeholder=" "
                     />
                     <label
-                      className="absolute left-3 top-2 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+                      className="absolute left-3 top-0 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
                     >
                       Password
                     </label>
@@ -747,7 +747,7 @@ function Login() {
 
                   {/* Forgot Password Link */}
                   <div className="text-right mb-4">
-                    <Link to="/password-recovery" className="text-sm text-blue-900 hover:underline">
+                    <Link to="/password-recovery" className="text-sm text-blue-500 hover:underline">
                       Forgot Password?
                     </Link>
                   </div>
@@ -757,7 +757,7 @@ function Login() {
                     type="submit"
                     disabled={isSubmitting}
                     className={`w-full p-2 text-white rounded-md ${
-                      isSubmitting ? 'bg-blue-800' : 'bg-skyblue hover:bg-blue-800'
+                      isSubmitting ? 'bg-blue-500' : 'bg-blue-500 hover:bg-blue-600'
                     } transition duration-300`}
                   >
                     {isSubmitting ? 'Logging in...' : 'Sign in'}
@@ -765,7 +765,7 @@ function Login() {
 
                   <div className="mt-4 text-center">
                     <span className="text-sm text-gray-600">Don’t have an account? </span>
-                    <Link to="/register" className="text-sm text-blue-900 hover:underline">
+                    <Link to="/register" className="text-sm text-blue-600 hover:underline">
                       Sign up
                     </Link>
                   </div>
