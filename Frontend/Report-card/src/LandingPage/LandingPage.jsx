@@ -20,7 +20,7 @@ function LandingPage() {
       <div className="bg-gray-100 text-gray-900 min-h-screen p-8 transition-colors duration-300">
         <div className="bg-white container mx-auto rounded-lg shadow-lg p-8 transition-all duration-300">
           {/* Centered Heading */}
-          <h1 className="text-5xl font-extrabold text-center mb-12">
+          <h1 className="text-5xl font-extrabold text-center mb-12 text-blue-900">
             Report Card Genrator Made Easy
           </h1>
 
@@ -50,7 +50,7 @@ function LandingPage() {
           </div>
 
           {/* Additional Content Section */}
-          <div className="mt-16 text-center md:text-left" data-aos="fade-up">
+          {/* <div className="mt-16 text-center md:text-left" data-aos="fade-up">
             <h2 className="text-3xl font-bold mb-4">
               Why Choose ReportCardGen?
             </h2>
@@ -60,7 +60,7 @@ function LandingPage() {
             <p className="text-lg mb-6">
               Embrace digital efficiency in education, and join us in providing students with a clear, concise record of their academic journey.
             </p>
-          </div>
+          </div> */}
         </div>
 
         {/* Cards Section */}
@@ -115,13 +115,13 @@ function LandingPage() {
         </div>
 
         {/* Call-to-Action Section */}
-        <div className="bg-blue-500 container mx-auto mt-16 text-center p-8 text-white rounded-lg shadow-lg">
+        <div className="bg-blue-100 container mx-auto mt-16 text-center p-8 text-blue-900 rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold mb-4">Get Started with ReportCardGen</h2>
           <p className="text-lg mb-6">
             Join thousands of educators using ReportCardGen to simplify report card management.
           </p>
           <button             onClick={() => navigate('/login')}
- className="bg-yellow-500 text-blue-900 font-semibold py-2 px-6 rounded-full hover:bg-yellow-400 transition-all">
+ className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-500 transition-all">
             Sign In Now
           </button>
         </div>
@@ -130,5 +130,7 @@ function LandingPage() {
     </>
   );
 }
+
+ 
 
 export default LandingPage;
