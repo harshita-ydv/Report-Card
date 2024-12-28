@@ -399,7 +399,7 @@ const AddStudent = () => {
             {/* Roll No. Field */}
             <div className="relative w-full">
               <input
-                type="number"
+                type="text"
                 name="rollno"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
