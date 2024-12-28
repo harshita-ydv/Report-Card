@@ -126,7 +126,7 @@ function LandingPage() {
           </button>
         </div>
       </div>
-      
+      <Footer />
     </>
   );
 }

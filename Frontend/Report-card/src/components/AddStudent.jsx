@@ -3,7 +3,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // Validation schema using Yup
 const validationSchema = Yup.object({
   // name: Yup.string().required('Name is required'),
@@ -19,7 +20,7 @@ const validationSchema = Yup.object({
   fatheremail: Yup.string()
   .email('Invalid email format') // Ensures it follows a standard email format
   .matches(/^[^@]+@[^@]+\.[^@]+$/, 'Email must contain exactly one @') // Ensures only one @ is present
-  .matches(/@[a-zA-Z0-9.-]+\.(com|edu|org)$/, 'Email must end with .com, .edu, or .org') // Restricts domain extensions
+  .matches(/@[a-zA-Z0-9.-]+\.(in|com|edu|org)$/, 'Email must end with .com, .edu, .in ,or .org') // Restricts domain extensions
   .required('Student Email is required'), // Ensures the field is mandatory
   // email: Yup.string().email('Invalid email address').required('Email is required'),
   email: Yup.string()
@@ -101,7 +102,9 @@ const AddStudent = () => {
           await axios.post('http://localhost:5000/api/data', values);
         }
         resetForm();
-        alert("successfully student aadded");
+        // alert("successfully student aadded");
+        toast.success('Student Add successfully!', { position: 'top-center' });
+
         // navigate('/login'); // Redirects back to the student table
       } catch (error) {
         alert("this emaili is not a valid email")
@@ -112,6 +115,8 @@ const AddStudent = () => {
   });
 
   return (
+    <>
+    <ToastContainer />
     <div className="max-w-4xl mx-auto space-x-2  ">
       <h2 className="text-3xl font-bold text-white-600 mb-6 text-center  p-2 rounded">
   {student ? 'Edit' : 'Add'} Student
@@ -266,7 +271,7 @@ const AddStudent = () => {
               <div className="text-red-500 text-sm">{formik.errors.otherPhone}</div>
             )}
           </div>
-
+             
           {/* Gender Field */}
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">Gender
@@ -477,7 +482,7 @@ const AddStudent = () => {
 
         {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> */}
           {/* 1A Level Field */}
-          <div className="mb-4">
+<div className="mb-4">
     <label className="block text-gray-700 text-sm font-bold mb-2">1A Level
     <span className="text-red-500">*</span>
     </label>
@@ -624,6 +629,7 @@ const AddStudent = () => {
         </div>
       </form>
     </div>
+    </>
   );
 }
 

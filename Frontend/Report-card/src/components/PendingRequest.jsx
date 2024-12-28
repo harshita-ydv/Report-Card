@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function PendingRequest() {
   const [pendingTeachers, setPendingTeachers] = useState([]);
 
@@ -24,8 +25,12 @@ function PendingRequest() {
     try {
       if (status === 'Accepted') {
         await axios.put(`http://localhost:5000/api/superadmin/approve/${teacherId}`);
+        toast.success('Accept successfully!', { position: 'top-center' });
+
       } else {
         await axios.put(`http://localhost:5000/api/superadmin/reject/${teacherId}`);
+        toast.success('Rejected!', { position: 'top-center' });
+
       }
       setPendingTeachers(pendingTeachers.filter((teacher) => teacher._id !== teacherId));
     } catch (error) {
@@ -34,7 +39,9 @@ function PendingRequest() {
   };
 
   return (
-    <div className="min-h-screen  flex flex-col items-center justify-center">
+    <>
+    <ToastContainer />
+    <div className="min-[40vh] mt-20 flex flex-col items-center justify-center ">
       <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
         <h3 className="text-xl font-semibold mb-4">Pending Teacher Requests</h3>
         <ul className="divide-y divide-gray-200">
@@ -71,6 +78,7 @@ function PendingRequest() {
         </ul>
       </div>
     </div>
+    </>
   );
 }
 

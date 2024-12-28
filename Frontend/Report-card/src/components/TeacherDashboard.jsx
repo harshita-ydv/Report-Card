@@ -336,141 +336,196 @@
 
 
 
+// // mainnnnnnnnnnnnnnnnnnn
 
+// import React, { useState } from 'react';
+// import { NavLink, Outlet } from 'react-router-dom';
+// import { FaHome, FaUserPlus, FaUsers, FaFileExcel, FaEye } from 'react-icons/fa'; // Import icons
+// import Navbar from './Navbar';
+// import Footer from '../LandingPage/Footer';
 
-import React, { useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { FaHome, FaUserPlus, FaUsers, FaFileExcel, FaEye } from 'react-icons/fa'; // Import icons
-import Navbar from './Navbar';
+// const TeacherDashboard = () => {
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-const TeacherDashboard = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+//   const toggleSidebar = () => {
+//     setIsSidebarOpen(!isSidebarOpen);
+//   };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+//   return (
+//     <>
+//     <div className="min-h-screen flex flex-col bg-gray-50">
+//       {/* Navbar */}
+//       <header className="bg-white-900 text-black shadow-md flex items-center justify-between">
+//         <button
+//           onClick={toggleSidebar}
+//           className="text-white lg:hidden focus:outline-none"
+//         >
+//           <svg
+//             xmlns="http://www.w3.org/2000/svg"
+//             className="h-6 w-6"
+//             fill="none"
+//             viewBox="0 0 24 24"
+//             stroke="currentColor"
+//           >
+//             <path
+//               strokeLinecap="round"
+//               strokeLinejoin="round"
+//               strokeWidth={2}
+//               d="M4 6h16M4 12h16m-7 6h7"
+//             />
+//           </svg>
+//         </button>
+//       </header>
 
-  return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Navbar */}
-      <header className="bg-white-900 text-black shadow-md flex items-center justify-between">
-        <button
-          onClick={toggleSidebar}
-          className="text-white lg:hidden focus:outline-none"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          </svg>
-        </button>
-      </header>
+//       <Navbar toggleSidebar={toggleSidebar} />
+//       <div className="flex flex-1">
+//         <aside
+//           className={`fixed inset-y-0 left-0 transform ${
+//             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+//           } lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out bg-blue-100 shadow-lg w-64 z-50`}
+//         >
+//           <nav className="p-4 text-b">
+//             <ul className="space-y-6">
+//               <li>
+//                 <NavLink
+//                   to="/teacher-dashboard"
+//                   className={({ isActive }) =>
+//                     `flex items-center space-x-3 ${
+//                       isActive ? 'text-blue-900 font-bold' : 'text-black'
+//                     } hover:text-blue-900 transition`
+//                   }
+//                   end
+//                 >
+//                   <FaHome />
+//                   <span>Home</span>
+//                 </NavLink>
+//               </li>
+//               <li>
+//                 <NavLink
+//                   to="/teacher-dashboard/add-student"
+//                   className={({ isActive }) =>
+//                     `flex items-center space-x-3 ${
+//                       isActive ? 'text-blue-900 font-bold' : 'text-black'
+//                     } hover:text-blue-900 transition`
+//                   }
+//                 >
+//                   <FaUserPlus />
+//                   <span>Add Student</span>
+//                 </NavLink>
+//               </li>
+//               <li>
+//                 <NavLink
+//                   to="/teacher-dashboard/manage-students"
+//                   className={({ isActive }) =>
+//                     `flex items-center space-x-3 ${
+//                       isActive ? 'text-blue-900 font-bold' : 'text-black'
+//                     } hover:text-blue-900 transition`
+//                   }
+//                 >
+//                   <FaUsers />
+//                   <span>Manage Students</span>
+//                 </NavLink>
+//               </li>
+//               <li>
+//                 <NavLink
+//                   to="/teacher-dashboard/view-students"
+//                   className={({ isActive }) =>
+//                     `flex items-center space-x-3 ${
+//                       isActive ? 'text-blue-900 font-bold' : 'text-black'
+//                     } hover:text-blue-900 transition`
+//                   }
+//                 >
+//                   <FaEye />
+//                   <span>Download PDF</span>
+//                 </NavLink>
+//               </li>
+//               <li>
+//                 <NavLink
+//                   to="/teacher-dashboard/upload"
+//                   className={({ isActive }) =>
+//                     `flex items-center space-x-3 ${
+//                       isActive ? 'text-blue-900 font-bold' : 'text-black'
+//                     } hover:text-blue-900 transition`
+//                   }
+//                 >
+//                   <FaFileExcel />
+//                   <span>Upload Excel File</span>
+//                 </NavLink>
+//               </li>
+//             </ul>
+//           </nav>
+//         </aside>
 
-      <Navbar toggleSidebar={toggleSidebar} />
-      <div className="flex flex-1">
-        <aside
-          className={`fixed inset-y-0 left-0 transform ${
-            isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          } lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out bg-blue-100 shadow-lg w-64 z-50`}
-        >
-          <nav className="p-4 text-b">
-            <ul className="space-y-6">
-              <li>
-                <NavLink
-                  to="/teacher-dashboard"
-                  className={({ isActive }) =>
-                    `flex items-center space-x-3 ${
-                      isActive ? 'text-blue-900 font-bold' : 'text-black'
-                    } hover:text-blue-900 transition`
-                  }
-                  end
-                >
-                  <FaHome />
-                  <span>Home</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/teacher-dashboard/add-student"
-                  className={({ isActive }) =>
-                    `flex items-center space-x-3 ${
-                      isActive ? 'text-blue-900 font-bold' : 'text-black'
-                    } hover:text-blue-900 transition`
-                  }
-                >
-                  <FaUserPlus />
-                  <span>Add Student</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/teacher-dashboard/manage-students"
-                  className={({ isActive }) =>
-                    `flex items-center space-x-3 ${
-                      isActive ? 'text-blue-900 font-bold' : 'text-black'
-                    } hover:text-blue-900 transition`
-                  }
-                >
-                  <FaUsers />
-                  <span>Manage Students</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/teacher-dashboard/view-students"
-                  className={({ isActive }) =>
-                    `flex items-center space-x-3 ${
-                      isActive ? 'text-blue-900 font-bold' : 'text-black'
-                    } hover:text-blue-900 transition`
-                  }
-                >
-                  <FaEye />
-                  <span>Download PDF</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/teacher-dashboard/upload"
-                  className={({ isActive }) =>
-                    `flex items-center space-x-3 ${
-                      isActive ? 'text-blue-900 font-bold' : 'text-black'
-                    } hover:text-blue-900 transition`
-                  }
-                >
-                  <FaFileExcel />
-                  <span>Upload Excel File</span>
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </aside>
+//         <main className="flex-1 lg:ml-50 flex items-center justify-center bg-[#fcfcfc]">
+//           <div className="w-full max-w-4xl p-6 rounded-lg ">
+//             <Outlet />
+         
+//           </div>
+         
+//         </main>
+        
 
-        <main className="flex-1 lg:ml-50 flex items-center justify-center bg-[#fcfcfc]">
-          <div className="w-full max-w-4xl p-6 rounded-lg ">
-            <Outlet />
-          </div>
-        </main>
-      </div>
+          
+//       </div>
 
-      {/* Overlay for Sidebar on Mobile */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"
-          onClick={toggleSidebar}
-        ></div>
-      )}
-    </div>
-  );
-};
+ 
+//       {/* Overlay for Sidebar on Mobile */}
+//       {isSidebarOpen && (
+//         <div
+//           className="fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"
+//           onClick={toggleSidebar}
+//         ></div>
+//       )}
+//     </div>
+//               <Footer/>
+//               </>
+//   );
+// };
+
+// export default TeacherDashboard;
+
+import React from "react";
+// import { Outlet } from "react-router-dom";
+import Layout from "./Layout";
+
+const TeacherDashboard = () => (
+  <Layout/>
+    // {/* <Outlet /> */}
+  
+);
 
 export default TeacherDashboard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

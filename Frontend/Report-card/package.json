@@ -13,6 +13,9 @@
     "@react-pdf/renderer": "^4.1.4",
     "aos": "^2.3.4",
     "axios": "^1.7.7",
+    "chart.js": "^4.4.7",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-chart-financial": "^0.2.1",
     "formik": "^2.4.6",
     "html2pdf.js": "^0.10.2",
     "react": "^18.3.1",
@@ -24,6 +27,9 @@
     "react-spinners": "^0.15.0",
     "react-toastify": "^10.0.6",
     "react-tooltip": "^5.28.0",
+    "react-vega": "^7.6.0",
+    "vega": "^5.30.0",
+    "vega-lite": "^5.23.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {

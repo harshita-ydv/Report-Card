@@ -240,116 +240,130 @@
 // export default SuperadminDas;
 
 
+// // mainnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+// import React, { useState } from 'react';
+// import { Link, Outlet } from 'react-router-dom';
+// import { FaHome, FaTasks, FaUsers, FaUserShield, FaFileExcel } from 'react-icons/fa'; // Import icons
+// import { BsCheckLg } from "react-icons/bs";
+// import { RxCross2 } from "react-icons/rx";
+// import { MdOutlinePendingActions } from "react-icons/md";
 
-import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { FaHome, FaTasks, FaUsers, FaUserShield, FaFileExcel } from 'react-icons/fa'; // Import icons
-import { BsCheckLg } from "react-icons/bs";
-import { RxCross2 } from "react-icons/rx";
-import { MdOutlinePendingActions } from "react-icons/md";
+// import Navbar from './Navbar';
 
-import Navbar from './Navbar';
+// const SuperAdminDas= () => {
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-const SuperAdminDas= () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+//   const toggleSidebar = () => {
+//     setIsSidebarOpen(!isSidebarOpen);
+//   };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+//   return (
+//     <div className="min-h-screen flex flex-col bg-gray-50">
+//       {/* Navbar */}
+//       <header className="bg-white-900 text-black shadow-md flex items-center justify-between">
+//         <button
+//           onClick={toggleSidebar}
+//           className="text-white lg:hidden focus:outline-none"
+//         >
+//           <svg
+//             xmlns="http://www.w3.org/2000/svg"
+//             className="h-6 w-6"
+//             fill="none"
+//             viewBox="0 0 24 24"
+//             stroke="currentColor"
+//           >
+//             <path
+//               strokeLinecap="round"
+//               strokeLinejoin="round"
+//               strokeWidth={2}
+//               d="M4 6h16M4 12h16m-7 6h7"
+//             />
+//           </svg>
+//         </button>
+//       </header>
 
-  return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Navbar */}
-      <header className="bg-white-900 text-black shadow-md flex items-center justify-between">
-        <button
-          onClick={toggleSidebar}
-          className="text-white lg:hidden focus:outline-none"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          </svg>
-        </button>
-      </header>
-
-      <Navbar toggleSidebar={toggleSidebar} />
-      <div className="flex flex-1">
-        {/* Sidebar */}
-        <aside
-          className={`fixed inset-y-0 left-0 transform ${
-            isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          } lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out bg-blue-100 shadow-lg w-64 z-50`}
-        >
-          <nav className="p-4">
-            <ul className="space-y-6">
-              <li>
-                <Link
-                  to="/superadmin-dashboard"
-                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
-                >
-                  <FaHome />
-                  <span>Home</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/superadmin-dashboard/pending-requests"
-                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
-                >
-<MdOutlinePendingActions />
-<span>Pending Requests</span>
-                </Link>
-              </li>
+//       <Navbar toggleSidebar={toggleSidebar} />
+//       <div className="flex flex-1">
+//         {/* Sidebar */}
+//         <aside
+//           className={`fixed inset-y-0 left-0 transform ${
+//             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+//           } lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out bg-blue-100 shadow-lg w-64 z-50`}
+//         >
+//           <nav className="p-4">
+//             <ul className="space-y-6">
+//               <li>
+//                 <Link
+//                   to="/superadmin-dashboard"
+//                   className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
+//                 >
+//                   <FaHome />
+//                   <span>Home</span>
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link
+//                   to="/superadmin-dashboard/pending-requests"
+//                   className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
+//                 >
+// <MdOutlinePendingActions />
+// <span>Pending Requests</span>
+//                 </Link>
+//               </li>
               
-              <li>
-                <Link
-                  to="/superadmin-dashboard/accept-requests"
-                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
-                >
-                <BsCheckLg />
-                  <span>Accepted Requests</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/superadmin-dashboard/users"
-                  className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
-                >
-<RxCross2 />                  <span>Rejected Requests</span>
-                </Link>
-              </li>
+//               <li>
+//                 <Link
+//                   to="/superadmin-dashboard/accept-requests"
+//                   className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
+//                 >
+//                 <BsCheckLg />
+//                   <span>Accepted Requests</span>
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link
+//                   to="/superadmin-dashboard/users"
+//                   className="flex items-center space-x-3 text-black hover:text-blue-900 transition"
+//                 >
+// <RxCross2 />                  <span>Rejected Requests</span>
+//                 </Link>
+//               </li>
        
-            </ul>
-          </nav>
-        </aside>
+//             </ul>
+//           </nav>
+//         </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 lg:ml-50 flex items-center justify-center bg-[#fcfcfc]">
-          <div className="w-full max-w-6xl p-6 rounded-lg">
-            <Outlet />
-          </div>
-        </main>
-      </div>
+//         {/* Main Content */}
+//         <main className="flex-1 lg:ml-50 flex items-center justify-center bg-[#fcfcfc]">
+//           <div className="w-full max-w-6xl p-6 rounded-lg">
+//             <Outlet />
+//           </div>
+//         </main>
+//       </div>
 
-      {/* Overlay for Sidebar on Mobile */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"
-          onClick={toggleSidebar}
-        ></div>
-      )}
-    </div>
-  );
-};
+//       {/* Overlay for Sidebar on Mobile */}
+//       {isSidebarOpen && (
+//         <div
+//           className="fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"
+//           onClick={toggleSidebar}
+//         ></div>
+//       )}
+//     </div>
+//   );
+// };
 
-export default SuperAdminDas;
+// export default SuperAdminDas;
+
+
+
+import React from 'react'
+import Layout from './LayoutS'
+
+const SuperadminDas = () => {
+  return (
+    // <div>SuperadminDas</div>
+    <Layout/>
+  )
+}
+
+export default SuperadminDas

@@ -11,6 +11,7 @@ const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const nodemailer = require('nodemailer');
+const moment = require('moment'); // For formatting the date and time
 
 dotenv.config();
 
@@ -92,14 +93,217 @@ const writeExcel = (data) => {
 
 // Multer setup for handling file uploads
 // const upload = multer();
+ 
 
-// API for Sending Email with File Attachment
+
+///////////////////////////chart code /////////////////////////////////////////////////
+// Function to read Excel and filter students by their year
+
+
+// API to fetch student counts by year using filter method
+app.get('/api/student-counts-by-year', (req, res) => {
+  try {
+    const data = readExcel(); // Assuming readExcel() returns an array of students data
+
+    // Initialize counts for each year
+    const yearCounts = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+    };
+
+    // Use filter method to count students for each year
+    yearCounts[1] = data.filter(student => student.year === "1 Year").length;
+    yearCounts[2] = data.filter(student => student.year === "2 Year").length;
+    yearCounts[3] = data.filter(student => student.year === "3 Year").length;
+    yearCounts[4] = data.filter(student => student.year === "4 Year").length;
+
+    res.json(yearCounts);
+  } catch (error) {
+    console.error('Error reading Excel file:', error);
+    res.status(500).json({ error: 'Failed to fetch student counts by year' });
+  }
+});
+
+
+
+// API to fetch student counts based on categories
+app.get('/api/student-counts', (req, res) => {
+  try {
+    const data = readExcel(); // Assuming readExcel() returns an array of students data
+
+    // Categories to count
+    const categories = ['BCA+ITEG', 'BBA+ITEG', 'DIPLOMA ITEG', 'BSC+ITEG'];
+
+    // Count students by category using filter
+    const studentCounts = categories.reduce((counts, category) => {
+      const count = data.filter(student => student.course === category).length;
+      counts[category] = count;
+      return counts;
+    }, {});
+
+    res.json(studentCounts);
+  } catch (error) {
+    console.error('Error reading Excel file:', error);
+    res.status(500).json({ error: 'Failed to fetch student counts' });
+  }
+});
+
+app.get('/api/students-count', (req, res) => {
+  try {
+    const data = readExcel();
+
+    const totalStudents = data.length;
+    const maleCount = data.filter((student) => student.gender?.toLowerCase() === 'male').length;
+    const femaleCount = data.filter((student) => student.gender?.toLowerCase() === 'female').length;
+
+    res.status(200).json({
+      totalStudents,
+      maleCount,
+      femaleCount,
+    });
+  } catch (error) {
+    console.error('Error fetching student counts:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+
+
+// Function to filter passed students in Level 1A
+const getPassedStudentsInLevel1A = () => {
+  const data = readExcel();
+  const passedStudents = data.filter(
+    (student) => student.oneA === 'Clear' )
+  return passedStudents.length;
+};
+
+
+// API to return the count of passed students
+app.get('/api/1apassed-students', (req, res) => {
+  try {
+    const count = getPassedStudentsInLevel1A();
+    res.json({ count });
+  } catch (error) {
+    console.error('Error reading Excel data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+const getPassedStudentsInLevel1B = () => {
+  const data = readExcel();
+  const passedStudents = data.filter(
+    (student) => student.oneB === 'Clear' )
+  return passedStudents.length;
+};
+
+app.get('/api/1bpassed-students', (req, res) => {
+  try {
+    const count = getPassedStudentsInLevel1B();
+    res.json({ count });
+  } catch (error) {
+    console.error('Error reading Excel data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
+const getPassedStudentsInLevel1C = () => {
+  const data = readExcel();
+  const passedStudents = data.filter(
+    (student) => student.oneC === 'Clear' )
+  return passedStudents.length;
+};
+
+app.get('/api/1cpassed-students', (req, res) => {
+  try {
+    const count = getPassedStudentsInLevel1C();
+    res.json({ count });
+  } catch (error) {
+    console.error('Error reading Excel data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+const getPassedStudentsInLevel2A = () => {
+  const data = readExcel();
+  const passedStudents = data.filter(
+    (student) => student.twoA === 'Clear' )
+  return passedStudents.length;
+};
+
+app.get('/api/2apassed-students', (req, res) => {
+  try {
+    const count = getPassedStudentsInLevel2A();
+    res.json({ count });
+  } catch (error) {
+    console.error('Error reading Excel data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+const getPassedStudentsInLevel2B = () => {
+  const data = readExcel();
+  const passedStudents = data.filter(
+    (student) => student.twoB === 'Clear' )
+  return passedStudents.length;
+};
+
+app.get('/api/2bpassed-students', (req, res) => {
+  try {
+    const count = getPassedStudentsInLevel2B();
+    res.json({ count });
+  } catch (error) {
+    console.error('Error reading Excel data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+const getPassedStudentsInLevel2C = () => {
+  const data = readExcel();
+  const passedStudents = data.filter(
+    (student) => student.twoC === 'Clear' )
+  return passedStudents.length;
+};
+
+app.get('/api/2cpassed-students', (req, res) => {
+  try {
+    const count = getPassedStudentsInLevel2C();
+    res.json({ count });
+  } catch (error) {
+    console.error('Error reading Excel data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const emailLogSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  sentAt: Date,
+  subject: String,
+  fileName: String,
+});
+
+// Create a new collection named `emailLogs`
+const EmailLog = mongoose.model('EmailLog', emailLogSchema);
+
+// Email sending API
 app.post('/api/send-email', upload.single('file'), async (req, res) => {
-  const { email } = req.body; // Extract recipient email from the request body
+  const { email, name } = req.body; // Extract recipient name and email from the request body
   const file = req.file; // Extract file attachment
 
-  if (!email || !file) {
-    return res.status(400).send({ message: 'Email and file are required.' });
+  if (!email || !file || !name) {
+    return res.status(400).send({ message: 'Name, email, and file are required.' });
   }
 
   try {
@@ -108,7 +312,7 @@ app.post('/api/send-email', upload.single('file'), async (req, res) => {
       service: 'Gmail',
       auth: {
         user: "ayushmalviya990@gmail.com", // Use environment variables for sensitive data
-        pass: "ixsw wfwp xspl tdtp",
+        pass: "ixsw wfwp xspl tdtp", // Use environment variables for sensitive data
       },
     });
 
@@ -123,7 +327,18 @@ app.post('/api/send-email', upload.single('file'), async (req, res) => {
 
     // Send the email
     await transporter.sendMail(mailOptions);
-    res.status(200).send({ message: 'Email sent successfully!' });
+
+    // Save email log to the new collection
+    const emailLog = new EmailLog({
+      name: name, // Name of the recipient
+      email: email, // Recipient email
+      sentAt: moment().toDate(), // Store the current date and time
+      subject: 'Student Report Card', // Subject of the email
+      fileName: file.originalname, // File name of the attachment
+    });
+    await emailLog.save(); // Save email log to the new collection
+
+    res.status(200).send({ message: 'Email sent and logged successfully!' });
   } catch (error) {
     console.error('Error sending email:', error);
     res.status(500).send({ message: 'Failed to send email' });
@@ -131,15 +346,95 @@ app.post('/api/send-email', upload.single('file'), async (req, res) => {
 });
 
 
+// Fetch email logs API
+app.get('/api/email-logs', async (req, res) => {
+  try {
+    // Retrieve all email logs with selected fields
+    const emailLogs = await EmailLog.find({}, 'id name email sentAt')
+      .sort({ sentAt: -1 }); // Sort by sentAt in descending order
+
+    res.status(200).send(emailLogs);
+  } catch (error) {
+    console.error('Error fetching email logs:', error);
+    res.status(500).send({ message: 'Failed to fetch email logs' });
+  }
+});
+
+app.delete('/api/email-logs/:id', async (req, res) => {
+  try {
+    const emailLogId = req.params.id;
+
+    // Find and delete the email log by its ID
+    const emailLog = await EmailLog.findByIdAndDelete(emailLogId);
+
+    if (!emailLog) {
+      return res.status(404).json({ message: 'Email log not found' });
+    }
+
+    res.status(200).json({ message: 'Email log deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting email log:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
+
+const serverRestartToken = uuidv4(); // Unique token created on server start
+
+app.get("/api/server-token", (req, res) => {
+  res.json({ serverRestartToken });
+});
+// //mainnnnnnnnnnnnnnnnnnnnn
+// // API for Sending Email with File Attachment
+// app.post('/api/send-email', upload.single('file'), async (req, res) => {
+//   const { email } = req.body; // Extract recipient email from the request body
+//   const file = req.file; // Extract file attachment
+
+//   if (!email || !file) {
+//     return res.status(400).send({ message: 'Email and file are required.' });
+//   }
+
+//   try {
+//     // Nodemailer transporter configuration
+//     const transporter = nodemailer.createTransport({
+//       service: 'Gmail',
+//       auth: {
+//         user: "ayushmalviya990@gmail.com", // Use environment variables for sensitive data
+//         pass: "ixsw wfwp xspl tdtp",
+//       },
+//     });
+
+//     // Email options including file attachment
+//     const mailOptions = {
+//       from: "ayushmalviya990@gmail.com",
+//       to: email,
+//       subject: 'Student Report Card',
+//       text: 'Please find the attached report card.',
+//       attachments: [{ filename: file.originalname, content: file.buffer }],
+//     };
+
+//     // Send the email
+//     await transporter.sendMail(mailOptions);
+//     res.status(200).send({ message: 'Email sent successfully!' });
+//   } catch (error) {
+//     console.error('Error sending email:', error);
+//     res.status(500).send({ message: 'Failed to send email' });
+//   }
+// });
+
+
 // Routes
 const authRoutes = require('./routes/auth');
 const superAdminRoutes = require('./routes/superadmin');
 const teacherRoutes = require('./routes/teacher');
+const imageRoutes = require('./routes/imageRouter');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/superadmin', superAdminRoutes);
 app.use('/api/teacher', teacherRoutes);
-
+app.use('/api/profile', imageRoutes);
 // API for Excel Data
 app.post('/api/data', (req, res) => {
   try {
@@ -296,42 +591,6 @@ app.post('/api/upload-excel', upload.single('file'), (req, res) => {
 
 // ////////////////////////////////////////////////////////////////
 
-cloudinary.config({
-  cloud_name: ' dayuzreb2',
-  api_key: '779315564742525',
-  api_secret: 'IFliGRYmEPoR3R5y8RQjDOxO8jg',
-});
-
-// const app = express();
-// app.use(cors());
-
-// Set up multer for handling file uploads
-// const storage = multer.memoryStorage();
-const uploadd = multer({ storage: multer.memoryStorage() });
-
-app.post('/upload-profile-photo', uploadd.single('image'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
-  }
-
-  // Upload the image to Cloudinary
-  cloudinary.uploader
-    .upload(
-      req.file,
-      {
-        resource_type: 'auto', // Automatically determine file type (image, video, etc.)
-      },
-      (error, result) => {
-        if (error) {
-          return res.status(500).json({ error: 'Image upload failed' });
-        }
-
-        // Send the Cloudinary image URL as the response
-        res.json({ imageUrl: result.secure_url });
-      }
-    )
-    .end(req.file.buffer); // Send the image buffer to Cloudinary
-});
 
 
 
@@ -411,14 +670,17 @@ app.put('/api/data/:id', (req, res) => {
     const { id } = req.params;
     const { email, fatheremail, ...otherFields } = req.body;
 
+    // Read the current data from Excel
     const data = readExcel();
+
+    // Find the index of the item being updated
     const itemIndex = data.findIndex((item) => item.id === id);
 
     if (itemIndex === -1) {
       return res.status(404).send({ message: 'ID not found' });
     }
 
-    // Check for email uniqueness (excluding the current record)
+    // Ensure email uniqueness (excluding the current record)
     const emailExists = data.some(
       (item, index) => index !== itemIndex && item.email === email
     );
@@ -426,8 +688,8 @@ app.put('/api/data/:id', (req, res) => {
     if (emailExists) {
       return res.status(400).send({ message: 'The provided email is already in use.' });
     }
-
-    // Check for fatheremail uniqueness (excluding the current record)
+  
+    // Ensure fatheremail uniqueness (excluding the current record)
     const fatherEmailExists = data.some(
       (item, index) => index !== itemIndex && item.fatheremail === fatheremail
     );
@@ -436,8 +698,13 @@ app.put('/api/data/:id', (req, res) => {
       return res.status(400).send({ message: 'The provided fatheremail is already in use.' });
     }
 
-    // Update the record
+    if(fatheremail === email){
+      return res.status(400).send({ message: 'Email and fatheremail should not be same.' });
+    }
+    // Update the record with the new values
     data[itemIndex] = { ...data[itemIndex], email, fatheremail, ...otherFields };
+
+    // Write the updated data back to the Excel file
     writeExcel(data);
 
     res.status(200).send({ message: 'Data updated successfully' });

@@ -1,10 +1,14 @@
+// // mainnnnnnnnnnnnnnnnnnnnnnnnn
+
 // import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import { pdf, Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
 // import logo from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png";
 // import { FiDownload, FiMail } from "react-icons/fi";
-
+// import sig from '../assets/62161cf7328ad280841f653f_esignature-signature.png'
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 // const styles = StyleSheet.create({
 //   page: {
 //     flexDirection: "column",
@@ -31,7 +35,7 @@
 //     padding: 10,
 //     marginBottom: 20,
 //     borderRadius: 5, // Optional: rounded corners
-//     color: "orange",
+//     color: "black",
 //   },
 //   text: {
 //     fontSize: 12,
@@ -51,12 +55,20 @@
 //   right: 0, 
 //   textAlign: 'right', 
 //   alignItems: 'flex-end'
+//   },
+//   sig:{
+//     width: 80,
+//     height: 50,
+//     // alignSelf: "center",
+//     // marginBottom: 20,
+//     marginBottom:-20,
 //   }
 // });
+
 // const GenReportCard = () => {
 //   const [students, setStudents] = useState([]);
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const [itemsPerPage, setItemsPerPage] = useState(10);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [itemsPerPage, setItemsPerPage] = useState(10);
 //   const [searchQuery, setSearchQuery] = useState("");
 
 //   const fetchData = async () => {
@@ -72,21 +84,21 @@
 //     student.name.toLowerCase().includes(searchQuery.toLowerCase())
 //   );
 
-//   useEffect(() => {
-//     setCurrentPage(1);
-//   }, [searchQuery]);
+  // useEffect(() => {
+  //   setCurrentPage(1);
+  // }, [searchQuery]);
 
-//   const paginateData = () => {
-//     const startIndex = (currentPage - 1) * itemsPerPage;
-//     const endIndex = startIndex + itemsPerPage;
-//     return filteredStudents.slice(startIndex, endIndex);
-//   };
+  // const paginateData = () => {
+  //   const startIndex = (currentPage - 1) * itemsPerPage;
+  //   const endIndex = startIndex + itemsPerPage;
+  //   return filteredStudents.slice(startIndex, endIndex);
+  // };
 
-//   const totalPages = Math.ceil(filteredStudents.length / itemsPerPage);
+  // const totalPages = Math.ceil(filteredStudents.length / itemsPerPage);
 
-//   const handlePageChange = (pageNumber) => {
-//     setCurrentPage(pageNumber);
-//   };
+  // const handlePageChange = (pageNumber) => {
+  //   setCurrentPage(pageNumber);
+  // };
 
 //   const generatePDF = async (student) => {
 //     const blob = await createPDFBlob(student);
@@ -107,7 +119,9 @@
 //     await axios.post("http://localhost:5000/api/send-email", formData, {
 //       headers: { "Content-Type": "multipart/form-data" },
 //     });
-//     alert("Report sent successfully!");
+//     // alert("Report sent successfully!");
+//     toast.success('Send successfully!', { position: 'top-center' });
+
 //   };
 
 //   const createPDFBlob = async (student) =>
@@ -179,6 +193,8 @@
 //     {/* Signature Section */}
 //     <View style={styles.signatureSection}>
 //       <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>Signature:</Text>
+//       <Image style={styles.sig} src={sig} />
+
 //       <Text style={styles.text}>________________</Text>
 //       <Text style={styles.text}>CEO Signatory</Text>
 //     </View>
@@ -197,137 +213,99 @@
 //   }, []);
 
 //   return (
-//     <div className="max-w-7xl mx-auto p-4 bg-white rounded-lg shadow text-blue-900">
-//       <h1 className="text-2xl font-bold text-black-600 text-center mb-6">
-//         Student Report Management
-//       </h1>
-//     <div className="max-w-7xl mx-auto p-4 sm:p-6 bg-white rounded-lg">
-//       <div className="mb-4 flex justify-end">
-//         <input
-//           type="text"
-//           placeholder="Search by name"
-//           value={searchQuery}
-//           onChange={handleSearch}
-//           className="p-2 border border-gray-300 rounded"
-//         />
-//       </div>
+//     <>
+    // <ToastContainer />
+    // <div className="max-w-7xl mx-auto p-4 bg-white rounded-lg shadow-md text-blue-900">
+    //   <h1 className="text-2xl font-bold text-black-600 text-center mb-6">
+    //     Student Report Management
+    //   </h1>
 
-//       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-//         {filteredData.map((student) => (
-//           <div
-//             key={student.id}
-//             className="border border-gray-300 rounded-lg shadow p-4 bg-gray-50"
-//           >
-//             <h3 className="text-xl font-semibold text-orange-600 mb-2">
-//               {student.name}
-//             </h3>
-//             <p><strong>Father's Name:</strong> {student.fatherName}</p>
-//             <p><strong>Father's Email:</strong> {student.email}</p>
-//             <p><strong>Roll No:</strong> {student.rollno}</p>
-//             <p><strong>Contact:</strong> {student.phone}</p>
+    //   {/* Search Input */}
+    //   <div className="mb-4 flex justify-end">
+    //     <div className="w-48">
+    //       <input
+    //         type="text"
+    //         value={searchQuery}
+    //         onChange={(e) => setSearchQuery(e.target.value)}
+    //         placeholder="Search by name"
+    //         className="w-full p-1 border border-blue-900 rounded"
+    //       />
+    //     </div>
+    //   </div>
 
-//             <div className="mt-4 flex space-x-2">
-//               <button
-//                 onClick={() => generatePDF(student)}
-//                 className="bg-blue-500 text-white py-1 px-4 rounded"
-//               >
-//                 Generate PDF
-//               </button>
-//               <button
-//                 onClick={() => sendReport(student)}
-//                 className="bg-green-500 text-white py-1 px-4 rounded"
-//               >
-//                 Send Email
-//               </button>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//       {/* Search Input */}
-//       <div className="mb-4 flex justify-end">
-//         <div className="w-48">
-//           <input
-//             type="text"
-//             value={searchQuery}
-//             onChange={(e) => setSearchQuery(e.target.value)}
-//             placeholder="Search by name"
-//             className="w-full p-1 border border-blue-900 rounded"
-//           />
-//         </div>
-//       </div>
+    //   {/* Table Wrapper for responsiveness */}
+    //   <div className="overflow-x-auto">
+    //     <table className="w-full border-collapse border border-gray-300">
+    //       <thead className="bg-gray-100">
+    //         <tr>
+    //           <th className="border border-gray-300 px-4 py-2">Name</th>
+    //           <th className="border border-gray-300 px-4 py-2">Father's Name</th>
+    //           <th className="border border-gray-300 px-4 py-2 hidden md:table-cell">
+    //             Father's Email
+    //           </th>
+    //           <th className="border border-gray-300 px-4 py-2">Roll No</th>
+    //           <th className="border border-gray-300 px-4 py-2">Actions</th>
+    //         </tr>
+    //       </thead>
+    //       <tbody>
+    //         {paginateData().map((student) => (
+    //           <tr key={student.id} className="hover:bg-gray-50">
+    //             <td className="border border-gray-300 px-4 py-2">{student.name}</td>
+    //             <td className="border border-gray-300 px-4 py-2">{student.fatherName}</td>
+    //             <td className="border border-gray-300 px-4 py-2 hidden md:table-cell">
+    //               {student.email}
+    //             </td>
+    //             <td className="border border-gray-300 px-4 py-2">{student.rollno}</td>
+    //             <td className="border border-gray-200 px-4 py-3 flex space-x-2 justify-center">
+    //               <button
+    //                 onClick={() => generatePDF(student)}
+    //                 className="text-blue-500 cursor-pointer hover:text-blue-600"
+    //                 title="Download PDF"
+    //               >
+    //                 <FiDownload />
+    //               </button>
+    //               <button
+    //                 onClick={() => sendReport(student)}
+    //                 className="text-blue-500 cursor-pointer hover:text-blue-600"
+    //                 title="Send Mail"
+    //               >
+    //                 <FiMail />
+    //               </button>
+    //             </td>
+    //           </tr>
+    //         ))}
+    //       </tbody>
+    //     </table>
+    //   </div>
 
-//       {/* Table Wrapper for responsiveness */}
-//       <div className="overflow-x-auto">
-//         <table className="w-full border-collapse border border-gray-300">
-//           <thead className="bg-gray-100">
-//             <tr>
-//               <th className="border border-gray-300 px-4 py-2">Name</th>
-//               <th className="border border-gray-300 px-4 py-2">Father's Name</th>
-//               <th className="border border-gray-300 px-4 py-2 hidden md:table-cell">
-//                 Father's Email
-//               </th>
-//               <th className="border border-gray-300 px-4 py-2">Roll No</th>
-//               <th className="border border-gray-300 px-4 py-2">Actions</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {paginateData().map((student) => (
-//               <tr key={student.id} className="hover:bg-gray-50">
-//                 <td className="border border-gray-300 px-4 py-2">{student.name}</td>
-//                 <td className="border border-gray-300 px-4 py-2">{student.fatherName}</td>
-//                 <td className="border border-gray-300 px-4 py-2 hidden md:table-cell">
-//                   {student.fatheremail}
-//                 </td>
-//                 <td className="border border-gray-300 px-4 py-2">{student.rollno}</td>
-//                 <td className="border border-gray-200 px-4 py-3 flex space-x-2 justify-center">
-//                   <button
-//                     onClick={() => generatePDF(student)}
-//                     className="text-blue-500 cursor-pointer hover:text-blue-600"
-//                     title="Download PDF"
-//                   >
-//                     <FiDownload />
-//                   </button>
-//                   <button
-//                     onClick={() => sendReport(student)}
-//                     className="text-blue-500 cursor-pointer hover:text-blue-600"
-//                     title="Send Mail"
-//                   >
-//                     <FiMail />
-//                   </button>
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
+    //   {/* Pagination Controls */}
+    //   <div className="flex justify-center mt-4">
+    //     <button
+    //       onClick={() => handlePageChange(currentPage - 1)}
+    //       disabled={currentPage === 1}
+    //       className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
+    //     >
+    //       Prev
+    //     </button>
+    //     <span className="self-center px-4">{`${currentPage} of ${totalPages}`}</span>
+    //     <button
+    //       onClick={() => handlePageChange(currentPage + 1)}
+    //       disabled={currentPage === totalPages}
+    //       className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
+    //     >
+    //       Next
+    //     </button>
+    //   </div>
 
-//       {/* Pagination Controls */}
-//       <div className="flex justify-center mt-4">
-//         <button
-//           onClick={() => handlePageChange(currentPage - 1)}
-//           disabled={currentPage === 1}
-//           className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
-//         >
-//           Prev
-//         </button>
-//         <span className="self-center px-4">{`${currentPage} of ${totalPages}`}</span>
-//         <button
-//           onClick={() => handlePageChange(currentPage + 1)}
-//           disabled={currentPage === totalPages}
-//           className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
-//         >
-//           Next
-//         </button>
-//       </div>
+    //   {/* "Name not found" message below the table */}
+    //   {filteredStudents.length === 0 && searchQuery && (
+    //     <div className="text-center text-red-500 font-semibold mt-4">
+    //       Name not found
+    //     </div>
+    //   )}
+    // </div>
+//     </>
 
-//       {/* "Name not found" message below the table */}
-//       {filteredStudents.length === 0 && searchQuery && (
-//         <div className="text-center text-red-500 font-semibold mt-4">
-//           Name not found
-//         </div>
-//       )}
-//     </div>
 //   );
 // };
 
@@ -336,16 +314,15 @@
 
 
 
-
-
-
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { pdf, Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
-import logo from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png";
+import axios from "axios";
 import { FiDownload, FiMail } from "react-icons/fi";
-import sig from '../assets/62161cf7328ad280841f653f_esignature-signature.png'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import logo from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png";
+import sig from "../assets/62161cf7328ad280841f653f_esignature-signature.png";
+import History from "./History";
 const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
@@ -404,23 +381,24 @@ const styles = StyleSheet.create({
 
 const GenReportCard = () => {
   const [students, setStudents] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const fetchData = async () => {
-    try {
-      const result = await axios.get("http://localhost:5000/api/data");
-      setStudents(result.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/data");
+        setStudents(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const filteredStudents = students.filter((student) =>
     student.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery]);
@@ -437,6 +415,7 @@ const GenReportCard = () => {
     setCurrentPage(pageNumber);
   };
 
+
   const generatePDF = async (student) => {
     const blob = await createPDFBlob(student);
     const url = URL.createObjectURL(blob);
@@ -452,11 +431,17 @@ const GenReportCard = () => {
     const formData = new FormData();
     formData.append("file", blob, `${student.name}_report.pdf`);
     formData.append("email", student.email);
+    formData.append("name", student.name);
 
-    await axios.post("http://localhost:5000/api/send-email", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    alert("Report sent successfully!");
+    try {
+      await axios.post("http://localhost:5000/api/send-email", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      toast.success("Report sent successfully!", { position: "top-center" });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("Failed to send report. Please try again.", { position: "top-center" });
+    }
   };
 
   const createPDFBlob = async (student) =>
@@ -543,11 +528,13 @@ const GenReportCard = () => {
 </Document>
     ).toBlob();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
+    <>
+   <ToastContainer />
     <div className="max-w-7xl mx-auto p-4 bg-white rounded-lg shadow-md text-blue-900">
       <h1 className="text-2xl font-bold text-black-600 text-center mb-6">
         Student Report Management
@@ -637,6 +624,7 @@ const GenReportCard = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

@@ -281,20 +281,20 @@
 
 // export default Register;
 
-import React, { useState } from 'react'; // Import useState hook
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import logo from '../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png';
 import { useNavigate, Link } from 'react-router-dom';
-import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './Navbar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Register() {
-  // State to manage password visibility
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate(); // Use navigate for redirection
 
-  // Define the validation schema using Yup
   const validationSchema = Yup.object({
     name: Yup.string()
       .min(2, 'Name must be at least 2 characters')
@@ -307,29 +307,31 @@ function Register() {
       .required('Password is required'),
   });
 
-  // Handle the form submission
   const handleRegister = async (values, { setSubmitting, resetForm }) => {
     try {
       await axios.post('http://localhost:5000/api/auth/register', values);
-      alert('Registered successfully');
-      resetForm(); // Reset the form on successful registration
+      toast.success('Registered successfully!', { position: 'top-center' });
+      resetForm();
+      setTimeout(() => {
+        navigate('/login'); // Redirect to login page after success
+      }, 2000); // Delay for better user experience
     } catch (error) {
       console.error('Registration failed', error);
-      alert('Email already in use');
+      toast.error('Email already in use!', { position: 'top-center' });
     } finally {
-      setSubmitting(false); // Stop the form submission state
+      setSubmitting(false);
     }
   };
 
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <ToastContainer /> {/* Toast Container for notifications */}
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
         <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
-          {/* Left Section: Form */}
           <div className="w-full md:w-1/2 p-8">
             <img
-              src={logo} // Use the imported logo
+              src={logo}
               alt="Report Card Generator Logo"
               className="w-32 h-auto mx-auto mb-4"
             />
@@ -342,7 +344,6 @@ function Register() {
             >
               {({ isSubmitting, touched, errors }) => (
                 <Form>
-                  {/* Name field */}
                   <div className="relative mb-6">
                     <Field
                       className={`peer w-full p-3 border ${touched.name && errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
@@ -356,7 +357,6 @@ function Register() {
                     <ErrorMessage name="name" component="div" className="text-red-500 text-sm mt-1" />
                   </div>
 
-                  {/* Email field */}
                   <div className="relative mb-6">
                     <Field
                       className={`peer w-full p-3 border ${touched.email && errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
@@ -370,11 +370,10 @@ function Register() {
                     <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
                   </div>
 
-                  {/* Password field with show/hide functionality */}
                   <div className="relative mb-6">
                     <Field
                       className={`peer w-full p-3 border ${touched.password && errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
-                      type={showPassword ? 'text' : 'password'} // Toggle between text and password
+                      type={showPassword ? 'text' : 'password'}
                       name="password"
                       placeholder=" "
                     />
@@ -382,53 +381,24 @@ function Register() {
                       Password
                     </label>
                     <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
-
-                    {/* Toggle password visibility */}
                     <button
                       type="button"
-                      onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+                      onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-3 text-gray-500 focus:outline-none"
                     >
                       {showPassword ? (
-                        // Eye icon (password visible)
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          stroke="currentColor"
-                          className="w-5 h-5"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15.25 12A3.25 3.25 0 1112 8.75M9.75 12a3.25 3.25 0 113.25 3.25M2.25 12a9.375 9.375 0 0116.82-4.376M9.75 15.25l.75-.75M2.25 12c.442.52 2.97 3.25 7.5 3.25M21.75 12c-.442-.52-2.97-3.25-7.5-3.25M21.75 12a9.375 9.375 0 01-16.82 4.376M15.25 8.75l-.75.75"
-                          />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15.25 12A3.25 3.25 0 1112 8.75M9.75 12a3.25 3.25 0 113.25 3.25" />
                         </svg>
                       ) : (
-                        // Eye slash icon (password hidden)
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          stroke="currentColor"
-                          className="w-5 h-5"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 15.25a3.25 3.25 0 110-6.5 3.25 3.25 0 010 6.5zM2.25 12s3.25-4.875 9.75-4.875S21.75 12 21.75 12s-3.25 4.875-9.75 4.875S2.25 12 2.25 12z"
-                          />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 15.25a3.25 3.25 0 110-6.5 3.25 3.25 0 010 6.5z" />
                         </svg>
                       )}
                     </button>
                   </div>
 
-                  {/* Role selection - Hidden and defaulted to Teacher */}
                   <Field type="hidden" name="role" value="Teacher" />
-
-                  {/* Submit button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -447,7 +417,6 @@ function Register() {
             </p>
           </div>
 
-          {/* Right Section: Illustration */}
           <div className="hidden md:flex w-1/2 bg-purple-100 items-center justify-center h-max">
             <img
               src="https://img.freepik.com/free-vector/progress-indicator-concept-illustration_114360-4978.jpg?ga=GA1.1.852954389.1699076296&semt=ais_hybrid"
@@ -462,12 +431,3 @@ function Register() {
 }
 
 export default Register;
-
-
-
-
-
-
-
-
-
