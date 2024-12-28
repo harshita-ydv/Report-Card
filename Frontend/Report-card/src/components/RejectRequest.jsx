@@ -18,9 +18,9 @@ function RejectRequest() {
 
     fetchRejectedTeachers();
   }, []);
-
+6
   return (
-    <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
+    <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6 mx-auto">
       <h3 className="text-xl font-semibold mb-4 text-center">Rejected Teacher Requests</h3>
       <ul className="divide-y divide-gray-200">
         {rejectedTeachers.length === 0 ? (
@@ -34,7 +34,7 @@ function RejectRequest() {
               <div>
               <p className="text-lg font-medium">{teacher.email}</p>
 
-                <p className="text-lg font-medium">{teacher.status}</p>
+                <p className="text-lg text-blue-400 font-medium">{teacher.status}</p>
                 <p className="text-gray-500">{teacher.role}</p>
               </div>
             </li>
