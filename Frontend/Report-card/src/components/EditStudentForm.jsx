@@ -699,33 +699,35 @@ const EditStudentForm = () => {
 
 
 {/* Attendance Percentage */}
-<div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">
-    Attendance Percentage <span className="text-red-500">*</span>
-  </label>
-  <input
-    type="number"
-    name="attenpercentage"
-    readOnly
-    value={formik.values.attenpercentage}
-    className="p-1 w-full rounded-md border border-gray-300 bg-gray-100"
-  />
-  {formik.touched.attenpercentage && formik.errors.attenpercentage && (
-    <div className="text-red-500 text-sm">{formik.errors.attenpercentage}</div>
-  )}
-</div>
-<div className="mb-4">
-    <label className="block text-gray-700 text-sm font-bold mb-2">1A Level
-    <span className="text-red-500">*</span>
+<div className="grid grid-cols-3 gap-4 mb-4">
+  {/* Attendance Percentage Field */}
+  <div>
+    <label className="block text-gray-700 text-sm font-bold mb-2">
+      Attendance Percentage <span className="text-red-500">*</span>
+    </label>
+    <input
+      type="number"
+      name="attenpercentage"
+      readOnly
+      value={formik.values.attenpercentage}
+      className="p-1 w-full rounded-md border border-gray-300 bg-gray-100"
+    />
+    {formik.touched.attenpercentage && formik.errors.attenpercentage && (
+      <div className="text-red-500 text-sm">{formik.errors.attenpercentage}</div>
+    )}
+  </div>
+
+  {/* 1A Level Field */}
+  <div>
+    <label className="block text-gray-700 text-sm font-bold mb-2">
+      1A Level <span className="text-red-500">*</span>
     </label>
     <select
       name="oneA"
       onChange={formik.handleChange}
-      className="w-full border px-3 py-2 rounded-md"
-
       onBlur={formik.handleBlur}
       value={formik.values.oneA}
-      // className={`p-1 w-full rounded-md border ${formik.touched.oneA && formik.errors.oneA ? 'border-red-500' : 'border-gray-300'}`}
+      className="w-full border px-3 py-2 rounded-md"
     >
       <option value="" disabled>Select Status</option>
       <option value="Pending">Pending</option>
@@ -737,103 +739,98 @@ const EditStudentForm = () => {
     )}
   </div>
 
-          {/* 1B Level Field */}
-          <div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">1B Level
-  <span className="text-red-500">*</span>
-  </label>
-  <select
-    name="oneB"
-    onChange={formik.handleChange}
-    onBlur={formik.handleBlur}
-    className="w-full border px-3 py-2 rounded-md"
-
-    value={formik.values.oneB}
-    // className={`p-1 w-full rounded-md border ${formik.touched.oneB && formik.errors.oneB ? 'border-red-500' : 'border-gray-300'}`}
-  >
-    <option value="" disabled>Select Status
-    <span className="text-red-500">*</span>
-    </option>
-    <option value="Pending">Pending</option>
-    <option value="Running">Running</option>
-    <option value="Clear">Clear</option>
-  </select>
-  {formik.touched.oneB && formik.errors.oneB && (
-    <div className="text-red-500 text-sm">{formik.errors.oneB}</div>
-  )}
+  {/* 1B Level Field */}
+  <div>
+    <label className="block text-gray-700 text-sm font-bold mb-2">
+      1B Level <span className="text-red-500">*</span>
+    </label>
+    <select
+      name="oneB"
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      value={formik.values.oneB}
+      className="w-full border px-3 py-2 rounded-md"
+    >
+      <option value="" disabled>Select Status</option>
+      <option value="Pending">Pending</option>
+      <option value="Running">Running</option>
+      <option value="Clear">Clear</option>
+    </select>
+    {formik.touched.oneB && formik.errors.oneB && (
+      <div className="text-red-500 text-sm">{formik.errors.oneB}</div>
+    )}
+  </div>
 </div>
+
           {/* 1C Level Field */}
-          <div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">1C Level
-  <span className="text-red-500">*</span>
-  </label>
-  <select
-    name="oneC"
-    onChange={formik.handleChange}
-    className="w-full border px-3 py-2 rounded-md"
+          <div className="grid grid-cols-3 gap-4 mb-4">
+  {/* 1C Level Field */}
+  <div>
+    <label className="block text-gray-700 text-sm font-bold mb-2">
+      1C Level <span className="text-red-500">*</span>
+    </label>
+    <select
+      name="oneC"
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      value={formik.values.oneC}
+      className="w-full border px-3 py-2 rounded-md"
+    >
+      <option value="" disabled>Select Status</option>
+      <option value="Pending">Pending</option>
+      <option value="Running">Running</option>
+      <option value="Clear">Clear</option>
+    </select>
+    {formik.touched.oneC && formik.errors.oneC && (
+      <div className="text-red-500 text-sm">{formik.errors.oneC}</div>
+    )}
+  </div>
 
-    onBlur={formik.handleBlur}
-    value={formik.values.oneC}
-    // className={`p-1 w-full rounded-md border ${formik.touched.oneC && formik.errors.oneC ? 'border-red-500' : 'border-gray-300'}`}
-  >
-    <option value="" disabled>Select Status</option>
-    <option value="Pending">Pending</option>
-    <option value="Running">Running</option>
-    <option value="Clear">Clear</option>
-  </select>
-  {formik.touched.oneC && formik.errors.oneC && (
-    <div className="text-red-500 text-sm">{formik.errors.oneC}</div>
-  )}
+  {/* 2A Level Field */}
+  <div>
+    <label className="block text-gray-700 text-sm font-bold mb-2">
+      2A Level <span className="text-red-500">*</span>
+    </label>
+    <select
+      name="twoA"
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      value={formik.values.twoA}
+      className="w-full border px-3 py-2 rounded-md"
+    >
+      <option value="" disabled>Select Status</option>
+      <option value="Pending">Pending</option>
+      <option value="Running">Running</option>
+      <option value="Clear">Clear</option>
+    </select>
+    {formik.touched.twoA && formik.errors.twoA && (
+      <div className="text-red-500 text-sm">{formik.errors.twoA}</div>
+    )}
+  </div>
+
+  {/* 2B Level Field */}
+  <div>
+    <label className="block text-gray-700 text-sm font-bold mb-2">
+      2B Level <span className="text-red-500">*</span>
+    </label>
+    <select
+      name="twoB"
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      value={formik.values.twoB}
+      className="w-full border px-3 py-2 rounded-md"
+    >
+      <option value="" disabled>Select Status</option>
+      <option value="Pending">Pending</option>
+      <option value="Running">Running</option>
+      <option value="Clear">Clear</option>
+    </select>
+    {formik.touched.twoB && formik.errors.twoB && (
+      <div className="text-red-500 text-sm">{formik.errors.twoB}</div>
+    )}
+  </div>
 </div>
-          {/* 2A Level Field */}
-          <div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">2A Level
-  <span className="text-red-500">*</span>
-  </label>
-  <select
-    name="twoA"
-    onChange={formik.handleChange}
-    onBlur={formik.handleBlur}
-    value={formik.values.twoA}
-    className="w-full border px-3 py-2 rounded-md"
 
-    // className={`p-1 w-full rounded-md border ${formik.touched.twoA && formik.errors.twoA ? 'border-red-500' : 'border-gray-300'}`}
-  >
-    <option value="" disabled>Select Status
-    <span className="text-red-500">*</span>
-    </option>
-    <option value="Pending">Pending</option>
-    <option value="Running">Running</option>
-    <option value="Clear">Clear</option>
-  </select>
-  {formik.touched.twoA && formik.errors.twoA && (
-    <div className="text-red-500 text-sm">{formik.errors.twoA}</div>
-  )}
-</div>
-
-{/* 2B Level Field */}
-<div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">2B Level
-  <span className="text-red-500">*</span>
-  </label>
-  <select
-    name="twoB"
-    onChange={formik.handleChange}
-    onBlur={formik.handleBlur}
-    value={formik.values.twoB}
-    className="w-full border px-3 py-2 rounded-md"
-
-    // className={`p-1 w-full rounded-md border ${formik.touched.twoB && formik.errors.twoB ? 'border-red-500' : 'border-gray-300'}`}
-  >
-    <option value="" disabled>Select Status</option>
-    <option value="Pending">Pending</option>
-    <option value="Running">Running</option>
-    <option value="Clear">Clear</option>
-  </select>
-  {formik.touched.twoB && formik.errors.twoB && (
-    <div className="text-red-500 text-sm">{formik.errors.twoB}</div>
-  )}
-</div>
 {/* 2C Level Field */}
 <div className="mb-4">
   <label className="block text-gray-700 text-sm font-bold mb-2">2C Level
