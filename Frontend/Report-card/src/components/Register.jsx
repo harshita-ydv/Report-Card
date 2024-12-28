@@ -291,9 +291,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './Navbar';
 
 function Register() {
-  // State to manage password visibility
-  const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate();
   // Define the validation schema using Yup
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -312,7 +310,8 @@ function Register() {
     try {
       await axios.post('http://localhost:5000/api/auth/register', values);
       alert('Registered successfully');
-      resetForm(); // Reset the form on successful registration
+      resetForm();
+      navigate('/login') // Reset the form on successful registration
     } catch (error) {
       console.error('Registration failed', error);
       alert('Email already in use');
