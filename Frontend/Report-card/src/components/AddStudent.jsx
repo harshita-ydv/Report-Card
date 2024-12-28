@@ -6,7 +6,6 @@ import axios from 'axios';
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
-  // name: Yup.string().required('Name is required'),
   name: Yup.string()
     .matches(/^[A-Za-z\s]+$/, "Name can only contain letters and spaces") // Regex for letters and spaces
     .required('Name is required'),
@@ -14,27 +13,24 @@ const validationSchema = Yup.object({
     .matches(/^[A-Za-z\s]+$/, 'Only alphabets are allowed')
     .required('Father Name is required'),
     motherName: Yup.string()
-    .matches(/^[A-Za-z\s]+$/, 'Only alphabets are allowed') // Ensures only letters and spaces are allowed
-    .required('Mother Name is required'), // Makes the field mandatory
+    .matches(/^[A-Za-z\s]+$/, 'Only alphabets are allowed') 
+    .required('Mother Name is required'), 
   fatheremail: Yup.string()
-  .email('Invalid email format') // Ensures it follows a standard email format
-  .matches(/^[^@]+@[^@]+\.[^@]+$/, 'Email must contain exactly one @') // Ensures only one @ is present
-  .matches(/@[a-zA-Z0-9.-]+\.(com|edu|org)$/, 'Email must end with .com, .edu, or .org') // Restricts domain extensions
-  .required('Student Email is required'), // Ensures the field is mandatory
-  // email: Yup.string().email('Invalid email address').required('Email is required'),
+  .email('Invalid email format') 
+  .matches(/^[^@]+@[^@]+\.[^@]+$/, 'Email must contain exactly one @') 
+  .matches(/@[a-zA-Z0-9.-]+\.(com|edu|org)$/, 'Email must end with .com, .edu, or .org')
+  .required('Student Email is required'), 
   email: Yup.string()
-  .email('Invalid email format') // Validates standard email structure
-  .matches(/^[^@]+@[^@]+\.[^@]+$/, 'Email must contain exactly one "@" symbol') // Ensures only one "@"
-  .matches(/@[a-zA-Z0-9.-]+\.(com|edu|org)$/, 'Email must end with .com, .edu, or .org') // Restricts to certain domains
-  .required('Father Email is required'), // Makes the field mandatory
+  .email('Invalid email format') 
+  .matches(/^[^@]+@[^@]+\.[^@]+$/, 'Email must contain exactly one "@" symbol')
+  .matches(/@[a-zA-Z0-9.-]+\.(com|edu|org)$/, 'Email must end with .com, .edu, or .org') 
+  .required('Father Email is required'),
   phone: Yup.string().matches(/^\d{10}$/, 'Phone must be 10 digits').required('Contact number is required'),
   otherPhone: Yup.string().matches(/^\d{10}$/, 'Other phone must be 10 digits').required('Other contact number is required'),
   gender: Yup.string().required('Gender is required'),
   address: Yup.string().required('Address is required'),
-  // rollno: Yup.string().required('Roll Number is required'),
   rollno: Yup.string()
-    .matches(/^[0-9]{6}$/, 'Roll Number must be exactly 6 digits') // Validates exactly 6 digits
-    .required('Roll Number is required'),
+    .matches(/^[0-9]{6}$/, 'Roll Number must be exactly 6 digits'),
   course: Yup.string().required('Course is required'),
   year: Yup.string().required('Year is required'),
   totalpresent: Yup.number()
@@ -113,12 +109,10 @@ const AddStudent = () => {
 
   return (
     <div className="max-w-4xl mx-auto space-x-2  ">
-      <h2 className="text-3xl font-bold text-white-600 mb-6 text-center  p-2 rounded">
+      <h2 className="text-3xl font-bold text-white-600 mb-6 text-center  p-2 rounded text-blue-900 ">
   {student ? 'Edit' : 'Add'} Student
 </h2>
-      <form onSubmit={formik.handleSubmit} className="bg-white shadow-xl rounded-lg px-8 pt-6 pb-8 mb-4 w-2/0 border-2 border-black  ">
-        {/* <h2 className="text-2xl font-semibold mb-4">
-          Student Information</h2> */}
+<form onSubmit={formik.handleSubmit} className="bg-white shadow-xl rounded-lg px-5 pt-8 pb-8 mb-5 w-10/11 ">
           <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
   Student Information
   <svg
@@ -137,283 +131,292 @@ const AddStudent = () => {
 </h2>
         <div className="border-b-2 border-black w-1/4 mb-4"></div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-          <div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">
-    Name <span className="text-red-500">*</span>
-  </label>
+        <div className="relative w-full">
   <input
     type="text"
     name="name"
     onChange={formik.handleChange}
     onBlur={formik.handleBlur}
     value={formik.values.name}
-    placeholder="Enter your name"
-    className={`p-1 w-full rounded-md border ${formik.touched.name && formik.errors.name ? 'border-red-500' : 'border-gray-300'}`}
+    placeholder=" " // Placeholder remains empty for the floating effect
+    className={`peer w-full p-3 border ${
+      formik.touched.name && formik.errors.name ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
   />
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Name <span className="text-red-500">*</span>
+  </label>
   {formik.touched.name && formik.errors.name && (
     <div className="text-red-500 text-sm">{formik.errors.name}</div>
   )}
 </div>
-          
+
           {/* Father Name Field */}
-          <div className="mb-4 ">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Father Name
-            <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="fatherName"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.fatherName}
-              placeholder="Enter your father name" 
-              className={`p-1 w-full rounded-md border ${formik.touched.fatherName && formik.errors.fatherName ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.fatherName && formik.errors.fatherName && (
-              <div className="text-red-500 text-sm">{formik.errors.fatherName}</div>
-            )}
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Student Email
-            <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              name="fatheremail"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.fatheremail}
-              placeholder="Enter your student email" 
-              className={`p-1 w-full rounded-md border ${formik.touched.fatheremail && formik.errors.fatheremail ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.fatheremail && formik.errors.fatheremail && (
-              <div className="text-red-500 text-sm">{formik.errors.fatheremail}</div>
-            )}
-          </div>
-
+          <div className="relative w-full">
+  <input
+    type="text"
+    name="fatherName"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.fatherName}
+    placeholder=" " // Empty placeholder for floating effect
+    className={`peer w-full p-3 border ${
+      formik.touched.fatherName && formik.errors.fatherName ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  />
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Father Name <span className="text-red-500">*</span>
+  </label>
+  {formik.touched.fatherName && formik.errors.fatherName && (
+    <div className="text-red-500 text-sm">{formik.errors.fatherName}</div>
+  )}
+</div>
+<div className="relative w-full">
+  <input
+    type="email"
+    name="fatheremail"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.fatheremail}
+    placeholder=" " // Empty placeholder for floating effect
+    className={`peer w-full p-3 border ${
+      formik.touched.fatheremail && formik.errors.fatheremail ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  />
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Student Email <span className="text-red-500">*</span>
+  </label>
+  {formik.touched.fatheremail && formik.errors.fatheremail && (
+    <div className="text-red-500 text-sm">{formik.errors.fatheremail}</div>
+  )}
+</div>
           {/* Mother Name Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Mother Name
-            <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="motherName"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.motherName}
-              placeholder="Enter your mother name" 
-              className={`p-1 w-full rounded-md border ${formik.touched.motherName && formik.errors.motherName ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.motherName && formik.errors.motherName && (
-              <div className="text-red-500 text-sm">{formik.errors.motherName}</div>
-            )}
-          </div>
-
+          <div className="relative w-full">
+  <input
+    type="text"
+    name="motherName"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.motherName}
+    placeholder=" " // Empty placeholder for floating effect
+    className={`peer w-full p-3 border ${
+      formik.touched.motherName && formik.errors.motherName ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  />
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Mother Name <span className="text-red-500">*</span>
+  </label>
+  {formik.touched.motherName && formik.errors.motherName && (
+    <div className="text-red-500 text-sm">{formik.errors.motherName}</div>
+  )}
+</div>
           {/* Email Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Father Email
-            <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              name="email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-              placeholder="Enter your father email" 
-              className={`p-1 w-full rounded-md border ${formik.touched.email && formik.errors.email ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.email && formik.errors.email && (
-              <div className="text-red-500 text-sm">{formik.errors.email}</div>
-            )}
-          </div>
+          <div className="relative w-full">
+  <input
+    type="email"
+    name="email"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.email}
+    placeholder=" " // Empty placeholder for floating effect
+    className={`peer w-full p-3 border ${
+      formik.touched.email && formik.errors.email ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  />
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Father Email <span className="text-red-500">*</span>
+  </label>
+  {formik.touched.email && formik.errors.email && (
+    <div className="text-red-500 text-sm">{formik.errors.email}</div>
+  )}
+</div>
+
 
           {/* Contact No. Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Contact No.
-            <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="phone"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.phone}
-              placeholder="Enter your contact No. " 
-              className={`p-1 w-full rounded-md border ${formik.touched.phone && formik.errors.phone ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.phone && formik.errors.phone && (
-              <div className="text-red-500 text-sm">{formik.errors.phone}</div>
-            )}
-          </div>
+          <div className="relative w-full">
+  <input
+    type="number"
+    name="phone"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.phone}
+    placeholder=" " // Empty placeholder for floating effect
+    className={`peer w-full p-3 border ${
+      formik.touched.phone && formik.errors.phone ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  />
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Contact No. <span className="text-red-500">*</span>
+  </label>
+  {formik.touched.phone && formik.errors.phone && (
+    <div className="text-red-500 text-sm">{formik.errors.phone}</div>
+  )}
+</div>
+
 
           {/* Other Contact No. Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Other Contact No.
-            <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="otherPhone"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.otherPhone}
-              placeholder="Enter your other contact no. " 
-              className={`p-1 w-full rounded-md border ${formik.touched.otherPhone && formik.errors.otherPhone ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.otherPhone && formik.errors.otherPhone && (
-              <div className="text-red-500 text-sm">{formik.errors.otherPhone}</div>
-            )}
-          </div>
+          <div className="relative w-full">
+  <input
+    type="number"
+    name="otherPhone"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.otherPhone}
+    placeholder=" " // Empty placeholder for floating effect
+    className={`peer w-full p-3 border ${
+      formik.touched.otherPhone && formik.errors.otherPhone ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  />
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Other Contact No. <span className="text-red-500">*</span>
+  </label>
+  {formik.touched.otherPhone && formik.errors.otherPhone && (
+    <div className="text-red-500 text-sm">{formik.errors.otherPhone}</div>
+  )}
+</div>
+
 
           {/* Gender Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Gender
-            <span className="text-red-500">*</span>
-            </label>
-            <select
-              name="gender"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.gender}
-              className={`p-1 w-full rounded-md border ${formik.touched.gender && formik.errors.gender ? 'border-red-500' : 'border-gray-300'}`}
-            >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-            {formik.touched.gender && formik.errors.gender && (
-              <div className="text-red-500 text-sm">{formik.errors.gender}</div>
-            )}
-          </div>
+          <div className="relative w-full">
+  <select
+    name="gender"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.gender}
+    className={`peer p-3 w-full rounded-md border ${
+      formik.touched.gender && formik.errors.gender ? 'border-red-500' : 'border-gray-300'
+    } focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  >
+    <option value="" disabled>Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+  </label>
+  {formik.touched.gender && formik.errors.gender && (
+    <div className="text-red-500 text-sm">{formik.errors.gender}</div>
+  )}
+</div>
+
 
           {/* Address Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Address
-            <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              name="address"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.address}
-              placeholder="Enter your address " 
-              className={`p-1 w-full rounded-md border ${formik.touched.address && formik.errors.address ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.address && formik.errors.address && (
-              <div className="text-red-500 text-sm">{formik.errors.address}</div>
-            )}
-          </div>
+          <div className="relative w-full">
+  <textarea
+    name="address"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.address}
+    placeholder=" " // Empty placeholder for floating effect
+    className={`peer w-full p-3 border ${
+      formik.touched.address && formik.errors.address ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  />
+  <label
+    className={`absolute left-3 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Address <span className="text-red-500">*</span>
+  </label>
+  {formik.touched.address && formik.errors.address && (
+    <div className="text-red-500 text-sm">{formik.errors.address}</div>
+  )}
+</div>
+
 
           {/* Roll No. Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Roll Number
-            <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              name="rollno"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.rollno}
-              className={`p-1 w-full rounded-md border ${formik.touched.rollno && formik.errors.rollno ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.rollno && formik.errors.rollno && (
-              <div className="text-red-500 text-sm">{formik.errors.rollno}</div>
-            )}
-          </div>
+          <div className="relative w-full">
+  <input
+    type="number"
+    name="rollno"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.rollno}
+    placeholder=" " // Empty placeholder for floating effect
+    className={`peer w-full p-3 border ${
+      formik.touched.rollno && formik.errors.rollno ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  />
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Roll Number <span className="text-red-500">*</span>
+  </label>
+  {formik.touched.rollno && formik.errors.rollno && (
+    <div className="text-red-500 text-sm">{formik.errors.rollno}</div>
+  )}
+</div>
+
 
           {/* Course Field */}
-          <div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">Course
-  <span className="text-red-500">*</span>
-  </label>
+          <div className="relative mb-4">
   <select
     name="course"
     onChange={formik.handleChange}
     onBlur={formik.handleBlur}
     value={formik.values.course}
-    className={`p-1 w-full rounded-md border ${formik.touched.course && formik.errors.course ? 'border-red-500' : 'border-gray-300'}`}
+    className={`peer p-3 w-full rounded-md border ${formik.touched.course && formik.errors.course ? 'border-red-500' : 'border-gray-300'}`}
   >
-    <option value="" disabled>
-      Select a course
-      <span className="text-red-500">*</span>
-    </option>
+    <option value="" disabled>  Course</option>
     <option value="BCA+ITEG">BCA + ITEG</option>
     <option value="BBA+ITEG">BBA + ITEG</option>
     <option value="DIPLOMA ITEG">Diploma ITEG</option>
     <option value="Bsc+ITEG">Bsc + ITEG</option>
   </select>
+  <label
+    className="absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+  >
+  </label>
   {formik.touched.course && formik.errors.course && (
     <div className="text-red-500 text-sm">{formik.errors.course}</div>
   )}
 </div>
 
+
         
     {/* Year Field */}
-<div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">Year
-  <span className="text-red-500">*</span>
-  </label>
+    <div className="relative w-full">
   <select
     name="year"
     onChange={formik.handleChange}
     onBlur={formik.handleBlur}
     value={formik.values.year}
-    className={`p-1 w-full rounded-md border ${formik.touched.year && formik.errors.year ? 'border-red-500' : 'border-gray-300'}`}
+    className={`peer p-3 w-full rounded-md border ${
+      formik.touched.year && formik.errors.year ? 'border-red-500' : 'border-gray-300'
+    } focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
   >
-    <option value="" disabled>Select Year
-    <span className="text-red-500">*</span>
-    </option>
+    <option value="" disabled> Year </option>
     <option value="1 Year">1st Year</option>
     <option value="2 Year">2nd Year</option>
     <option value="3 Year">3rd Year</option>
     <option value="4 Year">4th Year</option>
   </select>
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+  </label>
   {formik.touched.year && formik.errors.year && (
     <div className="text-red-500 text-sm">{formik.errors.year}</div>
   )}
 </div>
-{/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> */}
-  {/* Total Present */}
-{/* Total Present */}
-<div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">
-    Total Present <span className="text-red-500">*</span>
-  </label>
-  <input
-    type="number"
-    name="totalpresent"
-    onChange={(e) => {
-      const value = Number(e.target.value);
-      formik.setFieldValue("totalpresent", value);
-
-      // Automatically calculate Total Absent and Attendance Percentage
-      if (formik.values.totalday) {
-        const totalAbsent = formik.values.totalday - value;
-        const percentage = ((value / formik.values.totalday) * 100).toFixed(2);
-        formik.setFieldValue("totalabsent", totalAbsent >= 0 ? totalAbsent : 0);
-        formik.setFieldValue("attenpercentage", percentage);
-      }
-    }}
-    onBlur={formik.handleBlur}
-    value={formik.values.totalpresent}
-    className={`p-1 w-full rounded-md border ${
-      formik.touched.totalpresent && formik.errors.totalpresent ? "border-red-500" : "border-gray-300"
-    }`}
-  />
-  {formik.touched.totalpresent && formik.errors.totalpresent && (
-    <div className="text-red-500 text-sm">{formik.errors.totalpresent}</div>
-  )}
-</div>
 
 {/* Total Days */}
-<div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">
-    Total Days <span className="text-red-500">*</span>
-  </label>
+<div className="relative w-full mb-4">
   <input
     type="number"
     name="totalday"
@@ -431,188 +434,240 @@ const AddStudent = () => {
     }}
     onBlur={formik.handleBlur}
     value={formik.values.totalday}
-    className={`p-1 w-full rounded-md border ${
-      formik.touched.totalday && formik.errors.totalday ? "border-red-500" : "border-gray-300"
-    }`}
+    placeholder=" "
+    className={`peer w-full p-3 border ${
+      formik.touched.totalday && formik.errors.totalday ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
   />
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Total Days <span className="text-red-500">*</span>
+  </label>
   {formik.touched.totalday && formik.errors.totalday && (
     <div className="text-red-500 text-sm">{formik.errors.totalday}</div>
   )}
 </div>
 
-{/* Total Absent */}
-<div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">
-    Total Absent <span className="text-red-500">*</span>
+<div className="relative w-full mb-4">
+  <input
+    type="number"
+    name="totalpresent"
+    onChange={(e) => {
+      const value = Number(e.target.value);
+      formik.setFieldValue("totalpresent", value);
+
+      // Automatically calculate Total Absent and Attendance Percentage
+      if (formik.values.totalday) {
+        const totalAbsent = formik.values.totalday - value;
+        const percentage = ((value / formik.values.totalday) * 100).toFixed(2);
+        formik.setFieldValue("totalabsent", totalAbsent >= 0 ? totalAbsent : 0);
+        formik.setFieldValue("attenpercentage", percentage);
+      }
+    }}
+    onBlur={formik.handleBlur}
+    value={formik.values.totalpresent}
+    placeholder=" "
+    className={`peer w-full p-3 border ${
+      formik.touched.totalpresent && formik.errors.totalpresent ? 'border-red-500' : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  />
+  <label
+    className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Total Present <span className="text-red-500">*</span>
   </label>
+  {formik.touched.totalpresent && formik.errors.totalpresent && (
+    <div className="text-red-500 text-sm">{formik.errors.totalpresent}</div>
+  )}
+</div>
+
+{/* Total Absent */}
+<div className="relative w-full mb-4">
   <input
     type="number"
     name="totalabsent"
     readOnly
     value={formik.values.totalabsent}
-    className="p-1 w-full rounded-md border border-gray-300 bg-gray-100"
+    placeholder=" "
+    className={`peer w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue ${
+      formik.touched.totalabsent && formik.errors.totalabsent ? 'border-red-500' : 'border-gray-300'
+    }`}
   />
+  <label
+    className={`absolute left-3 text-black top-0 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Total Absent <span className="text-red-500">*</span>
+  </label>
   {formik.touched.totalabsent && formik.errors.totalabsent && (
     <div className="text-red-500 text-sm">{formik.errors.totalabsent}</div>
   )}
 </div>
 
-{/* Attendance Percentage */}
-<div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">
-    Attendance Percentage <span className="text-red-500">*</span>
-  </label>
+
+
+  {/* Attendance Percentage */}
+  <div className="relative mb-4">
   <input
     type="number"
     name="attenpercentage"
     readOnly
     value={formik.values.attenpercentage}
-    className="p-1 w-full rounded-md border border-gray-300 bg-gray-100"
+    placeholder=" " // Empty placeholder for floating effect
+    className={`peer w-full p-3 border ${
+      (formik.touched.attenpercentage || formik.submitCount > 0) && formik.errors.attenpercentage
+        ? 'border-red-500'
+        : 'border-gray-300'
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  bg-white`}
   />
+  <label
+    className="absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+  >
+    Attendance% <span className="text-red-500">*</span>
+  </label>
   {formik.touched.attenpercentage && formik.errors.attenpercentage && (
     <div className="text-red-500 text-sm">{formik.errors.attenpercentage}</div>
   )}
 </div>
-
-
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> */}
           {/* 1A Level Field */}
-          <div className="mb-4">
-    <label className="block text-gray-700 text-sm font-bold mb-2">1A Level
-    <span className="text-red-500">*</span>
-    </label>
-    <select
-      name="oneA"
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-      value={formik.values.oneA}
-      className={`p-1 w-full rounded-md border ${formik.touched.oneA && formik.errors.oneA ? 'border-red-500' : 'border-gray-300'}`}
-    >
-      <option value="" disabled>Select Status</option>
-      <option value="Pending">Pending</option>
-      <option value="Running">Running</option>
-      <option value="Clear">Clear</option>
-    </select>
-    {formik.touched.oneA && formik.errors.oneA && (
-      <div className="text-red-500 text-sm">{formik.errors.oneA}</div>
-    )}
-  </div>
-
-          {/* 1B Level Field */}
-          <div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">1B Level
-  <span className="text-red-500">*</span>
+  <div className="relative mb-4">
+  <select
+    name="oneA"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.oneA}
+    className={`peer p-3 w-full   rounded-md border ${formik.touched.oneA && formik.errors.oneA ? 'border-red-500' : 'border-gray-300'}`}
+  >
+    <option value="" disabled> 1A Level</option>
+    <option value="Pending">Pending</option>
+    <option value="Running">Running</option>
+    <option value="Clear">Clear</option>
+  </select>
+  <label
+    className="absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+  >
+     
   </label>
+  {formik.touched.oneA && formik.errors.oneA && (
+    <div className="text-red-500 text-sm">{formik.errors.oneA}</div>
+  )}
+</div>
+          {/* 1B Level Field */}
+          <div className="relative mb-4">
   <select
     name="oneB"
     onChange={formik.handleChange}
     onBlur={formik.handleBlur}
     value={formik.values.oneB}
-    className={`p-1 w-full rounded-md border ${formik.touched.oneB && formik.errors.oneB ? 'border-red-500' : 'border-gray-300'}`}
+    className={`peer p-3 w-full rounded-md border ${formik.touched.oneB && formik.errors.oneB ? 'border-red-500' : 'border-gray-300'}`}
   >
-    <option value="" disabled>Select Status
-    <span className="text-red-500">*</span>
-    </option>
+    <option value="" disabled>1B Level</option>
     <option value="Pending">Pending</option>
     <option value="Running">Running</option>
     <option value="Clear">Clear</option>
   </select>
+  <label
+    className="absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+  >
+
+  </label>
   {formik.touched.oneB && formik.errors.oneB && (
     <div className="text-red-500 text-sm">{formik.errors.oneB}</div>
   )}
 </div>
+
           {/* 1C Level Field */}
-          <div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">1C Level
-  <span className="text-red-500">*</span>
-  </label>
+          <div className="relative mb-4">
   <select
     name="oneC"
     onChange={formik.handleChange}
     onBlur={formik.handleBlur}
     value={formik.values.oneC}
-    className={`p-1 w-full rounded-md border ${formik.touched.oneC && formik.errors.oneC ? 'border-red-500' : 'border-gray-300'}`}
+    className={`peer p-3 w-full rounded-md border ${formik.touched.oneC && formik.errors.oneC ? 'border-red-500' : 'border-gray-300'}`}
   >
-    <option value="" disabled>Select Status</option>
+    <option value="" disabled>  1C Level</option>
     <option value="Pending">Pending</option>
     <option value="Running">Running</option>
     <option value="Clear">Clear</option>
   </select>
+  <label
+    className="absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+  >
+  </label>
   {formik.touched.oneC && formik.errors.oneC && (
     <div className="text-red-500 text-sm">{formik.errors.oneC}</div>
   )}
 </div>
+
           {/* 2A Level Field */}
-          <div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">2A Level
-  <span className="text-red-500">*</span>
-  </label>
+          <div className="relative mb-4">
   <select
     name="twoA"
     onChange={formik.handleChange}
     onBlur={formik.handleBlur}
     value={formik.values.twoA}
-    className={`p-1 w-full rounded-md border ${formik.touched.twoA && formik.errors.twoA ? 'border-red-500' : 'border-gray-300'}`}
+    className={`peer p-3 w-full rounded-md border ${formik.touched.twoA && formik.errors.twoA ? 'border-red-500' : 'border-gray-300'}`}
   >
-    <option value="" disabled>Select Status
-    <span className="text-red-500">*</span>
-    </option>
+    <option value="" disabled> 2A Level </option>
     <option value="Pending">Pending</option>
     <option value="Running">Running</option>
     <option value="Clear">Clear</option>
   </select>
+  <label
+    className="absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+  >
+  </label>
   {formik.touched.twoA && formik.errors.twoA && (
     <div className="text-red-500 text-sm">{formik.errors.twoA}</div>
   )}
 </div>
 
 {/* 2B Level Field */}
-<div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">2B Level
-  <span className="text-red-500">*</span>
-  </label>
+<div className="relative mb-4">
   <select
     name="twoB"
     onChange={formik.handleChange}
     onBlur={formik.handleBlur}
     value={formik.values.twoB}
-    className={`p-1 w-full rounded-md border ${formik.touched.twoB && formik.errors.twoB ? 'border-red-500' : 'border-gray-300'}`}
+    className={`peer p-3 w-full rounded-md border ${formik.touched.twoB && formik.errors.twoB ? 'border-red-500' : 'border-gray-300'}`}
   >
-    <option value="" disabled>Select Status</option>
+    <option value="" disabled> 2B Level </option>
     <option value="Pending">Pending</option>
     <option value="Running">Running</option>
     <option value="Clear">Clear</option>
   </select>
+  <label
+    className="absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+  >
+  </label>
   {formik.touched.twoB && formik.errors.twoB && (
     <div className="text-red-500 text-sm">{formik.errors.twoB}</div>
   )}
 </div>
+
 {/* 2C Level Field */}
-<div className="mb-4">
-  <label className="block text-gray-700 text-sm font-bold mb-2">2C Level
-  <span className="text-red-500">*</span>
-  </label>
+<div className="relative mb-4">
   <select
     name="twoC"
     onChange={formik.handleChange}
     onBlur={formik.handleBlur}
     value={formik.values.twoC}
-    className={`p-1 w-full rounded-md border ${formik.touched.twoC && formik.errors.twoC ? 'border-red-500' : 'border-gray-300'}`}
+    className={`peer p-3 w-full rounded-md border ${formik.touched.twoC && formik.errors.twoC ? 'border-red-500' : 'border-gray-300'}`}
   >
-    <option value="" disabled>Select Status
-    <span className="text-red-500">*</span>
-    </option>
+    <option value="" disabled> 2C Level</option>
     <option value="Pending">Pending</option>
     <option value="Running">Running</option>
     <option value="Clear">Clear</option>
   </select>
+  <label
+    className="absolute left-3 top-0  duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+  >
+  </label>
   {formik.touched.twoC && formik.errors.twoC && (
     <div className="text-red-500 text-sm">{formik.errors.twoC}</div>
   )}
 </div>
 </div>
-        {/* </div> */}
-
         {/* Submit Button */}
         <div className="mt-4 text-center">
           <button
@@ -626,7 +681,6 @@ const AddStudent = () => {
     </div>
   );
 }
-
 export default AddStudent;
 
 
