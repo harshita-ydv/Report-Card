@@ -338,14 +338,16 @@
 
 
 
-
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { pdf, Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
-import logo from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png";
+import axios from "axios";
 import { FiDownload, FiMail } from "react-icons/fi";
-import sig from '../assets/62161cf7328ad280841f653f_esignature-signature.png'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import logo from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png";
+import sig from "../assets/62161cf7328ad280841f653f_esignature-signature.png";
+import History from "./History";
+
 const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
@@ -356,8 +358,8 @@ const styles = StyleSheet.create({
     height: 500,
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 50,
     alignSelf: "center",
     marginBottom: 20,
   },
@@ -368,59 +370,56 @@ const styles = StyleSheet.create({
     color: 'darkblue',
   },
   section: {
-    border: '2px solid gray', // Section border
+    border: '2px black gray', // Section border
     padding: 10,
     marginBottom: 20,
     borderRadius: 5, // Optional: rounded corners
-    color: "black",
+  
   },
   text: {
     fontSize: 12,
     marginBottom: 4,
   },
   signatureSection: {
-    // display:"flex",
     marginTop: 20,
     marginBottom: 10,
-    // alignItems: 'center',
   },
   signatureSectionright: {
     marginTop: "113%",
-     marginBottom: "10",
-  width: '45%', 
-  position: 'absolute', 
-  right: 0, 
-  textAlign: 'right', 
-  alignItems: 'flex-end'
+    marginBottom: "10",
+    width: '45%', 
+    position: 'absolute', 
+    right: 0, 
+    textAlign: 'right', 
+    alignItems: 'flex-end'
   },
-  sig:{
+  sig: {
     width: 80,
     height: 50,
-    // alignSelf: "center",
-    // marginBottom: 20,
     marginBottom:-20,
   }
 });
 
 const GenReportCard = () => {
   const [students, setStudents] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const fetchData = async () => {
-    try {
-      const result = await axios.get("http://localhost:5000/api/data");
-      setStudents(result.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/data");
+        setStudents(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const filteredStudents = students.filter((student) =>
     student.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery]);
@@ -435,6 +434,10 @@ const GenReportCard = () => {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   const generatePDF = async (student) => {
@@ -452,16 +455,21 @@ const GenReportCard = () => {
     const formData = new FormData();
     formData.append("file", blob, `${student.name}_report.pdf`);
     formData.append("email", student.email);
+    formData.append("name", student.name);
 
-    await axios.post("http://localhost:5000/api/send-email", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    alert("Report sent successfully!");
+    try {
+      await axios.post("http://localhost:5000/api/send-email", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      toast.success("Report sent successfully!", { position: "top-center" });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("Failed to send report. Please try again.", { position: "top-center" });
+    }
   };
 
   const createPDFBlob = async (student) =>
     pdf(
-      
       <Document>
   <Page style={styles.page} size={{ width: 500, height: 700 }}>
     {/* Logo */}
@@ -543,30 +551,51 @@ const GenReportCard = () => {
 </Document>
     ).toBlob();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
+    <>
+   <ToastContainer />
     <div className="max-w-7xl mx-auto p-4 bg-white rounded-lg shadow-md text-blue-900">
       <h1 className="text-2xl font-bold text-black-600 text-center mb-6">
         Student Report Management
       </h1>
 
-      {/* Search Input */}
-      <div className="mb-4 flex justify-end">
-        <div className="w-48">
+      {/* Updated Search Bar */}
+      <div className="relative w-full mb-4 flex justify-end">
+        <div className="w-48 relative">
           <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by name"
-            className="w-full p-1 border border-blue-900 rounded"
+            onChange={handleSearch}
+            placeholder=" "
+            className={`peer w-full pl-10 p-3 border ${
+              searchQuery ? 'border-blue-500' : 'border-gray-300'
+            } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white text-left`}
           />
+          {/* Search Icon */}
+          <svg
+            className="absolute left-1 top-6 transform -translate-y-1/2 text-gray-500"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11.742 10.742a6.5 6.5 0 1 0-1.414 1.414l3.366 3.367a1 1 0 0 0 1.415-1.414l-3.367-3.367zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+          </svg>
+          {/* Floating Label */}
+          <label
+            className={`absolute left-5 top-0 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:left-3`}
+          >
+            Search By Name
+          </label>
         </div>
       </div>
 
-      {/* Table Wrapper for responsiveness */}
+      {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full border-collapse border border-gray-300">
           <thead className="bg-gray-100">
@@ -611,7 +640,7 @@ const GenReportCard = () => {
         </table>
       </div>
 
-      {/* Pagination Controls */}
+      {/* Pagination */}
       <div className="flex justify-center mt-4">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
@@ -630,13 +659,14 @@ const GenReportCard = () => {
         </button>
       </div>
 
-      {/* "Name not found" message below the table */}
+      {/* No Results Message */}
       {filteredStudents.length === 0 && searchQuery && (
         <div className="text-center text-red-500 font-semibold mt-4">
           Name not found
         </div>
       )}
     </div>
+    </>
   );
 };
 
