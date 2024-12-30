@@ -47,7 +47,7 @@ const validationSchema = Yup.object({
   rollno: Yup.string().matches(
     /^[0-9]{6}$/,
     "Roll Number must be exactly 6 digits"
-  ),
+  ).required("rollno is required"),
   course: Yup.string().required("Course is required"),
   year: Yup.string().required("Year is required"),
   totalpresent: Yup.number()
