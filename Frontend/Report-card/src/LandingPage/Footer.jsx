@@ -12,32 +12,7 @@ function Footer() {
           </p>
         </div>
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-center">Quick Links</h3>
-          <ul className="text-sm space-y-2 text-center">
-            <li>
-              <a href="#home" className="hover:underline hover:text-gray-300 transition duration-200">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#features" className="hover:underline hover:text-gray-300 transition duration-200">
-                Features
-              </a>
-            </li>
-            <li>
-              <a href="#about" className="hover:underline hover:text-gray-300 transition duration-200">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="hover:underline hover:text-gray-300 transition duration-200">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </div>
+       
 
         {/* Contact Information */}
         <div>

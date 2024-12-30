@@ -599,6 +599,8 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import logo from '../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png';
 import Navbar from './Navbar';
 
@@ -606,8 +608,6 @@ const predefinedSuperAdmin = { email: 'admin@example.com', password: 'admin123' 
 
 function Login() {
   const navigate = useNavigate();
-  
-  // State to toggle show/hide password
   const [showPassword, setShowPassword] = useState(false);
 
   const validationSchema = Yup.object().shape({
@@ -624,6 +624,7 @@ function Login() {
       localStorage.setItem('role', 'SuperAdmin');
       localStorage.setItem('name', 'Super Admin');
       localStorage.setItem('email', predefinedSuperAdmin.email);
+      toast.success('Login successful as Super Admin!');
       navigate('/superadmin-dashboard');
     } else {
       try {
@@ -633,6 +634,8 @@ function Login() {
         localStorage.setItem('role', role);
         localStorage.setItem('email', email);
 
+        toast.success(`Login successful as ${role}!`);
+
         if (role === 'Teacher') {
           navigate('/teacher-dashboard');
         } else if (role === 'Student') {
@@ -640,9 +643,9 @@ function Login() {
         }
       } catch (error) {
         if (error.response) {
-          alert(`Login failed: ${error.response.data.message}`);
+          toast.error(`Login failed: ${error.response.data.message}`);
         } else {
-          alert('An error occurred. Please try again.');
+          toast.error('An error occurred. Please try again.');
         }
       }
     }
@@ -651,6 +654,7 @@ function Login() {
   return (
     <>
       <Navbar />
+      <ToastContainer position="top-center" autoClose={3000} />
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="w-full md:w-1/2 p-8">
@@ -668,7 +672,6 @@ function Login() {
             >
               {({ isSubmitting, errors, touched }) => (
                 <Form>
-                  {/* Email Field */}
                   <div className="relative mb-6">
                     <Field
                       className={`peer w-full p-3 border ${
@@ -686,13 +689,12 @@ function Login() {
                     <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
                   </div>
 
-                  {/* Password Field */}
                   <div className="relative mb-6">
                     <Field
                       className={`peer w-full p-3 border ${
                         errors.password && touched.password ? 'border-red-500' : 'border-gray-300'
                       } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
-                      type={showPassword ? 'text' : 'password'} // Toggle password visibility
+                      type={showPassword ? 'text' : 'password'}
                       name="password"
                       placeholder=" "
                     />
@@ -702,15 +704,12 @@ function Login() {
                       Password
                     </label>
                     <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
-
-                    {/* Show Password Icon */}
                     <button
                       type="button"
-                      onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+                      onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-3 text-gray-500 focus:outline-none"
                     >
                       {showPassword ? (
-                        // Eye icon (password visible)
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -726,7 +725,6 @@ function Login() {
                           />
                         </svg>
                       ) : (
-                        // Eye slash icon (password hidden)
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -745,14 +743,12 @@ function Login() {
                     </button>
                   </div>
 
-                  {/* Forgot Password Link */}
                   <div className="text-right mb-4">
                     <Link to="/password-recovery" className="text-sm text-blue-500 hover:underline">
                       Forgot Password?
                     </Link>
                   </div>
 
-                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -774,7 +770,6 @@ function Login() {
             </Formik>
           </div>
 
-          {/* Right Side - Illustration */}
           <div className="hidden md:flex w-1/2 bg-purple-100 items-center justify-center">
             <img
               src="https://img.freepik.com/free-vector/progress-indicator-concept-illustration_114360-4978.jpg?ga=GA1.1.852954389.1699076296&semt=ais_hybrid"

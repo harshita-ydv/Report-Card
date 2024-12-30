@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+// import { toast , } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const StudentTable = () => {
   const [data, setData] = useState([]);
@@ -21,12 +24,13 @@ const StudentTable = () => {
       console.error("Error fetching data:", error);
     }
   };
-
   const deleteData = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/data/${id}`);
-      fetchData();
+      toast.success("Data deleted successfully!");
+      fetchData(); // Re-fetch data after deletion
     } catch (error) {
+      toast.error("Error deleting data. Please try again.");
       console.error("Error deleting data:", error);
     }
   };
@@ -69,6 +73,9 @@ const StudentTable = () => {
   }, []);
 
   return (
+    <>
+    <ToastContainer />
+
     <div>
     <div className="bg-white text-blue-900">
       <h1 className="text-2xl font-bold text-center mb-6">Student Management</h1>
@@ -258,6 +265,7 @@ const StudentTable = () => {
 
 </div>
 </div>
+</>
   )}
 
 export default StudentTable;

@@ -297,11 +297,12 @@
 
 
 
-
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FiUploadCloud, FiArrowLeft } from "react-icons/fi";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UploadExcelForm = () => {
   const [file, setFile] = useState(null);
@@ -311,7 +312,10 @@ const UploadExcelForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file) return alert("Please select a file.");
+    if (!file) {
+      toast.warn("Please select a file.");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("file", file);
@@ -322,17 +326,18 @@ const UploadExcelForm = () => {
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      alert(response.data.message);
+      toast.success(response.data.message);
       navigate("/teacher-dashboard");
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
-      alert(error.response?.data?.message || "Error uploading file");
+      toast.error(error.response?.data?.message || "Error uploading file");
     }
   };
 
   return (
-<div className="flex justify-center items-center ">
-      <div className="bg-white p-10 shadow-2xl rounded-2xl w-full max-w-lg transform transition hover:scale-105  items-center">
+    <div className="flex justify-center items-center">
+      <ToastContainer />
+      <div className="bg-white p-10 shadow-2xl rounded-2xl w-full max-w-lg transform transition hover:scale-105 items-center">
         {/* Header */}
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Upload Excel File
@@ -349,7 +354,9 @@ const UploadExcelForm = () => {
             >
               <FiUploadCloud className="text-5xl text-blue-400 mb-3" />
               <span className="text-gray-700 text-sm">
-                {file ? file.name : "Click or drag a file here"}
+                {file
+                  ? file.name
+                  : "Click or drag a file here and follow this excel file column formats  (name , email , phone , fatheremail , fatherName , motherName , otherPhone , gender , address , rollno , course , year , totalpresent , totalabsent , totalday , attenpercentage"}
               </span>
               <input
                 id="file-upload"
@@ -379,10 +386,8 @@ const UploadExcelForm = () => {
           </div>
         </form>
       </div>
-      </div>
-    
+    </div>
   );
 };
 
 export default UploadExcelForm;
-

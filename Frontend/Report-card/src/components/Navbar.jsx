@@ -219,7 +219,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import logo from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png"; // Adjust the path to your logo file
+import logo from "../assets/Untitled-1.png"; // Adjust the path to your logo file
 import { AiOutlineUser } from "react-icons/ai"; // Import a profile icon
 import ProfileModel from "./ProfileModel"; // Import ProfileModal component
 
@@ -260,14 +260,14 @@ const Navbar = ({ toggleSidebar }) => {
     <header className="bg-blue-900 text-white shadow-lg">
       <div className="container mx-auto px-6 py-1 flex justify-between items-center">
         {/* Logo */}
-        <img
-          src={logo}
-          alt="Report Card Generator Logo"
-          style={{
-            height: "60px", // Increase the height
-            width: "auto", // Maintain aspect ratio
-          }}
-        />
+<div className="flex items-center justify-start">
+  <img
+    src={logo}
+    alt="Report Card Generator Logo"
+    className="w-[4em] h-[4em]"
+  />
+</div>
+
 
         {/* Navigation Links */}
         <ul className="flex space-x-8">
