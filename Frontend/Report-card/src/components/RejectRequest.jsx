@@ -1,3 +1,51 @@
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+
+// function RejectRequest() {
+//   const [rejectedTeachers, setRejectedTeachers] = useState([]);
+
+//   useEffect(() => {
+//     const fetchRejectedTeachers = async () => {
+//       try {
+//         const response = await axios.get(
+//           'http://localhost:5000/api/superadmin/rejected-teachers'
+//         );
+//         setRejectedTeachers(response.data);
+//       } catch (error) {
+//         console.error('Error fetching rejected teacher requests', error);
+//       }
+//     };
+
+//     fetchRejectedTeachers();
+//   }, []);
+// 6
+//   return (
+//     <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6 mx-auto">
+//       <h3 className="text-xl font-semibold mb-4 text-center">Rejected Teacher Requests</h3>
+//       <ul className="divide-y divide-gray-200">
+//         {rejectedTeachers.length === 0 ? (
+//           <p className="text-gray-500 text-center">No rejected teacher requests</p>
+//         ) : (
+//           rejectedTeachers.map((teacher) => (
+//             <li
+//               key={teacher._id}
+//               className="py-4 flex justify-between items-center"
+//             >
+//               <div>
+//               <p className="text-lg font-medium">{teacher.email}</p>
+
+//                 <p className="text-lg text-blue-400 font-medium">{teacher.status}</p>
+//                 <p className="text-gray-500">{teacher.role}</p>
+//               </div>
+//             </li>
+//           ))
+//         )}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default RejectRequest;
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -18,7 +66,21 @@ function RejectRequest() {
 
     fetchRejectedTeachers();
   }, []);
-6
+
+  const removeTeacher = async (teacherId) => {
+    try {
+      await axios.delete(
+        `http://localhost:5000/api/superadmin/rejected-teachers/${teacherId}`
+      );
+      // Update the state after removing the teacher
+      setRejectedTeachers((prevTeachers) =>
+        prevTeachers.filter((teacher) => teacher._id !== teacherId)
+      );
+    } catch (error) {
+      console.error('Error removing teacher', error);
+    }
+  };
+
   return (
     <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6 mx-auto">
       <h3 className="text-xl font-semibold mb-4 text-center">Rejected Teacher Requests</h3>
@@ -32,11 +94,16 @@ function RejectRequest() {
               className="py-4 flex justify-between items-center"
             >
               <div>
-              <p className="text-lg font-medium">{teacher.email}</p>
-
+                <p className="text-lg font-medium">{teacher.email}</p>
                 <p className="text-lg text-blue-400 font-medium">{teacher.status}</p>
                 <p className="text-gray-500">{teacher.role}</p>
               </div>
+              <button
+                onClick={() => removeTeacher(teacher._id)}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              >
+                Remove
+              </button>
             </li>
           ))
         )}

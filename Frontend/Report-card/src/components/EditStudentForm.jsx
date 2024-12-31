@@ -623,6 +623,7 @@ const EditStudentForm = () => {
     onBlur={formik.handleBlur}
     value={formik.values.rollno}
     placeholder=" " // Empty placeholder for floating effect
+    disabled
     className={`peer w-full p-3 border ${
       formik.touched.rollno && formik.errors.rollno ? 'border-red-500' : 'border-gray-300'
     } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
@@ -630,8 +631,10 @@ const EditStudentForm = () => {
   <label
     className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
   >
+  
     Roll Number <span className="text-red-500">*</span>
   </label>
+  
   {formik.touched.rollno && formik.errors.rollno && (
     <div className="text-red-500 text-sm">{formik.errors.rollno}</div>
   )}

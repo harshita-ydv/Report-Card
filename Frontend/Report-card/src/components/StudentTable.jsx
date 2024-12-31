@@ -1,10 +1,10 @@
 
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
-// import { toast , } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const StudentTable = () => {
@@ -14,7 +14,9 @@ const StudentTable = () => {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, studentId: null, studentName: null });
   const navigate = useNavigate();
+
   const fetchData = async () => {
     try {
       const result = await axios.get("http://localhost:5000/api/data");
@@ -24,11 +26,17 @@ const StudentTable = () => {
       console.error("Error fetching data:", error);
     }
   };
-  const deleteData = async (id) => {
+
+  const confirmDelete = (id, name) => {
+    setDeleteModal({ isOpen: true, studentId: id, studentName: name });
+  };
+
+  const deleteData = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/data/${id}`);
+      await axios.delete(`http://localhost:5000/api/data/${deleteModal.studentId}`);
       toast.success("Data deleted successfully!");
       fetchData(); // Re-fetch data after deletion
+      setDeleteModal({ isOpen: false, studentId: null, studentName: null });
     } catch (error) {
       toast.error("Error deleting data. Please try again.");
       console.error("Error deleting data:", error);
@@ -74,101 +82,127 @@ const StudentTable = () => {
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
+      <div>
+        <div className="bg-white text-blue-900">
+          <h1 className="text-2xl font-bold text-center mb-6">Student Management</h1>
 
-    <div>
-    <div className="bg-white text-blue-900">
-      <h1 className="text-2xl font-bold text-center mb-6">Student Management</h1>
-
+           {/* Updated Search Bar */}
       <div className="relative w-full mb-4 flex justify-end">
-          <div className="w-48 relative">
-            {/* Search Input */}
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={handleSearch} // Changed to handleSearch function
-              placeholder=" "
-              className={`peer w-full pl-10 p-3 border ${
-                searchQuery ? 'border-blue-500' : 'border-gray-300'
-              } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white text-left`} 
-            />
-            {/* Search Icon */}
-            <svg
-              className="absolute left-1 top-6 transform -translate-y-1/2 text-gray-500"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
+        <div className="w-48 relative">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearch}
+            placeholder=" "
+            className={`peer w-full pl-10 p-3 border ${
+              searchQuery ? 'border-blue-500' : 'border-gray-300'
+            } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white text-left`}
+          />
+          {/* Search Icon */}
+          <svg
+            className="absolute left-1 top-6 transform -translate-y-1/2 text-gray-500"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11.742 10.742a6.5 6.5 0 1 0-1.414 1.414l3.366 3.367a1 1 0 0 0 1.415-1.414l-3.367-3.367zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+          </svg>
+          {/* Floating Label */}
+          <label
+            className={`absolute left-5 top-0 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:left-3`}
+          >
+            Search By Name
+          </label>
+        </div>
+      </div>
+          <table className="table-auto w-full border-collapse border border-gray-300">
+            <thead>
+              <tr className="bg-gray-200 text-gray-700">
+                <th className="border border-gray-300 px-4 py-2">Name</th>
+                <th className="border border-gray-300 px-4 py-2">Roll No</th>
+                <th className="border border-gray-300 px-4 py-2">Email</th>
+                <th className="border border-gray-300 px-4 py-2">Course</th>
+                <th className="border border-gray-300 px-4 py-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paginateData().map((student) => (
+                <tr key={student.id} className="text-gray-700">
+                  <td className="border border-gray-300 px-4 py-2">{student.name}</td>
+                  <td className="border border-gray-300 px-4 py-2">{student.rollno}</td>
+                  <td className="border border-gray-300 px-4 py-2">{student.fatheremail}</td>
+                  <td className="border border-gray-300 px-4 py-2">{student.course}</td>
+                  <td className="border border-gray-200 px-4 py-3 flex justify-center space-x-3">
+                    <FaEye
+                      className="text-blue-500 cursor-pointer hover:text-blue-600"
+                      size={18}
+                      onClick={() => handleViewDetails(student)}
+                    />
+                    <FaEdit
+                      className="text-blue-500 cursor-pointer hover:text-blue-600"
+                      size={18}
+                      onClick={() => editData(student)}
+                    />
+                    <FaTrash
+                      className="text-blue-500 cursor-pointer hover:text-blue-600"
+                      size={18}
+                      onClick={() => confirmDelete(student.id, student.name)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {/* Pagination Controls */}
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
             >
-              <path d="M11.742 10.742a6.5 6.5 0 1 0-1.414 1.414l3.366 3.367a1 1 0 0 0 1.415-1.414l-3.367-3.367zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-            </svg>
-            {/* Floating Label */}
-            <label
-              className={`absolute left-5 top-0 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:left-3`}
+              Prev
+            </button>
+            <span className="self-center px-4">{`${currentPage} of ${totalPages}`}</span>
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
             >
-              Search By Name
-            </label>
+              Next
+            </button>
           </div>
         </div>
-      {/* Table */}
-      <table className="table-auto w-full border-collapse border border-gray-300">
-        <thead>
-          <tr className="bg-gray-200 text-gray-700">
-            <th className="border border-gray-300 px-4 py-2">Name</th>
-            <th className="border border-gray-300 px-4 py-2">Roll No</th>
-            <th className="border border-gray-300 px-4 py-2">Email</th>
-            <th className="border border-gray-300 px-4 py-2">Course</th>
-            <th className="border border-gray-300 px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginateData().map((student) => (
-            <tr key={student.id} className="text-gray-700">
-              <td className="border border-gray-300 px-4 py-2">{student.name}</td>
-              <td className="border border-gray-300 px-4 py-2">{student.rollno}</td>
-              <td className="border border-gray-300 px-4 py-2">{student.fatheremail}</td>
-              <td className="border border-gray-300 px-4 py-2">{student.course}</td>
-              <td className="border border-gray-200 px-4 py-3 flex justify-center space-x-3">
-                <FaEye
-                  className="text-blue-500 cursor-pointer hover:text-blue-600"
-                  size={18}
-                  onClick={() => handleViewDetails(student)}
-                />
-                <FaEdit
-                  className="text-blue-500 cursor-pointer hover:text-blue-600"
-                  size={18}
-                  onClick={() => editData(student)}
-                />
-                <FaTrash
-                  className="text-blue-500 cursor-pointer hover:text-blue-600"
-                  size={18}
-                  onClick={() => deleteData(student.id)}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
 
-      {/* Pagination Controls */}
-      <div className="flex justify-center mt-4">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
-        >
-          Prev
-        </button>
-        <span className="self-center px-4">{`${currentPage} of ${totalPages}`}</span>
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
-        >
-          Next
-        </button>
-      </div>{selectedStudent && (
+        {/* Delete Confirmation Modal */}
+        {deleteModal.isOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h2 className="text-lg font-semibold text-gray-800">Confirm Delete</h2>
+              <p className="text-gray-600 mt-2">
+                Are you sure you want to delete the record for <strong>{deleteModal.studentName}</strong>?
+              </p>
+              <div className="flex justify-end mt-4 space-x-3">
+                <button
+                  onClick={() => setDeleteModal({ isOpen: false, studentId: null, studentName: null })}
+                  className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+                >
+                  NO
+                </button>
+                <button
+                  onClick={deleteData}
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                  YES
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+{selectedStudent && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div className="bg-blue-100 p-4 rounded-lg shadow-lg w-11/12 max-w-3xl">
       <div className="bg-white shadow-md rounded-lg p-4 space-y-4">
@@ -262,10 +296,10 @@ const StudentTable = () => {
     </div>
   </div>
 )}
-
 </div>
-</div>
-</>
-  )}
+    </>
+  );
+};
 
 export default StudentTable;
+
