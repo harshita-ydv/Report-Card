@@ -1,18 +1,19 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faTwitter, faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 function Footer() {
   return (
-    <footer className=" bg-blue-900 text-white py-8">
+    <footer className="bg-blue-900 text-white py-8">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
         {/* Project Information */}
         <div>
           <h3 className="text-lg font-semibold mb-4">About ReportCardGen</h3>
           <p className="text-sm leading-relaxed">
-            ReportCardGen is a comprehensive report card generation platform, designed to simplify student evaluation. It’s a solution for educators to efficiently manage and track student progress.
+            ReportCardGen is a comprehensive report card generation platform, designed to simplify student evaluation.
+            It’s a solution for educators to efficiently manage and track student progress.
           </p>
         </div>
-
-       
 
         {/* Contact Information */}
         <div>
@@ -26,6 +27,28 @@ function Footer() {
           <p className="text-sm">
             <span className="font-medium">Address:</span> 123 Education Lane, Indore, Madhya Pradesh
           </p>
+        </div>
+
+        {/* Social Media Links */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+          <div className="flex justify-center md:justify-start space-x-4">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <FontAwesomeIcon icon={faFacebook} size="lg" className="hover:text-blue-500" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <FontAwesomeIcon icon={faTwitter} size="lg" className="hover:text-blue-400" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <FontAwesomeIcon icon={faInstagram} size="lg" className="hover:text-pink-500" />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FontAwesomeIcon icon={faLinkedin} size="lg" className="hover:text-blue-700" />
+            </a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <FontAwesomeIcon icon={faGithub} size="lg" className="hover:text-gray-500" />
+            </a>
+          </div>
         </div>
       </div>
 

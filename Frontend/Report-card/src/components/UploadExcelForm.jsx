@@ -335,8 +335,10 @@ const UploadExcelForm = () => {
   };
 
   return (
+    <>
+    <ToastContainer />
+
     <div className="flex justify-center items-center">
-      <ToastContainer />
       <div className="bg-white p-10 shadow-2xl rounded-2xl w-full max-w-lg transform transition hover:scale-105 items-center">
         {/* Header */}
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
@@ -387,6 +389,7 @@ const UploadExcelForm = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
