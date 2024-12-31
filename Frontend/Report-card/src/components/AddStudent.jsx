@@ -792,12 +792,18 @@ const AddStudent = () => {
             </div>
           </div>
           {/* Submit Button */}
-          <div className="mt-4 text-center">
+          <div className="mt-6 text-center ">
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              className="ml-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
             >
               Submit
+            </button>
+            <button
+              type="submit"
+              className="ml-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
+            >
+              Back
             </button>
           </div>
         </form>
