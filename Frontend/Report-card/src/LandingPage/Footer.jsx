@@ -33,20 +33,20 @@ function Footer() {
         <div>
           <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
           <div className="flex justify-center md:justify-start space-x-4">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <FontAwesomeIcon icon={faFacebook} size="lg" className="hover:text-blue-500" />
+            <a  rel="noopener noreferrer" aria-label="Facebook">
+              <FontAwesomeIcon icon={faFacebook} size="lg"  />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <FontAwesomeIcon icon={faTwitter} size="lg" className="hover:text-blue-400" />
+            <a  rel="noopener noreferrer" aria-label="Twitter">
+              <FontAwesomeIcon icon={faTwitter} size="lg"  />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <FontAwesomeIcon icon={faInstagram} size="lg" className="hover:text-pink-500" />
+            <a rel="noopener noreferrer" aria-label="Instagram">
+              <FontAwesomeIcon icon={faInstagram} size="lg"  />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <FontAwesomeIcon icon={faLinkedin} size="lg" className="hover:text-blue-700" />
+            <a  rel="noopener noreferrer" aria-label="LinkedIn">
+              <FontAwesomeIcon icon={faLinkedin} size="lg" />
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <FontAwesomeIcon icon={faGithub} size="lg" className="hover:text-gray-500" />
+            <a rel="noopener noreferrer" aria-label="GitHub">
+              <FontAwesomeIcon icon={faGithub} size="lg"  />
             </a>
           </div>
         </div>

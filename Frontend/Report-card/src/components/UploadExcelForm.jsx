@@ -336,7 +336,7 @@ const UploadExcelForm = () => {
 
   return (
     <>
-    <ToastContainer />
+    <ToastContainer  position="top-center" />
 
     <div className="flex justify-center items-center">
       <div className="bg-white p-10 shadow-2xl rounded-2xl w-full max-w-lg transform transition hover:scale-105 items-center">
