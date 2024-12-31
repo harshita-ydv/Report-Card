@@ -82,12 +82,32 @@ function App() {
               }
             >
               <Route index element={<Superhome />} />
+               
               <Route path="pending-requests" element={<PendingRequest />} />
 
               <Route path="accept-requests" element={<AcceptRequest />} />
               <Route path="users" element={<RejectRequest />} />
               {/* <Route path="/teacher-status" element={<TeacherStatus/>} /> */}
             </Route>
+            <Route
+  path="/teacher-dashboard/*"
+  element={
+    <ProtectedRoute role="SuperAdmin">
+      <TeacherDashboard />
+    </ProtectedRoute>
+  }
+>
+<Route index element={<StudentDashboard/>} />
+
+<Route path="home" element={<TeacherHome />} />
+<Route path="add-student" element={<AddStudent />} />
+<Route path="manage-students" element={<StudentTable />} />
+
+<Route path="view-students" element={<GenReportCard />} />
+<Route path="upload" element={<UploadExcelForm />} />
+<Route path="history" element={<History/>} />
+
+</Route>
             {/* Protected Route for Teacher */}
             <Route
               path="/teacher-dashboard/*"

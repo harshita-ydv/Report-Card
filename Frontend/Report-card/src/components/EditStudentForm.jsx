@@ -343,7 +343,8 @@ import axios from 'axios';
 import Navbar from './Navbar';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const EditStudentForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -370,8 +371,15 @@ const EditStudentForm = () => {
     onSubmit: async (values) => {
       try {
         await axios.put(`http://localhost:5000/api/data/${values.id}`, values);
-        alert('Student updated successfully!');
-        navigate('/teacher-dashboard/manage-students');
+        // alert('Student updated successfully!');
+  toast.success("Registered successfully!", {
+        position: "top-center",
+        autoClose: 1000, // Show toast for 1 second
+      });
+      setTimeout(() => {
+        navigate("/teacher-dashboard/manage-students");
+      }, 1000);        
+        // navigate('/teacher-dashboard/manage-students');
       } catch (error) {
         console.error('Error updating student:', error);
         alert('There was an error updating the student.');
@@ -382,6 +390,7 @@ const EditStudentForm = () => {
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <div className="max-w-4xl mx-auto space-x-2  ">
       <h2 className="text-3xl font-bold text-white-600 mb-6 text-center  p-2 rounded text-blue-900 pt-6">
   {student ? 'Edit' : 'Add'} Student

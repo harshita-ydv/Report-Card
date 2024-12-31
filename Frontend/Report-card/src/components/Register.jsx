@@ -442,6 +442,13 @@
 // export default Register;
 
 
+// 
+
+
+
+
+
+
 import React, { useState } from "react";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -455,6 +462,7 @@ import "react-toastify/dist/ReactToastify.css";
 function Register() {
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const navigate = useNavigate();
+
   // Define the validation schema using Yup
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -471,9 +479,19 @@ function Register() {
   const handleRegister = async (values, { setSubmitting, resetForm }) => {
     try {
       await axios.post("http://localhost:5000/api/auth/register", values);
-      alert("Registered successfully");
+
+      // Show success toast
+      toast.success("Registered successfully!", {
+        position: "top-center",
+        autoClose: 1000, // Show toast for 1 second
+      });
+
       resetForm(); // Reset the form on successful registration
-      navigate('/login')
+
+      // Redirect to login page after 1 second
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
     } catch (error) {
       console.error("Registration failed", error);
       toast.error("Email already in use!", { position: "top-center" });
@@ -485,7 +503,7 @@ function Register() {
   return (
     <>
       <Navbar />
-      <ToastContainer />
+      <ToastContainer /> {/* ToastContainer to display toast notifications */}
 
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
@@ -581,7 +599,6 @@ function Register() {
                       className="absolute right-3 top-3 text-gray-500 focus:outline-none"
                     >
                       {showPassword ? (
-                        // Eye icon (password visible)
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -597,7 +614,6 @@ function Register() {
                           />
                         </svg>
                       ) : (
-                        // Eye slash icon (password hidden)
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
