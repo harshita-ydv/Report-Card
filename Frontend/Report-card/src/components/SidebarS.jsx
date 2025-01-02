@@ -58,31 +58,35 @@
 // };
 
 // export default Sidebar;
-
-
-
-
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaHome } from 'react-icons/fa';
+import { FaHome, FaChalkboardTeacher } from 'react-icons/fa';
 import { BsCheckLg } from 'react-icons/bs';
 import { RxCross2 } from 'react-icons/rx';
 import { MdOutlinePendingActions } from 'react-icons/md';
-import { FaChalkboardTeacher } from 'react-icons/fa'; // Icon for Teacher Dashboard
+import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
+import { AiOutlineUserAdd, AiOutlineUsergroupAdd, AiOutlineFilePdf } from 'react-icons/ai';
+import { FiUpload, FiSend } from 'react-icons/fi';
 
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <aside
       className={`fixed inset-y-0 left-0 transform ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } lg:translate-x-0 transition-transform duration-300 ease-in-out bg-blue-100 shadow-lg w-64 z-50`}
+      } lg:translate-x-0 transition-transform duration-300 ease-in-out bg-blue-100 shadow-lg w-64 full-height z-50`}
     >
       <nav className="p-4">
         <ul className="space-y-6">
           <li>
             <NavLink
               to="/superadmin-dashboard"
-              end // Ensures this link is active only when the exact route is "/superadmin-dashboard"
+              end
               className={({ isActive }) =>
                 `flex items-center space-x-3 ${
                   isActive ? 'text-blue-900 font-bold' : 'text-black'
@@ -133,17 +137,98 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/teacher-dashboard"
-              className={({ isActive }) =>
-                `flex items-center space-x-3 ${
-                  isActive ? 'text-blue-900 font-bold' : 'text-black'
-                } hover:text-blue-900 transition`
-              }
+            <div
+              className="flex items-center justify-between cursor-pointer hover:text-blue-900 transition"
+              onClick={toggleDropdown}
             >
-              <FaChalkboardTeacher />
-              <span>Teacher Dashboard</span>
-            </NavLink>
+              <div className="flex items-center space-x-3">
+                <FaChalkboardTeacher />
+                <span>Teacher Dashboard</span>
+              </div>
+              {isDropdownOpen ? <IoIosArrowDown /> : <IoIosArrowForward />}
+            </div>
+            {isDropdownOpen && (
+              <ul className="ml-8 mt-2 space-y-4">
+                <li>
+                  <NavLink
+                    to="/superadmin-dashboard/dash"
+                    className={({ isActive }) =>
+                      `flex items-center space-x-3 ${
+                        isActive ? 'text-blue-900 font-bold' : 'text-black'
+                      } hover:text-blue-900 transition`
+                    }
+                  >
+                    <FaHome />
+                    <span>Home</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/superadmin-dashboard/add-student"
+                    className={({ isActive }) =>
+                      `flex items-center space-x-3 ${
+                        isActive ? 'text-blue-900 font-bold' : 'text-black'
+                      } hover:text-blue-900 transition`
+                    }
+                  >
+                    <AiOutlineUserAdd />
+                    <span>Add Student</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/superadmin-dashboard/manage-students"
+                    className={({ isActive }) =>
+                      `flex items-center space-x-3 ${
+                        isActive ? 'text-blue-900 font-bold' : 'text-black'
+                      } hover:text-blue-900 transition`
+                    }
+                  >
+                    <AiOutlineUsergroupAdd />
+                    <span>Manage Students</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/superadmin-dashboard/view-students"
+                    className={({ isActive }) =>
+                      `flex items-center space-x-3 ${
+                        isActive ? 'text-blue-900 font-bold' : 'text-black'
+                      } hover:text-blue-900 transition`
+                    }
+                  >
+                    <AiOutlineFilePdf />
+                    <span>Download PDF</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/superadmin-dashboard/upload"
+                    className={({ isActive }) =>
+                      `flex items-center space-x-3 ${
+                        isActive ? 'text-blue-900 font-bold' : 'text-black'
+                      } hover:text-blue-900 transition`
+                    }
+                  >
+                    <FiUpload />
+                    <span>Upload PDF</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/superadmin-dashboard/history"
+                    className={({ isActive }) =>
+                      `flex items-center space-x-3 ${
+                        isActive ? 'text-blue-900 font-bold' : 'text-black'
+                      } hover:text-blue-900 transition`
+                    }
+                  >
+                    <FiSend />
+                    <span>Send History</span>
+                  </NavLink>
+                </li>
+              </ul>
+            )}
           </li>
         </ul>
       </nav>
