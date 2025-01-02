@@ -106,25 +106,26 @@ const StudentDashboard = () => {
             label: title,
             data,
             backgroundColor: [
-              'rgba(255, 99, 132, 0.5)',
-              'rgba(54, 162, 235, 0.5)',
-              'rgba(255, 206, 86, 0.5)',
-              'rgba(75, 192, 192, 0.5)',
-              'rgba(153, 102, 255, 0.5)',
-              'rgba(255, 159, 64, 0.5)',
+              'rgba(0, 51, 102, 0.5)',  // Dark blue
+              'rgba(0, 76, 153, 0.5)',  // Slightly lighter dark blue
+              'rgba(0, 102, 204, 0.5)', // Medium dark blue
+              'rgba(0, 127, 255, 0.5)', // Light dark blue
+              'rgba(51, 153, 255, 0.5)', // Lightest dark blue
+              'rgba(102, 178, 255, 0.5)' // Very light dark blue
             ],
             borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
+              'rgba(0, 51, 102, 1)',  // Dark blue
+              'rgba(0, 76, 153, 1)',  // Slightly lighter dark blue
+              'rgba(0, 102, 204, 1)', // Medium dark blue
+              'rgba(0, 127, 255, 1)', // Light dark blue
+              'rgba(51, 153, 255, 1)', // Lightest dark blue
+              'rgba(102, 178, 255, 1)' // Very light dark blue
             ],
             borderWidth: 1,
           },
         ],
       };
+      
 
       const chartOptions = {
         responsive: true,
@@ -153,7 +154,7 @@ const StudentDashboard = () => {
       totalStudentsChartInstance,
       ['Level 1A', 'Level 1B', 'Level 1C', 'Level 2A', 'Level 2B', 'Level 2C'],
       passCounts,
-      'Students Passed by Level'
+      'Students Passed -'
     );
 
     // Create the second chart (Gender distribution)

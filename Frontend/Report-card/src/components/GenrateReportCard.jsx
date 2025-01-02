@@ -346,7 +346,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png";
 import sig from "../assets/62161cf7328ad280841f653f_esignature-signature.png";
+import sig1 from "../assets/png-clipart-line-angle-signature-blue-angle-removebg-preview.png"
 import History from "./History";
+// import foot from "../assets/rb_33716.png"
 
 const styles = StyleSheet.create({
   page: {
@@ -385,7 +387,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   signatureSectionright: {
-    marginTop: "113%",
+    marginTop: "109%",
     marginBottom: "10",
     width: '45%', 
     position: 'absolute', 
@@ -394,6 +396,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end'
   },
   sig: {
+    width: 80,
+    height: 50,
+    marginBottom:-20,
+  },
+  sig1: {
     width: 80,
     height: 50,
     marginBottom:-20,
@@ -542,12 +549,15 @@ const GenReportCard = () => {
       <Text style={styles.text}>CEO Signatory</Text>
     </View>
     <View style={[styles.signatureSectionright,{  paddingRight: 20 }]}>
-      <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>Signature:</Text>
+      <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Signature:</Text>
+      <Image style={styles.sig1} src={sig1} />
+
       <Text style={styles.text}>________________</Text>
       <Text style={styles.text}>HOD Signatory</Text>
     </View>
 
   </Page>
+
 </Document>
     ).toBlob();
 

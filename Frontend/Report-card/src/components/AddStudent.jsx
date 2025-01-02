@@ -261,7 +261,7 @@ const AddStudent = () => {
             </div>
            
             {/* Email Field */}
-            <div className="relative w-full">
+            <div className="relative w-full mt-2">
               <input
                 type="email"
                 name="email"
@@ -288,7 +288,7 @@ const AddStudent = () => {
             </div>
 
             {/* Contact No. Field */}
-            <div className="relative w-full">
+            <div className="relative w-full mt-2">
               <input
                 type="number"
                 name="phone"
@@ -315,7 +315,7 @@ const AddStudent = () => {
             </div>
 
             {/* Other Contact No. Field */}
-            <div className="relative w-full">
+            <div className="relative w-full mt-2">
               <input
                 type="number"
                 name="otherPhone"
@@ -342,7 +342,7 @@ const AddStudent = () => {
             </div>
 
             {/* Gender Field */}
-            <div className="relative w-full">
+            <div className="relative w-full mt-2">
               <select
                 name="gender"
                 onChange={formik.handleChange}
@@ -372,7 +372,7 @@ const AddStudent = () => {
             </div>
 
             {/* Address Field */}
-            <div className="relative w-full">
+            <div className="relative w-full mt-2">
               <textarea
                 name="address"
                 onChange={formik.handleChange}
@@ -398,7 +398,7 @@ const AddStudent = () => {
             </div>
 
             {/* Roll No. Field */}
-            <div className="relative w-full">
+            <div className="relative w-full mt-2">
               <input
                 type="text"
                 name="rollno"
@@ -425,7 +425,7 @@ const AddStudent = () => {
             </div>
 
             {/* Course Field */}
-            <div className="relative mb-4">
+            <div className="relative mt-2">
               <select
                 name="course"
                 onChange={formik.handleChange}
@@ -455,7 +455,7 @@ const AddStudent = () => {
             </div>
 
             {/* Year Field */}
-            <div className="relative w-full">
+            <div className="relative w-full mt-2">
               <select
                 name="year"
                 onChange={formik.handleChange}
@@ -485,7 +485,7 @@ const AddStudent = () => {
             </div>
 
             {/* Total Days */}
-            <div className="relative w-full mb-4">
+            <div className="relative w-full mt-2">
               <input
                 type="number"
                 name="totalday"
@@ -528,7 +528,7 @@ const AddStudent = () => {
               )}
             </div>
 
-            <div className="relative w-full mb-4">
+            <div className="relative w-full mt-2">
               <input
                 type="number"
                 name="totalpresent"
@@ -572,7 +572,7 @@ const AddStudent = () => {
             </div>
 
             {/* Total Absent */}
-            <div className="relative w-full mb-4">
+            <div className="relative w-full mt-2">
               <input
                 type="number"
                 name="totalabsent"
@@ -598,7 +598,7 @@ const AddStudent = () => {
             </div>
 
             {/* Attendance Percentage */}
-            <div className="relative mb-4">
+            <div className="relative mt-2">
               <input
                 type="number"
                 name="attenpercentage"
@@ -623,7 +623,7 @@ const AddStudent = () => {
                 )}
             </div>
             {/* 1A Level Field */}
-            <div className="relative mb-4">
+            <div className="relative mt-2">
               <select
                 name="oneA"
                 onChange={formik.handleChange}
@@ -659,7 +659,7 @@ const AddStudent = () => {
   )}
 </div> */}
             {/* 1B Level Field */}
-            <div className="relative mb-4">
+            <div className="relative mt-2">
               <select
                 name="oneB"
                 onChange={formik.handleChange}
@@ -685,7 +685,7 @@ const AddStudent = () => {
             </div>
 
             {/* 1C Level Field */}
-            <div className="relative mb-4">
+            <div className="relative mt-2">
               <select
                 name="oneC"
                 onChange={formik.handleChange}
@@ -712,7 +712,7 @@ const AddStudent = () => {
             </div>
 
             {/* 2A Level Field */}
-            <div className="relative mb-4">
+            <div className="relative mt-2">
               <select
                 name="twoA"
                 onChange={formik.handleChange}
@@ -739,7 +739,7 @@ const AddStudent = () => {
             </div>
 
             {/* 2B Level Field */}
-            <div className="relative mb-4">
+            <div className="relative mt-2">
               <select
                 name="twoB"
                 onChange={formik.handleChange}
@@ -766,7 +766,7 @@ const AddStudent = () => {
             </div>
 
             {/* 2C Level Field */}
-            <div className="relative mb-4">
+            <div className="relative mt-2">
               <select
                 name="twoC"
                 onChange={formik.handleChange}
