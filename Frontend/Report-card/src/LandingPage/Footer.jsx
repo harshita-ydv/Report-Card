@@ -19,13 +19,13 @@ function Footer() {
         <div>
           <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
           <p className="text-sm">
-            <span className="font-medium">Email:</span> support@reportcardgen.com
+            <span className="font-medium">Email:</span> Singaji.com
           </p>
           <p className="text-sm">
-            <span className="font-medium">Phone:</span> +1 (555) 123-4567
+            <span className="font-medium">Phone:</span> +1 123456789
           </p>
           <p className="text-sm">
-            <span className="font-medium">Address:</span> 123 Education Lane, Indore, Madhya Pradesh
+            <span className="font-medium">Address:</span> Singaji Educational Society , Sandalpur, Madhya Pradesh
           </p>
         </div>
 
@@ -59,5 +59,4 @@ function Footer() {
     </footer>
   );
 }
-
 export default Footer;
