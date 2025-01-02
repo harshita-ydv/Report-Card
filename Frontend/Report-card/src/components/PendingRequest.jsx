@@ -41,9 +41,9 @@ function PendingRequest() {
   return (
     <>
     <ToastContainer />
-    <div className="w-full max-w-3xl bg-white rounded-lg p-6 mx-auto ">
-      <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
-        <h3 className="text-xl font-semibold mb-4">Pending Teacher Requests</h3>
+    {/* <div className="w-full max-w-3xl bg-white rounded-lg p-6 mx-auto "> */}
+      <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6 p-6 mx-auto">
+        <h3 className="text-xl font-semibold mb-4 text-center">Pending Teacher Requests</h3>
         <ul className="divide-y divide-gray-200">
           {pendingTeachers.length === 0 ? (
             <p className="text-gray-500 text-center">No pending teacher requests</p>
@@ -77,7 +77,7 @@ function PendingRequest() {
           )}
         </ul>
       </div>
-    </div>
+    
     </>
   );
 }

@@ -51,6 +51,7 @@ import axios from 'axios';
 
 function AcceptRequest() {
   const [acceptedTeachers, setAcceptedTeachers] = useState([]);
+  const [confirmRemove, setConfirmRemove] = useState(null);
 
   useEffect(() => {
     const fetchAcceptedTeachers = async () => {
@@ -70,11 +71,9 @@ function AcceptRequest() {
   // Handle teacher removal
   const handleRemoveTeacher = async (teacherId) => {
     try {
-      // Send DELETE request to the server
       await axios.delete(`http://localhost:5000/api/superadmin/approved-teachers/${teacherId}`);
-
-      // Update the UI by removing the teacher from the list
       setAcceptedTeachers(acceptedTeachers.filter((teacher) => teacher._id !== teacherId));
+      setConfirmRemove(null); // Close confirmation dialog
     } catch (error) {
       console.error('Error removing teacher:', error);
     }
@@ -99,7 +98,7 @@ function AcceptRequest() {
               </div>
               {/* Remove Button */}
               <button
-                onClick={() => handleRemoveTeacher(teacher._id)}
+                onClick={() => setConfirmRemove(teacher._id)}
                 className="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600"
               >
                 Remove
@@ -108,6 +107,32 @@ function AcceptRequest() {
           ))
         )}
       </ul>
+
+      {/* Confirmation Dialog */}
+      {confirmRemove && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h4 className="text-lg font-medium mb-4">Are you sure?</h4>
+            <p className="text-gray-600 mb-4">
+              Do you really want to remove this teacher? This action cannot be undone.
+            </p>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={() => setConfirmRemove(null)}
+                className="px-4 py-2 text-sm bg-gray-300 rounded hover:bg-gray-400"
+              >
+                No
+              </button>
+              <button
+                onClick={() => handleRemoveTeacher(confirmRemove)}
+                className="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600"
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
