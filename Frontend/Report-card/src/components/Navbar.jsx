@@ -222,7 +222,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/Untitled-1.png"; // Adjust the path to your logo file
 import { AiOutlineUser } from "react-icons/ai"; // Import a profile icon
 import ProfileModel from "./ProfileModel"; // Import ProfileModal component
-
+import logo1 from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png"
+import logo2 from "../assets/Artboard 1.png"
 const Navbar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -262,9 +263,9 @@ const Navbar = ({ toggleSidebar }) => {
         {/* Logo */}
 <div className="flex items-center justify-start">
   <img
-    src={logo}
+    src={logo2}
     alt="Report Card Generator Logo"
-    className="w-[4em] h-[4em]"
+    className="w-[4em] h-[5em]"
   />
 </div>
 

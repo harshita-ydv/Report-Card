@@ -53,7 +53,9 @@ function RejectRequest() {
                 <p className="text-gray-500">{teacher.role}</p>
               </div>
               <button
-                onClick={() => setConfirmRemove(teacher._id)}
+                onClick={() =>
+                  setConfirmRemove({ id: teacher._id, email: teacher.email })
+                }
                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
               >
                 Remove
@@ -69,7 +71,7 @@ function RejectRequest() {
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h4 className="text-lg font-medium mb-4">Are you sure?</h4>
             <p className="text-gray-600 mb-4">
-              Do you really want to remove this teacher? This action cannot be undone.
+              Do you really want to remove <strong>{confirmRemove.email}</strong>?.
             </p>
             <div className="flex justify-end space-x-4">
               <button
@@ -79,8 +81,8 @@ function RejectRequest() {
                 No
               </button>
               <button
-                onClick={() => handleRemoveTeacher(confirmRemove)}
-                className="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600"
+                onClick={() => handleRemoveTeacher(confirmRemove.id)}
+                className="px-4 py-2 text-sm text-white bg-blue-500 rounded hover:bg-red-600"
               >
                 Yes
               </button>

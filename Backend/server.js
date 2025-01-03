@@ -1,4 +1,3 @@
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -320,8 +319,23 @@ app.post('/api/send-email', upload.single('file'), async (req, res) => {
     const mailOptions = {
       from: "ayushmalviya990@gmail.com",
       to: email,
-      subject: 'Student Report Card',
-      text: 'Please find the attached report card.',
+      subject: 'Access Your Child Report Card via Email',
+      text: `Dear Parents/Guardians,
+    
+      We are pleased to introduce our new Report Card Generator, designed to ensure a seamless and 
+      efficient way of sharing your child's academic progress with you.  With this system, 
+      you will receive your child's report card directly via email,providing easy and instant
+      access to their performance details.This initiative is part of our effort to enhance
+      communication and keep you informed about your child's achievements. Kindly ensure 
+      that the email address registered with us is up to date to avoid any inconvenience.
+    
+      If you have any questions or require assistance, please feel free to contact us.
+    
+      Thank you for your continued support.
+    
+      Warm regards  
+      SSISM 
+      Contact No.:-9876543231  `,
       attachments: [{ filename: file.originalname, content: file.buffer }],
     };
 
@@ -759,7 +773,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
 
 
 

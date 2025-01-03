@@ -87,14 +87,16 @@
 
 // export default ResetPassword;
 
-
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ResetPassword = ({ email }) => {
   const [newPassword, setNewPassword] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
@@ -102,14 +104,17 @@ const ResetPassword = ({ email }) => {
         email,
         newPassword,
       });
-      setMessage(response.data.message);
+      toast.success(response.data.message || 'Password reset successfully!', {
+        onClose: () => navigate('/login', { replace: true }),
+      });
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Something went wrong');
+      toast.error(error.response?.data?.message || 'Something went wrong');
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <ToastContainer position="top-right" autoClose={1000} />
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold text-gray-700 text-center mb-6">Reset Your Password</h2>
         <div className="relative">
@@ -137,15 +142,6 @@ const ResetPassword = ({ email }) => {
         >
           Reset Password
         </button>
-        {message && (
-          <p
-            className={`mt-4 text-sm text-center ${
-              message.includes('Something went wrong') ? 'text-red-500' : 'text-green-500'
-            }`}
-          >
-            {message}
-          </p>
-        )}
       </div>
     </div>
   );

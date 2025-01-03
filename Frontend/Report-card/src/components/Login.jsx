@@ -606,6 +606,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import logo from '../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png';
 import Navbar from './Navbar';
+import lgo from "../assets/logo.png"
 
 const predefinedSuperAdmin = { email: 'admin@example.com', password: 'admin123' };
 
@@ -662,9 +663,9 @@ function Login() {
         <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="w-full md:w-1/2 p-8">
             <img
-              src={logo}
+              src={lgo}
               alt="Report Card Generator Logo"
-              className="w-32 h-auto mx-auto mb-4"
+              className="w-18 h-[5em] mx-auto mb-4"
             />
             <p className="text-gray-600 mb-4">Please enter your details</p>
 

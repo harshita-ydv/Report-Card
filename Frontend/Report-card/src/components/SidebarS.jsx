@@ -58,8 +58,13 @@
 // };
 
 // export default Sidebar;
-import React, { useState } from 'react';
+
+
+
+
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 import { FaHome, FaChalkboardTeacher } from 'react-icons/fa';
 import { BsCheckLg } from 'react-icons/bs';
 import { RxCross2 } from 'react-icons/rx';
@@ -70,18 +75,43 @@ import { FiUpload, FiSend } from 'react-icons/fi';
 
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [pendingRequestCount, setPendingRequestCount] = useState(0);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // const [pendingRequestCount, setPendingRequestCount] = useState(0);
+
+  // Function to fetch the pending request count
+  const fetchPendingRequestCount = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/superadmin/pending-request-count"
+      );
+      setPendingRequestCount(response.data.count);
+    } catch (error) {
+      console.error("Error fetching pending request count:", error);
+    }
+  };
+
+  // UseEffect to fetch the count on component mount
+  useEffect(() => {
+    fetchPendingRequestCount();
+  }, []);
+
+  // Callback to refresh the count after accepting/rejecting requests
+  const handleRequestAction = async () => {
+    await fetchPendingRequestCount();
   };
 
   return (
     <aside
       className={`fixed inset-y-0 left-0 transform ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } lg:translate-x-0 transition-transform duration-300 ease-in-out bg-blue-100 shadow-lg w-64 full-height z-50`}
+      } lg:translate-x-0 transition-transform duration-300 ease-in-out bg-blue-100 shadow-lg w-64 full-[100vh] z-50`}
     >
-      <nav className="p-4">
+      <nav className="p-4  mt-5">
         <ul className="space-y-6">
           <li>
             <NavLink
@@ -100,14 +130,21 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           <li>
             <NavLink
               to="/superadmin-dashboard/pending-requests"
+              onClick={() => {
+                // navigate("/superadmin-dashboard/users");
+                handleRequestAction();
+              }}
               className={({ isActive }) =>
-                `flex items-center space-x-3 ${
+                `flex items-center justify-between ${
                   isActive ? 'text-blue-900 font-bold' : 'text-black'
                 } hover:text-blue-900 transition`
               }
             >
-              <MdOutlinePendingActions />
-              <span>Pending Requests</span>
+              <div className="flex items-center space-x-3">
+                <MdOutlinePendingActions />
+                <span>Pending Requests  ({pendingRequestCount})</span>
+              </div>
+             
             </NavLink>
           </li>
           <li>

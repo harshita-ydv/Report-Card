@@ -176,7 +176,7 @@ const Layout = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col lg:ml-[250px] ">
+        <div className="flex-1 flex flex-col lg:ml-[250px] mt-4">
           <main className="flex-1 bg-[#fcfcfc] overflow-auto p-6">
             {/* Render child routes */}
             <Outlet />

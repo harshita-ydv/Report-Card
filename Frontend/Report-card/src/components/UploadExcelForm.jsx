@@ -358,7 +358,7 @@ const UploadExcelForm = () => {
               <span className="text-gray-700 text-sm">
                 {file
                   ? file.name
-                  : "Click or drag a file here and follow this excel file column formats  (name , email , phone , fatheremail , fatherName , motherName , otherPhone , gender , address , rollno , course , year , totalpresent , totalabsent , totalday , attenpercentage"}
+                  : "Click or drag a file here and follow this excel file column formats  (name , email , phone , fatheremail , fatherName , motherName , otherPhone , gender , address , rollno , course , year , totalpresent , totalabsent , totalday , attenpercentage ,oneA , oneB ,oneC , twoA ,twoB , twoC)"}
               </span>
               <input
                 id="file-upload"

@@ -208,33 +208,8 @@ const AddStudent = () => {
                 </div>
               )}
             </div>
-            <div className="relative w-full">
-              <input
-                type="email"
-                name="fatheremail"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.fatheremail}
-                placeholder=" " // Empty placeholder for floating effect
-                className={`peer w-full p-3 border ${
-                  formik.touched.fatheremail && formik.errors.fatheremail
-                    ? "border-red-500"
-                    : "border-gray-300"
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
-              />
-              <label
-                className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
-              >
-                Student Email <span className="text-red-500">*</span>
-              </label>
-              {formik.touched.fatheremail && formik.errors.fatheremail && (
-                <div className="text-red-500 text-sm">
-                  {formik.errors.fatheremail}
-                </div>
-              )}
-            </div>
-            {/* Mother Name Field */}
-            <div className="relative w-full">
+             {/* Mother Name Field */}
+             <div className="relative w-full">
               <input
                 type="text"
                 name="motherName"
@@ -259,6 +234,32 @@ const AddStudent = () => {
                 </div>
               )}
             </div>
+            <div className="relative w-full">
+              <input
+                type="email"
+                name="fatheremail"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.fatheremail}
+                placeholder=" " // Empty placeholder for floating effect
+                className={`peer w-full p-3 border ${
+                  formik.touched.fatheremail && formik.errors.fatheremail
+                    ? "border-red-500"
+                    : "border-gray-300"
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+              />
+              <label
+                className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+              >
+                Father Email <span className="text-red-500">*</span>
+              </label>
+              {formik.touched.fatheremail && formik.errors.fatheremail && (
+                <div className="text-red-500 text-sm">
+                  {formik.errors.fatheremail}
+                </div>
+              )}
+            </div>
+           
             {/* Email Field */}
             <div className="relative w-full mt-2">
               <input
@@ -277,7 +278,7 @@ const AddStudent = () => {
               <label
                 className={`absolute left-3 top-0 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
               >
-                Father Email <span className="text-red-500">*</span>
+                Student Email <span className="text-red-500">*</span>
               </label>
               {formik.touched.email && formik.errors.email && (
                 <div className="text-red-500 text-sm">
@@ -798,6 +799,16 @@ const AddStudent = () => {
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
             >
               Submit
+            </button>
+            <button
+              type="submit"
+              className="ml-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
+              onClick={() => navigate("/teacher-dashboard/home")}
+              onClick={() => navigate("/superadmin-dashboard/dash")}
+
+
+            >
+              Back
             </button>
           </div>
         </form>
