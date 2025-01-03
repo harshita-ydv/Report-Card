@@ -58,8 +58,8 @@ router.get('/pending-teacher-requests', async (req, res) => {
 const transporter = nodemailer.createTransport({
   service: 'Gmail', // Or your email provider
   auth: {
-    user: 'vishwakarmadivya133@gmail.com', // Replace with your email
-    pass: 'jlxi fdms ajoo qyuf', // Replace with your email password or app password
+    user: 'ayushmalviya990@gmail.com', // Replace with your email
+    pass: 'ixsw wfwp xspl tdtp', // Replace with your email password or app password
   },
 });
 
@@ -76,7 +76,7 @@ router.put('/approve/:id', async (req, res) => {
 
     // Send approval email
     await transporter.sendMail({
-      from: 'vishwakarmadivya133@gmail.com',
+      from: 'ayushmalviya990@gmail.com',
       to: teacher.email,
       subject: 'Your Request Has Been Approved',
       text: `Dear Teacher, ${teacher.name},\n\n 
@@ -86,7 +86,7 @@ router.put('/approve/:id', async (req, res) => {
       the features available to you..
 
       If you encounter any issues while logging in or navigating the platform, please
-      do not hesitate to contact us at [support email or contact information].
+      do not hesitate to contact us at.
 
       Thank you for your patience during the approval process, and we look forward to
       your active participation.
@@ -116,7 +116,7 @@ router.put('/reject/:id', async (req, res) => {
 
     // Send rejection email
     await transporter.sendMail({
-      from: 'vishwakarmadivya133@gmail.com',
+      from: 'ayushmalviya990@gmail.com',
       to: teacher.email,
       subject: 'Your Request Has Been Rejected',
       text: `Dear Teacher ${teacher.name},\n\n
@@ -203,4 +203,35 @@ router.delete('/approved-teachers/:id', async (req, res) => {
 });
 
 
+router.get('/pending-request-count', async (req, res) => {
+  try {
+    const count = await User.countDocuments({ status: 'Pending' });
+    res.json({ count });
+  } catch (error) {
+    console.error('Error fetching pending request count:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Delete an approved teacher
+router.delete('/approved-teachers/:id', async (req, res) => {
+  try {
+    const teacher = await User.findById(req.params.id);
+
+    if (!teacher || teacher.role !== 'Teacher' || teacher.status !== 'accepted') {
+      return res.status(404).json({ message: 'Approved teacher not found' });
+    }
+
+    await User.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({ message: 'Approved teacher removed successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error removing approved teacher' });
+  }
+});
+
+
 module.exports = router;
+
+

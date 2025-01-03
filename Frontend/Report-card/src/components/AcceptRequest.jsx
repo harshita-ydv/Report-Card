@@ -51,7 +51,7 @@ import axios from 'axios';
 
 function AcceptRequest() {
   const [acceptedTeachers, setAcceptedTeachers] = useState([]);
-  const [confirmRemove, setConfirmRemove] = useState(null);
+  const [confirmRemove, setConfirmRemove] = useState(null); // Store teacher info for confirmation dialog
 
   useEffect(() => {
     const fetchAcceptedTeachers = async () => {
@@ -98,7 +98,7 @@ function AcceptRequest() {
               </div>
               {/* Remove Button */}
               <button
-                onClick={() => setConfirmRemove(teacher._id)}
+                onClick={() => setConfirmRemove({ id: teacher._id, name: teacher.email })}
                 className="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600"
               >
                 Remove
@@ -114,7 +114,7 @@ function AcceptRequest() {
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h4 className="text-lg font-medium mb-4">Are you sure?</h4>
             <p className="text-gray-600 mb-4">
-              Do you really want to remove this teacher? This action cannot be undone.
+              Do you really want to remove <strong>{confirmRemove.name}</strong>?.
             </p>
             <div className="flex justify-end space-x-4">
               <button
@@ -124,8 +124,8 @@ function AcceptRequest() {
                 No
               </button>
               <button
-                onClick={() => handleRemoveTeacher(confirmRemove)}
-                className="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600"
+                onClick={() => handleRemoveTeacher(confirmRemove.id)}
+                className="px-4 py-2 text-sm text-white bg-blue-500 rounded hover:bg-red-600"
               >
                 Yes
               </button>

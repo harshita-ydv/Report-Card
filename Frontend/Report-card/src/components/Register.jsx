@@ -458,7 +458,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import lgo from "../assets/logo.png";
 function Register() {
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const navigate = useNavigate();
@@ -510,9 +510,9 @@ function Register() {
           {/* Left Section: Form */}
           <div className="w-full md:w-1/2 p-8">
             <img
-              src={logo} // Use the imported logo
+              src={lgo} // Use the imported logo
               alt="Report Card Generator Logo"
-              className="w-32 h-auto mx-auto mb-4" // Adjust the width (w-32) and margin (mb-4)
+              className="w-18 h-[5em] mx-auto mb-4" // Adjust the width (w-32) and margin (mb-4)
             />
             <p className="text-gray-600 mb-4">Please enter your details</p>
 

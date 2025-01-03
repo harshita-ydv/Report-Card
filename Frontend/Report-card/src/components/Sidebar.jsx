@@ -106,7 +106,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => (
       isSidebarOpen ? "translate-x-0" : "-translate-x-full"
     }`}
   >
-    <nav className="p-4 text-black">
+    <nav className="p-4 text-black mt-5">
       <ul className="space-y-6">
       <li>
           <NavLink

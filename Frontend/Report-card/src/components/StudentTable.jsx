@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -118,44 +116,58 @@ const StudentTable = () => {
           </label>
         </div>
       </div>
-          <table className="table-auto w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-200 text-gray-700">
-                <th className="border border-gray-300 px-4 py-2">Name</th>
-                <th className="border border-gray-300 px-4 py-2">Roll No</th>
-                <th className="border border-gray-300 px-4 py-2">Email</th>
-                <th className="border border-gray-300 px-4 py-2">Course</th>
-                <th className="border border-gray-300 px-4 py-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginateData().map((student) => (
-                <tr key={student.id} className="text-gray-700">
-                  <td className="border border-gray-300 px-4 py-2">{student.name}</td>
-                  <td className="border border-gray-300 px-4 py-2">{student.rollno}</td>
-                  <td className="border border-gray-300 px-4 py-2">{student.fatheremail}</td>
-                  <td className="border border-gray-300 px-4 py-2">{student.course}</td>
-                  <td className="border border-gray-200 px-4 py-3 flex justify-center space-x-3">
-                    <FaEye
-                      className="text-blue-500 cursor-pointer hover:text-blue-600"
-                      size={18}
-                      onClick={() => handleViewDetails(student)}
-                    />
-                    <FaEdit
-                      className="text-blue-500 cursor-pointer hover:text-blue-600"
-                      size={18}
-                      onClick={() => editData(student)}
-                    />
-                    <FaTrash
-                      className="text-blue-500 cursor-pointer hover:text-blue-600"
-                      size={18}
-                      onClick={() => confirmDelete(student.id, student.name)}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      
+<div className="overflow-x-auto">
+  <table className="w-full border-collapse border border-gray-300 ">
+    <thead className="bg-gray-100">
+      <tr>
+        <th className="border border-gray-300 px-4 py-2">Name</th>
+        <th className="border border-gray-300 px-4 py-2">Roll No</th>
+        <th className="border border-gray-300 px-4 py-2 hidden md:table-cell">
+          Father's Email
+        </th>
+        <th className="border border-gray-300 px-4 py-2">Course</th>
+        <th className="border border-gray-300 px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {paginateData().map((student) => (
+        <tr key={student.id} className="hover:bg-gray-50">
+          <td className="border border-gray-300 px-4 py-2">{student.name}</td>
+          <td className="border border-gray-300 px-4 py-2">{student.rollno}</td>
+          <td className="border border-gray-300 px-4 py-2 hidden md:table-cell">
+            {student.email}
+          </td>
+          <td className="border border-gray-300 px-4 py-2">{student.course}</td>
+          <td className="border border-gray-200 px-4 py-3 flex space-x-2 justify-center">
+            <button
+              onClick={() => handleViewDetails(student)}
+              className="text-blue-500 cursor-pointer hover:text-blue-600"
+              title="View Details"
+            >
+              <FaEye />
+            </button>
+            <button
+              onClick={() => editData(student)}
+              className="text-blue-500 cursor-pointer hover:text-blue-600"
+              title="Edit"
+            >
+              <FaEdit />
+            </button>
+            <button
+              onClick={() => confirmDelete(student.id, student.name)}
+              className="text-blue-500 cursor-pointer hover:text-blue-600"
+              title="Delete"
+            >
+              <FaTrash />
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
 
           {/* Pagination Controls */}
           <div className="flex justify-center mt-4">
@@ -261,6 +273,9 @@ const StudentTable = () => {
               <strong className="text-gray-800">Total Absent:</strong> {selectedStudent.totalabsent}
             </p>
             <p className="bg-gray-100 py-2 px-3 rounded-lg shadow-md hover:bg-gray-200 transition duration-200">
+              <strong className="text-gray-800">Percentage:</strong> {selectedStudent.attenpercentage}
+            </p>
+            <p className="bg-gray-100 py-2 px-3 rounded-lg shadow-md hover:bg-gray-200 transition duration-200">
               <strong className="text-gray-800">Total Days:</strong> {selectedStudent.totalday}
             </p>
             <p className="bg-gray-100 py-2 px-3 rounded-lg shadow-md hover:bg-gray-200 transition duration-200">
@@ -300,6 +315,4 @@ const StudentTable = () => {
     </>
   );
 };
-
-export default StudentTable;
 

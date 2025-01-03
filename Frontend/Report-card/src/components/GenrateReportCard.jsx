@@ -349,7 +349,7 @@ import sig from "../assets/62161cf7328ad280841f653f_esignature-signature.png";
 import sig1 from "../assets/png-clipart-line-angle-signature-blue-angle-removebg-preview.png"
 import History from "./History";
 // import foot from "../assets/rb_33716.png"
-
+import lgo from "../assets/logo.png"
 const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
@@ -361,7 +361,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 100,
-    height: 50,
+    height: 100,
     alignSelf: "center",
     marginBottom: 20,
   },
@@ -387,7 +387,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   signatureSectionright: {
-    marginTop: "109%",
+    marginTop: "119%",
     marginBottom: "10",
     width: '45%', 
     position: 'absolute', 
@@ -478,9 +478,9 @@ const GenReportCard = () => {
   const createPDFBlob = async (student) =>
     pdf(
       <Document>
-  <Page style={styles.page} size={{ width: 500, height: 700 }}>
+  <Page style={styles.page} size={{ width: 500, height: 750 }}>
     {/* Logo */}
-    <Image style={styles.logo} src={logo} />
+    <Image style={styles.logo} src={lgo} />
     
     {/* Title */}
     <Text style={styles.title}>Student ReportCard</Text>
