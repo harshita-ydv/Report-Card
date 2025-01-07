@@ -133,13 +133,16 @@ const AddStudent = () => {
     <>
       <ToastContainer />
       <div className="max-w-4xl mx-auto space-x-2  ">
-        <h2 className="text-3xl font-bold text-white-600 mb-6 text-center  p-2 rounded text-blue-900 ">
-          {student ? "Edit" : "Add"} Student
-        </h2>
+      
         <form
           onSubmit={formik.handleSubmit}
           className="bg-white shadow-xl rounded-lg px-5 pt-8 pb-8 mb-5 w-10/11 "
         >
+            <h2 className="text-3xl font-bold mb-6 text-center  p-2 rounded text-gray-800 ">
+          Add Student
+          <div className="w-20 sm:w-28 h-1 mx-auto bg-blue-500 rounded-full mt-2"></div>
+
+        </h2>
           <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
             Student Information
             <svg

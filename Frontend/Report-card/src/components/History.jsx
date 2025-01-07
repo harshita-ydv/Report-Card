@@ -100,8 +100,10 @@ const History = () => {
 
   return (
     <div className="container mx-auto p-4 sm:p-6">
-      <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-4">Email History</h2>
-      <div className="w-20 sm:w-28 h-1 mx-auto bg-blue-500 rounded-full"></div>
+      <h2 className="text-3xl sm:text-3xl font-bold text-center mb-4">Email History
+      <div className="w-20 sm:w-28 h-1 mx-auto bg-blue-500 rounded-full mt-2"></div>
+
+      </h2>
 
       {/* Search Input */}
       <div className="relative w-full mb-6 flex justify-center sm:justify-end">

@@ -502,10 +502,11 @@ function Register() {
 
   return (
     <>
-      <Navbar />
-      <ToastContainer /> {/* ToastContainer to display toast notifications */}
+   <div className="fixed top-0 left-0 w-full z-50">
+        <Navbar />
+      </div>      <ToastContainer /> {/* ToastContainer to display toast notifications */}
 
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 mt-9">
         <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
           {/* Left Section: Form */}
           <div className="w-full md:w-1/2 p-8">

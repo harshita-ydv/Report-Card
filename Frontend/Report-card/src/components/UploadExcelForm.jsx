@@ -372,13 +372,7 @@ const UploadExcelForm = () => {
 
           {/* Buttons */}
           <div className="flex justify-between space-x-4">
-            <button
-              type="button"
-              onClick={() => navigate("/teacher-dashboard")}
-              className="flex-1 py-2 px-4 flex items-center justify-center bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 transition"
-            >
-              <FiArrowLeft className="mr-2" /> Back
-            </button>
+           
             <button
               type="submit"
               className="flex-1 py-2 px-4 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition"

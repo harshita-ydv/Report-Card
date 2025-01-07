@@ -2,26 +2,29 @@ import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Footer from './Footer';
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-// const navigate = useNavigate();
-
 
 function LandingPage() {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
+
   const navigate = useNavigate();
 
   return (
-
     <>
-    <Navbar/>
-      <div className="bg-gray-100 text-gray-900 min-h-screen p-8 transition-colors duration-300">
+      {/* Fixed Navbar */}
+      <div className="fixed top-0 left-0 w-full z-50">
+        <Navbar />
+      </div>
+
+      {/* Main Content */}
+      <div className="bg-gray-100 text-gray-900 min-h-screen pt-[64px] p-8 transition-colors duration-300 mt-9">
         <div className="bg-white container mx-auto rounded-lg shadow-lg p-8 transition-all duration-300">
           {/* Centered Heading */}
           <h1 className="text-5xl font-extrabold text-center mb-12 text-blue-900">
-            Report Card Genrator Made Easy
+            Report Card Generator Made Easy
           </h1>
 
           {/* Main Section */}
@@ -48,24 +51,10 @@ function LandingPage() {
               </p>
             </div>
           </div>
-
-          {/* Additional Content Section */}
-          {/* <div className="mt-16 text-center md:text-left" data-aos="fade-up">
-            <h2 className="text-3xl font-bold mb-4">
-              Why Choose ReportCardGen?
-            </h2>
-            <p className="text-lg mb-6">
-              Our platform offers intuitive tools to assist educators in managing student information, creating custom report cards, and tracking academic progress seamlessly. From grade input to personalized feedback, ReportCardGen has it all.
-            </p>
-            <p className="text-lg mb-6">
-              Embrace digital efficiency in education, and join us in providing students with a clear, concise record of their academic journey.
-            </p>
-          </div> */}
         </div>
 
         {/* Cards Section */}
         <div className="container mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Card 1 */}
           <div
             className="bg-white p-6 rounded-lg shadow-lg text-center transition-transform transform hover:scale-105 hover:shadow-2xl"
             data-aos="fade-up"
@@ -80,8 +69,6 @@ function LandingPage() {
               Effortlessly manage student data, grades, and progress all in one place.
             </p>
           </div>
-
-          {/* Card 2 */}
           <div
             className="bg-white p-6 rounded-lg shadow-lg text-center transition-transform transform hover:scale-105 hover:shadow-2xl"
             data-aos="fade-up"
@@ -96,8 +83,6 @@ function LandingPage() {
               Create and customize report cards to match the specific needs of each student.
             </p>
           </div>
-
-          {/* Card 3 */}
           <div
             className="bg-white p-6 rounded-lg shadow-lg text-center transition-transform transform hover:scale-105 hover:shadow-2xl"
             data-aos="fade-up"
@@ -120,17 +105,18 @@ function LandingPage() {
           <p className="text-lg mb-6">
             Join thousands of educators using ReportCardGen to simplify report card management.
           </p>
-          <button             onClick={() => navigate('/login')}
- className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-500 transition-all">
+          <button
+            onClick={() => navigate('/login')}
+            className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-500 transition-all"
+          >
             Sign In Now
           </button>
         </div>
       </div>
+
       <Footer />
     </>
   );
 }
-
- 
 
 export default LandingPage;
