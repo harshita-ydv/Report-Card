@@ -133,13 +133,13 @@ router.post("/register", async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',  // or any other email service like SendGrid, etc.
       auth: {
-        user: 'ayushmalviya990@gmail.com', // Your email
-        pass: 'ixsw wfwp xspl tdtp'  // Your email password (you may want to use environment variables)
+        user: 'harshitayadav659@gmail.com', // Your email
+        pass: 'spvv kfdh gxuv gfwt'  // Your email password (you may want to use environment variables)
       }
     });
 
     const mailOptions = {
-      from: 'ayushmalviya990@gmail.com',  // Sender email
+      from: 'harshitayadav659@gmail.com',  // Sender email
       to: email,  // Recipient email
       subject: 'Registration Successful',
       text: `Dear ${name},\n\nYou have successfully registered. Please wait, your request will be reviewed within the next 2 hours.\n\nThank you!`

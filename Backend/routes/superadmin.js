@@ -58,8 +58,8 @@ router.get('/pending-teacher-requests', async (req, res) => {
 const transporter = nodemailer.createTransport({
   service: 'Gmail', // Or your email provider
   auth: {
-    user: 'ayushmalviya990@gmail.com', // Replace with your email
-    pass: 'ixsw wfwp xspl tdtp', // Replace with your email password or app password
+    user: 'harshitayadav659@gmail.com', // Replace with your email
+    pass: 'spvv kfdh gxuv gfwt', // Replace with your email password or app password
   },
 });
 
@@ -76,7 +76,7 @@ router.put('/approve/:id', async (req, res) => {
 
     // Send approval email
     await transporter.sendMail({
-      from: 'ayushmalviya990@gmail.com',
+      from: 'harshitayadav659@gmail.com',
       to: teacher.email,
       subject: 'Your Request Has Been Approved',
       text: `Dear Teacher, ${teacher.name},\n\n 
@@ -116,7 +116,7 @@ router.put('/reject/:id', async (req, res) => {
 
     // Send rejection email
     await transporter.sendMail({
-      from: 'ayushmalviya990@gmail.com',
+      from: 'harshitayadav659@gmail.com',
       to: teacher.email,
       subject: 'Your Request Has Been Rejected',
       text: `Dear Teacher ${teacher.name},\n\n

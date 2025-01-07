@@ -310,14 +310,15 @@ app.post('/api/send-email', upload.single('file'), async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: "ayushmalviya990@gmail.com", // Use environment variables for sensitive data
-        pass: "ixsw wfwp xspl tdtp", // Use environment variables for sensitive data
+        user: "harshitayadav659@gmail.com", // Use environment variables for sensitive data
+        pass: "spvv kfdh gxuv gfwt",
+         // Use environment variables for sensitive data
       },
     });
 
     // Email options including file attachment
     const mailOptions = {
-      from: "ayushmalviya990@gmail.com",
+      from: "harshitayadav659@gmail.com",
       to: email,
       subject: 'Access Your Child Report Card via Email',
       text: `Dear Parents/Guardians,
