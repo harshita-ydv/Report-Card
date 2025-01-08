@@ -240,13 +240,13 @@ const AddStudent = () => {
             <div className="relative w-full">
               <input
                 type="email"
-                name="fatheremail"
+                name="email"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.fatheremail}
+                value={formik.values.email}
                 placeholder=" " // Empty placeholder for floating effect
                 className={`peer w-full p-3 border ${
-                  formik.touched.fatheremail && formik.errors.fatheremail
+                  formik.touched.email && formik.errors.email
                     ? "border-red-500"
                     : "border-gray-300"
                 } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
@@ -256,9 +256,9 @@ const AddStudent = () => {
               >
                 Father Email <span className="text-red-500">*</span>
               </label>
-              {formik.touched.fatheremail && formik.errors.fatheremail && (
+              {formik.touched.email && formik.errors.email && (
                 <div className="text-red-500 text-sm">
-                  {formik.errors.fatheremail}
+                  {formik.errors.email}
                 </div>
               )}
             </div>
@@ -267,13 +267,13 @@ const AddStudent = () => {
             <div className="relative w-full mt-2">
               <input
                 type="email"
-                name="email"
+                name="fatheremail"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.email}
+                value={formik.values.fatheremail}
                 placeholder=" " // Empty placeholder for floating effect
                 className={`peer w-full p-3 border ${
-                  formik.touched.email && formik.errors.email
+                  formik.touched.fatheremail && formik.errors.fatheremail
                     ? "border-red-500"
                     : "border-gray-300"
                 } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
