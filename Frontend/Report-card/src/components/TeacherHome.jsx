@@ -74,7 +74,7 @@ const TeacherHome = () => {
   return (
     <div className="container mx-auto my-8 p-4 mt-0">
       <h2 className="text-3xl font-extrabold text-center text-blue-900 mb-6">
-        Welcome to Teacher's Dashboard
+        Welcome to Teacher's Home
       </h2>
       <p className="text-lg text-center text-gray-700 mb-8">
         Manage your classes, view student details, and more, all in one place.

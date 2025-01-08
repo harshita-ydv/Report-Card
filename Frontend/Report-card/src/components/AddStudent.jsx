@@ -133,13 +133,16 @@ const AddStudent = () => {
     <>
       <ToastContainer />
       <div className="max-w-4xl mx-auto space-x-2  ">
-        <h2 className="text-3xl font-bold text-white-600 mb-6 text-center  p-2 rounded text-blue-900 ">
-          {student ? "Edit" : "Add"} Student
-        </h2>
+      
         <form
           onSubmit={formik.handleSubmit}
           className="bg-white shadow-xl rounded-lg px-5 pt-8 pb-8 mb-5 w-10/11 "
         >
+            <h2 className="text-3xl font-bold mb-6 text-center  p-2 rounded text-gray-800 ">
+          Add Student
+          <div className="w-20 sm:w-28 h-1 mx-auto bg-blue-500 rounded-full mt-2"></div>
+
+        </h2>
           <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
             Student Information
             <svg
@@ -237,13 +240,13 @@ const AddStudent = () => {
             <div className="relative w-full">
               <input
                 type="email"
-                name="fatheremail"
+                name="email"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.fatheremail}
+                value={formik.values.email}
                 placeholder=" " // Empty placeholder for floating effect
                 className={`peer w-full p-3 border ${
-                  formik.touched.fatheremail && formik.errors.fatheremail
+                  formik.touched.email && formik.errors.email
                     ? "border-red-500"
                     : "border-gray-300"
                 } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
@@ -253,9 +256,9 @@ const AddStudent = () => {
               >
                 Father Email <span className="text-red-500">*</span>
               </label>
-              {formik.touched.fatheremail && formik.errors.fatheremail && (
+              {formik.touched.email && formik.errors.email && (
                 <div className="text-red-500 text-sm">
-                  {formik.errors.fatheremail}
+                  {formik.errors.email}
                 </div>
               )}
             </div>
@@ -264,13 +267,13 @@ const AddStudent = () => {
             <div className="relative w-full mt-2">
               <input
                 type="email"
-                name="email"
+                name="fatheremail"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.email}
+                value={formik.values.fatheremail}
                 placeholder=" " // Empty placeholder for floating effect
                 className={`peer w-full p-3 border ${
-                  formik.touched.email && formik.errors.email
+                  formik.touched.fatheremail && formik.errors.fatheremail
                     ? "border-red-500"
                     : "border-gray-300"
                 } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}

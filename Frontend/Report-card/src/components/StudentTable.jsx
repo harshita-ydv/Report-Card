@@ -400,112 +400,115 @@ const StudentTable = () => {
     <>
       <ToastContainer />
       <div>
-        <div className="bg-white text-blue-900">
-          <h1 className="text-2xl font-bold text-center mb-6">Student Management</h1>
+      <div className="max-w-7xl mx-auto p-4 bg-white rounded-lg shadow-md text-blue-900">
+  <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Student Management
+  <div className="w-20 sm:w-28 h-1 mx-auto bg-blue-500 rounded-full mt-2"></div>
 
-           {/* Updated Search Bar */}
-      <div className="relative w-full mb-4 flex justify-end">
-        <div className="w-48 relative">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={handleSearch}
-            placeholder=" "
-            className={`peer w-full pl-10 p-3 border ${
-              searchQuery ? 'border-blue-500' : 'border-gray-300'
-            } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white text-left`}
-          />
-          {/* Search Icon */}
-          <svg
-            className="absolute left-1 top-6 transform -translate-y-1/2 text-gray-500"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11.742 10.742a6.5 6.5 0 1 0-1.414 1.414l3.366 3.367a1 1 0 0 0 1.415-1.414l-3.367-3.367zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-          </svg>
-          {/* Floating Label */}
-          <label
-            className={`absolute left-5 top-0 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:left-3`}
-          >
-            Search By Name
-          </label>
-        </div>
-      </div>
-      
-<div className="overflow-x-auto">
-  <table className="w-full border-collapse border border-gray-300 ">
-    <thead className="bg-gray-100">
-      <tr>
-        <th className="border border-gray-300 px-4 py-2">Name</th>
-        <th className="border border-gray-300 px-4 py-2">Roll No</th>
-        <th className="border border-gray-300 px-4 py-2 hidden md:table-cell">
-          Father's Email
-        </th>
-        <th className="border border-gray-300 px-4 py-2">Course</th>
-        <th className="border border-gray-300 px-4 py-2">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {paginateData().map((student) => (
-        <tr key={student.id} className="hover:bg-gray-50">
-          <td className="border border-gray-300 px-4 py-2">{student.name}</td>
-          <td className="border border-gray-300 px-4 py-2">{student.rollno}</td>
-          <td className="border border-gray-300 px-4 py-2 hidden md:table-cell">
-            {student.email}
-          </td>
-          <td className="border border-gray-300 px-4 py-2">{student.course}</td>
-          <td className="border border-gray-200 px-4 py-3 flex space-x-2 justify-center">
-            <button
-              onClick={() => handleViewDetails(student)}
-              className="text-blue-500 cursor-pointer hover:text-blue-600"
-              title="View Details"
-            >
-              <FaEye />
-            </button>
-            <button
-              onClick={() => editData(student)}
-              className="text-blue-500 cursor-pointer hover:text-blue-600"
-              title="Edit"
-            >
-              <FaEdit />
-            </button>
-            <button
-              onClick={() => confirmDelete(student.id, student.name)}
-              className="text-blue-500 cursor-pointer hover:text-blue-600"
-              title="Delete"
-            >
-              <FaTrash />
-            </button>
-          </td>
+  </h1>
+
+  {/* Updated Search Bar */}
+  <div className="relative w-full mb-4 flex justify-end">
+    <div className="w-48 relative">
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={handleSearch}
+        placeholder=" "
+        className={`peer w-full pl-10 p-3 border ${
+          searchQuery ? 'border-blue-500' : 'border-gray-300'
+        } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white text-left`}
+      />
+      {/* Search Icon */}
+      <svg
+        className="absolute left-1 top-6 transform -translate-y-1/2 text-gray-500"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        viewBox="0 0 16 16"
+      >
+        <path d="M11.742 10.742a6.5 6.5 0 1 0-1.414 1.414l3.366 3.367a1 1 0 0 0 1.415-1.414l-3.367-3.367zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+      </svg>
+      {/* Floating Label */}
+      <label
+        className={`absolute left-5 top-0 text-gray-500 duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:left-3`}
+      >
+        Search By Name
+      </label>
+    </div>
+  </div>
+
+  {/* Table */}
+  <div className="overflow-x-auto">
+    <table className="w-full border-collapse border border-gray-300">
+      <thead className="bg-gray-100">
+        <tr>
+          <th className="border border-gray-300 px-4 py-2">Name</th>
+          <th className="border border-gray-300 px-4 py-2">Roll No</th>
+          <th className="border border-gray-300 px-4 py-2 hidden md:table-cell">
+            Father's Email
+          </th>
+          <th className="border border-gray-300 px-4 py-2">Course</th>
+          <th className="border border-gray-300 px-4 py-2">Actions</th>
         </tr>
-      ))}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {paginateData().map((student) => (
+          <tr key={student.id} className="hover:bg-gray-50">
+            <td className="border border-gray-300 px-4 py-2">{student.name}</td>
+            <td className="border border-gray-300 px-4 py-2">{student.rollno}</td>
+            <td className="border border-gray-300 px-4 py-2 hidden md:table-cell">
+              {student.email}
+            </td>
+            <td className="border border-gray-300 px-4 py-2">{student.course}</td>
+            <td className="border border-gray-200 px-4 py-3 flex space-x-2 justify-center">
+              <button
+                onClick={() => handleViewDetails(student)}
+                className="text-blue-500 cursor-pointer hover:text-blue-600"
+                title="View Details"
+              >
+                <FaEye />
+              </button>
+              <button
+                onClick={() => editData(student)}
+                className="text-blue-500 cursor-pointer hover:text-blue-600"
+                title="Edit"
+              >
+                <FaEdit />
+              </button>
+              <button
+                onClick={() => confirmDelete(student.id, student.name)}
+                className="text-blue-500 cursor-pointer hover:text-blue-600"
+                title="Delete"
+              >
+                <FaTrash />
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {/* Pagination */}
+  <div className="flex justify-center mt-4">
+    <button
+      onClick={() => handlePageChange(currentPage - 1)}
+      disabled={currentPage === 1}
+      className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
+    >
+      Prev
+    </button>
+    <span className="self-center px-4">{`${currentPage} of ${totalPages}`}</span>
+    <button
+      onClick={() => handlePageChange(currentPage + 1)}
+      disabled={currentPage === totalPages}
+      className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
+    >
+      Next
+    </button>
+  </div>
 </div>
-
-
-          {/* Pagination Controls */}
-          <div className="flex justify-center mt-4">
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
-            >
-              Prev
-            </button>
-            <span className="self-center px-4">{`${currentPage} of ${totalPages}`}</span>
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="px-4 py-2 mx-2 text-white bg-blue-500 rounded disabled:bg-blue-300"
-            >
-              Next
-            </button>
-          </div>
-        </div>
 
         {/* Delete Confirmation Modal */}
         {deleteModal.isOpen && (
