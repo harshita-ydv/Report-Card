@@ -41,7 +41,7 @@ function LandingPage() {
             {/* Content Section */}
             <div className="flex-1 text-center md:text-left" data-aos="fade-up">
               <h2 className="text-4xl font-bold mb-4">
-                Welcome to ReportCardGen
+                Welcome to Reportify
               </h2>
               <p className="text-lg mb-6">
                 Empowering students, educators, and parents with a streamlined report card generation system. Whether for academics or other achievements, we make the process simple, accurate, and efficient.

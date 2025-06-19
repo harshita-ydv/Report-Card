@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const nodemailer = require('nodemailer');
+const dotenv = require("dotenv");
+dotenv.config();
 
 // Route to get all pending teacher requests (for Super Admin)
 router.get('/pending-teacher-requests', async (req, res) => {
@@ -58,8 +60,9 @@ router.get('/pending-teacher-requests', async (req, res) => {
 const transporter = nodemailer.createTransport({
   service: 'Gmail', // Or your email provider
   auth: {
-    user: 'ayushmalviya990@gmail.com', // Replace with your email
-    pass: 'ixsw wfwp xspl tdtp', // Replace with your email password or app password
+    user: process.env.EMAIL_USER, // Replace with your email
+    pass: process.env.EMAIL_PASS,
+ // Replace with your email password or app password
   },
 });
 
@@ -76,7 +79,7 @@ router.put('/approve/:id', async (req, res) => {
 
     // Send approval email
     await transporter.sendMail({
-      from: 'ayushmalviya990@gmail.com',
+      from:process.env.EMAIL_USER,
       to: teacher.email,
       subject: 'Your Request Has Been Approved',
       text: `Dear Teacher, ${teacher.name},\n\n 
@@ -116,7 +119,7 @@ router.put('/reject/:id', async (req, res) => {
 
     // Send rejection email
     await transporter.sendMail({
-      from: 'ayushmalviya990@gmail.com',
+      from: process.env.EMAIL_USER,
       to: teacher.email,
       subject: 'Your Request Has Been Rejected',
       text: `Dear Teacher ${teacher.name},\n\n

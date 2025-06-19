@@ -74,7 +74,7 @@ const TeacherHome = () => {
   return (
     <div className="container mx-auto my-8 p-4 mt-0">
       <h2 className="text-3xl font-extrabold text-center text-blue-900 mb-6">
-        Welcome to Teacher's Home
+         Teacher's Home
       </h2>
       <p className="text-lg text-center text-gray-700 mb-8">
         Manage your classes, view student details, and more, all in one place.
@@ -122,7 +122,7 @@ const TeacherHome = () => {
           </div>
           <h5 className="text-xl font-semibold mb-2 text-blue-900">Download PDF</h5>
           <p className="text-gray-600 text-sm mb-4">
-            Generate and review student report cards.
+            Generate pdf and send student report cards.
           </p>
           <button
             onClick={() => navigate("/teacher-dashboard/view-students")}

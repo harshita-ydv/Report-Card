@@ -54,6 +54,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const nodemailer = require('nodemailer');  // Import Nodemailer
+const dotenv = require("dotenv");
+dotenv.config();
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -133,13 +135,14 @@ router.post("/register", async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',  // or any other email service like SendGrid, etc.
       auth: {
-        user: 'ayushmalviya990@gmail.com', // Your email
-        pass: 'ixsw wfwp xspl tdtp'  // Your email password (you may want to use environment variables)
+        user: process.env.EMAIL_USER,// Your email
+        pass: process.env.EMAIL_PASS,
+ // Your email password (you may want to use environment variables)
       }
     });
 
     const mailOptions = {
-      from: 'ayushmalviya990@gmail.com',  // Sender email
+      from: process.env.EMAIL_USER,  // Sender email
       to: email,  // Recipient email
       subject: 'Registration Successful',
       text: `Dear ${name},\n\nYou have successfully registered. Please wait, your request will be reviewed within the next 2 hours.\n\nThank you!`

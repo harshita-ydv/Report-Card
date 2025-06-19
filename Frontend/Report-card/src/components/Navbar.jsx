@@ -219,10 +219,11 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import logo from "../assets/Untitled-1.png"; // Adjust the path to your logo file
+// import logo from "../assets/Untitled-1.png"; // Adjust the path to your logo file
 import { AiOutlineUser } from "react-icons/ai"; // Import a profile icon
 import ProfileModel from "./ProfileModel"; // Import ProfileModal component
-import logo1 from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png"
+// import logo1 from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png"
+// import logo2 from "../assets/Artboard 1.png"
 import logo2 from "../assets/Artboard 1.png"
 const Navbar = ({ toggleSidebar }) => {
   const navigate = useNavigate();

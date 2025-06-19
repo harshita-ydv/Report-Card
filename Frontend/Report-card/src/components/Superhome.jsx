@@ -121,11 +121,9 @@ const Superhome = () => {
   return (
     <div className="container mx-auto my-4 p-4">
       <h2 className="text-3xl font-extrabold text-center text-blue-900 mb-6">
-        Dashboard Overview
+        Superadmin Home
       </h2>
-      <p className="text-lg text-center text-gray-700 mb-8">
-        Access key functionalities and manage your tasks efficiently.
-      </p>
+     
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {/* Card 1: Pending Requests */}
@@ -159,7 +157,7 @@ const Superhome = () => {
             Accepted Requests
           </h5>
           <p className="text-gray-600 text-sm mb-4">
-            Stay updated with the latest alerts and updates.
+            Accepted Teacher's Requests.
           </p>
           <button
             onClick={() => {
@@ -181,7 +179,7 @@ const Superhome = () => {
             Rejected Requests
           </h5>
           <p className="text-gray-600 text-sm mb-4">
-            Stay updated with the latest alerts and updates.
+            Rejected Teacher's Requests.
           </p>
           <button
             onClick={() => {

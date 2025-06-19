@@ -40,7 +40,7 @@
 
 const express = require('express');
 const Teacher = require('../models/Teachers');
-const User = require('../models/User');
+const User = require('../models/user');
 const router = express.Router();
 
 // ============================

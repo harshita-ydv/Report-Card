@@ -310,8 +310,9 @@ app.post('/api/send-email', upload.single('file'), async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: "ayushmalviya990@gmail.com", // Use environment variables for sensitive data
-        pass: "ixsw wfwp xspl tdtp", // Use environment variables for sensitive data
+        user: process.env.EMAIL_USER, // Use environment variables for sensitive data
+        pass: process.env.EMAIL_PASS,
+// Use environment variables for sensitive data
       },
     });
 

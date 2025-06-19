@@ -372,7 +372,7 @@ const EditStudentForm = () => {
       try {
         await axios.put(`http://localhost:5000/api/data/${values.id}`, values);
         // alert('Student updated successfully!');
-  toast.success("Registered successfully!", {
+  toast.success("Updated successfully!", {
         position: "top-center",
         autoClose: 1000, // Show toast for 1 second
       });
@@ -965,12 +965,14 @@ const EditStudentForm = () => {
       <button
         type="submit"
         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
+        
       >
         Save Changes
       </button>
       <button
         type="button"
         onClick={() => navigate('/teacher-dashboard/manage-students')}
+        
         className="ml-4 bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition duration-200"
       >
         Cancel

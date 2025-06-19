@@ -8,9 +8,9 @@ function Footer() {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
         {/* Project Information */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">About ReportCardGen</h3>
+          <h3 className="text-lg font-semibold mb-4">About Reportify</h3>
           <p className="text-sm leading-relaxed">
-            ReportCardGen is a comprehensive report card generation platform, designed to simplify student evaluation.
+            Reportify is a comprehensive report card generation platform, designed to simplify student evaluation.
             It’s a solution for educators to efficiently manage and track student progress.
           </p>
         </div>

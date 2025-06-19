@@ -18,11 +18,10 @@ const StudentDashboard = () => {
 
   const [passCounts, setPassCounts] = useState([]);
   const [chartTwoData, setChartTwoData] = useState([]);
-  const [chartThreeData, setChartThreeData] = useState([]); // Updated state for Chart Three
-  const [chartFourData, setChartFourData] = useState([40, 35, 25]); // Default data for the 4th chart (can be updated)
+  const [chartThreeData, setChartThreeData] = useState([]);
+  const [chartFourData, setChartFourData] = useState([40, 35, 25]);
 
   useEffect(() => {
-    // Fetch data for all levels
     const fetchStudentData = async () => {
       try {
         const endpoints = [
@@ -47,7 +46,6 @@ const StudentDashboard = () => {
       }
     };
 
-    // Fetch student gender data for Chart Two
     const fetchGenderData = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/students-count');
@@ -59,13 +57,11 @@ const StudentDashboard = () => {
       }
     };
 
-    // Fetch student category data for Chart Three
     const fetchCategoryData = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/student-counts');
         const data = response.data;
 
-        // Update chartThreeData with category counts
         const categories = Object.keys(data);
         const counts = Object.values(data);
 
@@ -75,7 +71,6 @@ const StudentDashboard = () => {
       }
     };
 
-    // Fetch student counts by year for Chart Four (integrate this into the fourth chart)
     const fetchStudentCountsByYear = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/student-counts-by-year');
@@ -106,26 +101,25 @@ const StudentDashboard = () => {
             label: title,
             data,
             backgroundColor: [
-              'rgba(0, 51, 102, 0.5)',  // Dark blue
-              'rgba(0, 76, 153, 0.5)',  // Slightly lighter dark blue
-              'rgba(0, 102, 204, 0.5)', // Medium dark blue
-              'rgba(0, 127, 255, 0.5)', // Light dark blue
-              'rgba(51, 153, 255, 0.5)', // Lightest dark blue
-              'rgba(102, 178, 255, 0.5)' // Very light dark blue
+              'rgba(0, 51, 102, 0.5)',
+              'rgba(0, 76, 153, 0.5)',
+              'rgba(0, 102, 204, 0.5)',
+              'rgba(0, 127, 255, 0.5)',
+              'rgba(51, 153, 255, 0.5)',
+              'rgba(102, 178, 255, 0.5)',
             ],
             borderColor: [
-              'rgba(0, 51, 102, 1)',  // Dark blue
-              'rgba(0, 76, 153, 1)',  // Slightly lighter dark blue
-              'rgba(0, 102, 204, 1)', // Medium dark blue
-              'rgba(0, 127, 255, 1)', // Light dark blue
-              'rgba(51, 153, 255, 1)', // Lightest dark blue
-              'rgba(102, 178, 255, 1)' // Very light dark blue
+              'rgba(0, 51, 102, 1)',
+              'rgba(0, 76, 153, 1)',
+              'rgba(0, 102, 204, 1)',
+              'rgba(0, 127, 255, 1)',
+              'rgba(51, 153, 255, 1)',
+              'rgba(102, 178, 255, 1)',
             ],
             borderWidth: 1,
           },
         ],
       };
-      
 
       const chartOptions = {
         responsive: true,
@@ -148,7 +142,6 @@ const StudentDashboard = () => {
       });
     };
 
-    // Create the first chart
     createChart(
       totalStudentsRef,
       totalStudentsChartInstance,
@@ -157,7 +150,6 @@ const StudentDashboard = () => {
       'Students Passed -'
     );
 
-    // Create the second chart (Gender distribution)
     const totalStudents = chartTwoData.reduce((a, b) => a + b, 0);
     createChart(
       chartTwoRef,
@@ -167,7 +159,6 @@ const StudentDashboard = () => {
       `Total Student (${totalStudents})`
     );
 
-    // Create the third chart (Student Categories - Bar Chart)
     if (chartThreeData.labels && chartThreeData.counts) {
       createChart(
         chartThreeRef,
@@ -175,18 +166,17 @@ const StudentDashboard = () => {
         chartThreeData.labels,
         chartThreeData.counts,
         'Student Categories',
-        'bar'  // Change the chart type to 'bar'
+        'bar'
       );
     }
 
-    // Create the fourth chart (Counts by Year)
     createChart(
       chartFourRef,
       chartFourInstance,
       ['Year 1', 'Year 2', 'Year 3', 'Year 4'],
       chartFourData,
       'Students by Year',
-      'pie' // Pie chart for Year data
+      'pie'
     );
 
     return () => {
@@ -206,25 +196,28 @@ const StudentDashboard = () => {
   }, [passCounts, chartTwoData, chartThreeData, chartFourData]);
 
   return (
-    <div className="flex flex-wrap justify-center gap-8">
-      <div>
-        <h2 className="text-center mb-4">Total Students Chart</h2>
-        <canvas ref={totalStudentsRef} width="400" height="40"></canvas>
-      </div>
+    <div className='mt-8'>
+      <h1 className="text-3xl text-center mb-8 font-extrabold text-blue-900">Welcome Teacher Dashboard</h1>
+      <div className="flex flex-wrap justify-center gap-8">
+        <div>
+          <h2 className="text-center mb-4">Total Students Chart</h2>
+          <canvas ref={totalStudentsRef} width="400" height="400"></canvas>
+        </div>
 
-      <div>
-        <h2 className="text-center mb-4">Gender Distribution</h2>
-        <canvas ref={chartTwoRef} width="400" height="400"></canvas>
-      </div>
+        <div>
+          <h2 className="text-center mb-4">Gender Distribution</h2>
+          <canvas ref={chartTwoRef} width="400" height="400"></canvas>
+        </div>
 
-      <div>
-        <h2 className="text-center mb-4">Student Categories</h2>
-        <canvas ref={chartThreeRef} width="400" height="400"></canvas>
-      </div>
+        <div>
+          <h2 className="text-center mb-4">Student Categories</h2>
+          <canvas ref={chartThreeRef} width="400" height="400"></canvas>
+        </div>
 
-      <div>
-        <h2 className="text-center mb-4">Students by Year</h2>
-        <canvas ref={chartFourRef} width="400" height="400"></canvas>
+        <div>
+          <h2 className="text-center mb-4">Students by Year</h2>
+          <canvas ref={chartFourRef} width="400" height="400"></canvas>
+        </div>
       </div>
     </div>
   );

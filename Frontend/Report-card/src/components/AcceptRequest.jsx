@@ -33,7 +33,9 @@ function AcceptRequest() {
 
   return (
     <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6 mx-auto">
-      <h3 className="text-xl font-semibold mb-4 text-center">Accepted Teacher Requests</h3>
+      <h3 className="text-3xl font-bold mb-4 text-center">Accepted Teacher Requests
+      <div className="w-20 sm:w-28 h-1 mx-auto bg-blue-500 rounded-full mt-2"></div>
+      </h3>
       <ul className="divide-y divide-gray-200">
         {acceptedTeachers.length === 0 ? (
           <p className="text-gray-500 text-center">No accepted teacher requests</p>

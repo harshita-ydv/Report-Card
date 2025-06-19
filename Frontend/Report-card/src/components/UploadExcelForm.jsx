@@ -327,7 +327,7 @@ const UploadExcelForm = () => {
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       toast.success(response.data.message);
-      navigate("/teacher-dashboard");
+      // navigate("/teacher-dashboard");
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
       toast.error(error.response?.data?.message || "Error uploading file");
@@ -336,7 +336,8 @@ const UploadExcelForm = () => {
 
   return (
     <>
-    <ToastContainer  position="top-center" />
+    <ToastContainer  position="top-center"   autoClose={2000}
+ />
 
     <div className="flex justify-center items-center">
       <div className="bg-white p-10 shadow-2xl rounded-2xl w-full max-w-lg transform transition hover:scale-105 items-center">

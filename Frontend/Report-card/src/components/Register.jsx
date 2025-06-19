@@ -453,7 +453,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import logo from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png";
+// import logo from "../assets/a5MfLJOhTEWxmOyj4-uQKg-Photoroom.png";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";

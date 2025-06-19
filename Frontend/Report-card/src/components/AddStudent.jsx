@@ -32,7 +32,7 @@ const validationSchema = Yup.object({
       'Email must contain exactly one "@" symbol'
     )
     .matches(
-      /@[a-zA-Z0-9.-]+\.(com|edu|org)$/,
+      /@[a-zA-Z0-9.-]+\.(com|edu|org|in)$/,
       "Email must end with .com, .edu, or .org"
     )
     .required("Father Email is required"),
@@ -293,7 +293,7 @@ const AddStudent = () => {
             {/* Contact No. Field */}
             <div className="relative w-full mt-2">
               <input
-                type="number"
+                type="text"
                 name="phone"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -320,7 +320,7 @@ const AddStudent = () => {
             {/* Other Contact No. Field */}
             <div className="relative w-full mt-2">
               <input
-                type="number"
+                type="text"
                 name="otherPhone"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -376,29 +376,29 @@ const AddStudent = () => {
 
             {/* Address Field */}
             <div className="relative w-full mt-2">
-              <textarea
-                name="address"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.address}
-                placeholder=" " // Empty placeholder for floating effect
-                className={`peer w-full p-3 border ${
-                  formik.touched.address && formik.errors.address
-                    ? "border-red-500"
-                    : "border-gray-300"
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
-              />
-              <label
-                className={`absolute left-3 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
-              >
-                Address <span className="text-red-500">*</span>
-              </label>
-              {formik.touched.address && formik.errors.address && (
-                <div className="text-red-500 text-sm">
-                  {formik.errors.address}
-                </div>
-              )}
-            </div>
+  <input
+    type="text"
+    name="address"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.address}
+    placeholder=" " // Empty placeholder for floating effect
+    className={`peer w-full p-3 border ${
+      formik.touched.address && formik.errors.address
+        ? "border-red-500"
+        : "border-gray-300"
+    } rounded-md focus:outline-none focus:ring-2 focus:ring-skyblue bg-white`}
+  />
+  <label
+    className={`absolute left-3 text-black duration-300 transform -translate-y-4 scale-75 origin-[0] bg-white px-1 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75`}
+  >
+    Address <span className="text-red-500">*</span>
+  </label>
+  {formik.touched.address && formik.errors.address && (
+    <div className="text-red-500 text-sm">{formik.errors.address}</div>
+  )}
+</div>
+
 
             {/* Roll No. Field */}
             <div className="relative w-full mt-2">
